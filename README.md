@@ -1,7 +1,7 @@
 # 제주교육마루 — 한국교육학회 제주지회 뉴스레터
 
 > 한국교육학회 제주지회 뉴스레터 웹사이트
-> 🔗 https://yangbyul.github.io/newsletter-jeju/
+> 🔗 https://kera-jeju.github.io/newsletter-jeju/
 
 ## 개요
 
@@ -44,8 +44,11 @@ newsletter-jeju/
 
 ### 1단계: 원고 수집
 
-구글 드라이브에 원고 폴더를 준비합니다.
-2026년 예시: `G:\내 드라이브\2026 제주지회 뉴스레터`
+1. 필진에게 **구글 문서 템플릿**을 메일로 전달
+2. 필진이 구글 문서로 작성 후 **메일로 회신** (이미지는 별도 파일 첨부)
+3. 편집위원이 수합하여 구글 드라이브 폴더에 정리
+
+구글 드라이브 원고 폴더 구조 (예: `G:\내 드라이브\2026 제주지회 뉴스레터`):
 
 ```
 2026 제주지회 뉴스레터/
@@ -58,8 +61,6 @@ newsletter-jeju/
 ├── 06_제주지회 활동 소개/ ← 활동 관련
 └── 배너_이미지/        ← 배너, 로고 등
 ```
-
-각 폴더에 `원고_템플릿.txt`가 포함되어 있습니다.
 
 ### 2단계: 원고 서식
 
@@ -81,28 +82,21 @@ newsletter-jeju/
 홍길동(2024). 논문제목. 학술지명, 1(2), 1-10.
 ```
 
-- 프로필 사진: `필자이름_사진.jpg`로 같은 폴더에 저장
-- 본문 이미지: `[이미지: 파일명.jpg]`로 위치 표시
+- 프로필 사진: `필자이름_사진.jpg`로 별도 첨부
+- 본문 이미지: `[이미지: 파일명.jpg]`로 위치 표시, 이미지 파일은 별도 첨부
 
 ### 3단계: 빌드
 
-#### 방법 A: 노션 내보내기 (기존 방식)
-
 ```bash
-# 노션에서 Markdown & CSV로 내보내기 후
-python build.py --src /path/to/notion-export --out ./2026
-```
-
-#### 방법 B: 구글 드라이브 원고 (향후)
-
-```bash
-# 구글 드라이브 원고 폴더 지정
+# Claude Code에서 실행
 python build.py --src "G:\내 드라이브\2026 제주지회 뉴스레터" --out ./2026
 ```
 
-> ⚠️ **참고**: 현재 build.py는 노션 내보내기 형식에 최적화되어 있습니다.
-> 구글 드라이브 원고 형식을 읽으려면 build.py에 파서 추가가 필요합니다.
-> Claude Code에 "뉴스레터 빌드해줘"라고 요청하면 처리해줍니다.
+> **원고 형식별 빌드 방법**
+> - **구글 문서(.gdoc)**: build.py가 Google Drive API를 통해 문서 내용을 읽어 변환
+> - **노션 내보내기**: `python build.py --src /path/to/notion-export --out ./2026` (2025년 방식)
+>
+> 빌드에 문제가 있으면 Claude Code에 "뉴스레터 빌드해줘"라고 요청하면 처리해줍니다.
 
 ### 4단계: 메인 페이지 업데이트
 
@@ -169,8 +163,8 @@ push 후 2~3분이면 GitHub Pages에 자동 반영됩니다.
 
 | 항목 | 내용 |
 |------|------|
-| GitHub | [Yangbyul/newsletter-jeju](https://github.com/Yangbyul/newsletter-jeju) |
-| 웹사이트 | https://yangbyul.github.io/newsletter-jeju/ |
+| GitHub | [kera-jeju/newsletter-jeju](https://github.com/kera-jeju/newsletter-jeju) |
+| 웹사이트 | https://kera-jeju.github.io/newsletter-jeju/ |
 | 원고 폴더 | `G:\내 드라이브\20XX 제주지회 뉴스레터` |
 | 편집위원 | 양은별 (e.yang@jejunu.ac.kr) |
 | 네이버 카페 | https://cafe.naver.com/kerajeju |

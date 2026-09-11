@@ -81,6 +81,7 @@ SECTIONS = [
         'file_key': '',
         'subsections': [
             {'title': '박사학위 취득', 'file_key': '회원동정_박사학위'},
+            {'title': '신간 안내', 'file_key': '회원동정_신간안내'},
             {'title': '연구비 수주', 'file_key': '회원동정_연구비수주'},
             {'title': '회원 소식', 'file_key': '회원동정_회원소식'},
         ]

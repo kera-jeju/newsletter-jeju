@@ -106,6 +106,7 @@ nav.site-nav {
     transition: background var(--transition), color var(--transition);
     white-space: nowrap;
     display: block;
+    touch-action: manipulation;   /* 모바일 탭 지연·제스처 충돌 방지 */
 }
 .toc-list a:hover {
     background: rgba(255,255,255,0.12);
@@ -878,12 +879,23 @@ footer {
 
 /* -- MOBILE -- */
 @media (max-width: 640px) {
+    /* 좁은 화면에서는 탭을 가로로 흘리지 않고 줄바꿈한다.
+       가로 스크롤은 표시가 없어 뒤쪽 탭(활동 소개)을 아무도 찾지 못한다. */
     .nav-inner {
-        padding: 0 0.75rem;
-        height: 48px;
+        padding: 0.4rem 0.6rem;
+        height: auto;
+        min-height: 48px;
+        flex-wrap: wrap;
+        overflow-x: visible;
+        justify-content: center;
+        gap: 0.25rem;
     }
-    .nav-brand { font-size: 0.72rem; }
-    .toc-list a { font-size: 0.75rem; padding: 0.25rem 0.45rem; }
+    .nav-brand { font-size: 0.72rem; width: 100%; text-align: center; }
+    .toc-list { flex-wrap: wrap; justify-content: center; row-gap: 0.15rem; }
+    .toc-list a {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.6rem;
+    }
     main { padding: 1rem 0.875rem 2rem; }
     .masthead-eyebrow { font-size: 0.68rem; padding: 0.6rem 1rem 0.3rem; }
     .masthead-meta { font-size: 0.78rem; padding: 0.4rem 1rem; }
@@ -910,6 +922,14 @@ footer {
 }
 
 </style>
+  <!-- 스크립트가 막힌 환경(메신저 내장 뷰어 등)에서도 내용이 보이게 한다.
+       탭 전환 대신 모든 꼭지를 이어서 펼친다. 빈 화면보다는 낫다. -->
+  <noscript><style>
+    .view { display: block !important; }
+    nav.site-nav { position: static; }
+    .masthead-calligraphy { display: block !important; }
+    .article-back-bar { display: none !important; }
+  </style></noscript>
 </head>
 <body>
 

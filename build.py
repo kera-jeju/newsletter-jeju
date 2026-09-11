@@ -2034,12 +2034,20 @@ def build(src_root, out_dir):
 
     # 구성원 소개: remove redundant heading, style member count, add 임원진 subheading
     html = re.sub(r'<h1[^>]*>제주지회 구성원</h1>', '', html)
-    html = html.replace(
-        '<blockquote><strong>제주지회 구성원 : 70명 (2025년 2월 기준)</strong> </blockquote>',
-        '<p style="font-size:0.9rem;color:var(--gray-text);margin:0.5rem 0 1rem;">제주지회 구성원 : 70명 (2025년 2월 기준)</p>')
-    html = html.replace(
-        '<h3 id="회장">회장</h3>',
-        '<h2 style="margin-top:1.5rem;">임원진</h2>\n<h3 id="회장">회장</h3>')
+    # 구성원 수 줄은 작은 회색 글씨로 — 원고가 인용문으로 오든 문단으로 오든 같게
+    html = re.sub(
+        r'<blockquote>\s*(?:<strong>)?\s*(제주지회 구성원\s*:.*?)\s*(?:</strong>)?\s*</blockquote>'
+        r'|<p>\s*(제주지회 구성원\s*:.*?)\s*</p>',
+        lambda m: ('<p style="font-size:0.9rem;color:var(--gray-text);'
+                   'margin:0.5rem 0 1rem;">'
+                   + (m.group(1) or m.group(2)) + '</p>'),
+        html, flags=re.DOTALL)
+    # 2025년 원고에는 '임원진' 제목이 없어 여기서 넣어 준다.
+    # 원고가 이미 갖고 있으면(2026년~) 중복되므로 건너뛴다.
+    if '임원진</h2>' not in html:
+        html = html.replace(
+            '<h3 id="회장">회장</h3>',
+            '<h2 style="margin-top:1.5rem;">임원진</h2>\n<h3 id="회장">회장</h3>')
 
     # 구성원 소개: 회원가입/가입비 line breaks + account name correction
     html = html.replace(

@@ -10,13 +10,13 @@ build.py --config config_2026.py 로 불러 쓴다.
 NEWSLETTER_SUBTITLE = "제2호"
 PUBLICATION_DATE = "2026년 10월 1일"
 COPYRIGHT_YEAR = "2026"
-EDITORS = "양은별"
+EDITORS = "양은별, 황현철"
 
 SECTIONS = [
     {
         'id': 'greeting',
         'title': '한국교육학회 제주지회 창립 60주년을 향한 축하말씀',
-        'nav_title': '인사말',
+        'nav_title': '축사',
         'subtitle': '',
         'icon': '',
         'color': '#1a5c35',
@@ -90,6 +90,9 @@ SECTIONS = [
         'color': '#2d6a4f',
         'file_key': '',
         'subsections': [
+            {'title': '구성원 소개', 'file_key': '활동소개_구성원소개'},
+            {'title': '회비 납부자 명단', 'file_key': '활동소개_회비납부자'},
+            {'title': '- 2026 주요 활동 -', 'file_key': '', 'is_divider': True},
             {'title': '창립 59주년 기념행사 및 학술발표회',
              'file_key': '활동소개_황현철'},
             {'title': '조천 마을탐방: 항일 정신과 근대교육의 요람을 찾아서',

@@ -14,6 +14,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 from docx2md import convert as docx_convert     # noqa: E402
 from hwpx2md import convert as hwpx_convert     # noqa: E402
+import refstyle                                 # noqa: E402
 
 # 원고 원본이 모여 있는 폴더. 구글 드라이브 '2026 제주지회 뉴스레터'에서
 # 내려받은 docx/hwpx를 한곳에 모아두고 --src 로 지정한다.
@@ -180,6 +181,7 @@ def main():
     SUB.mkdir(parents=True, exist_ok=True)
 
     rows = []
+    ref_notes = []
 
     # ---- docx 원고 ----
     for spec in DOCX:
@@ -202,6 +204,9 @@ def main():
         if not title or "제목을 적어" in title:
             title = spec.get("title_override") or "(제목 미정)"
 
+        body, ref = refstyle.normalize_section(body)
+        if ref:
+            ref_notes.append((spec["slug"], ref))
         author = author_block(meta.get("필자", ""), meta.get("소속", ""),
                               meta.get("직함", ""), prof)
         write_md(spec["slug"], title, author, body, subtitle)
@@ -223,6 +228,9 @@ def main():
                 continue
             kept.append(l)
         body = "\n".join(kept).strip()
+        body, ref = refstyle.normalize_section(body)
+        if ref:
+            ref_notes.append((spec["slug"], ref))
         author = author_block(spec["name"], spec["affil"], spec["role"])
         write_md(spec["slug"], spec["title"], author, body)
         rows.append((spec["slug"], "수합", len(body), len(images), spec["title"]))
@@ -267,6 +275,18 @@ def main():
     print("-" * 96)
     for slug, st, n, ni, title in rows:
         print(f"{slug:<24}{st:<8}{n:>8}{ni:>6}  {title[:42]}")
+    if ref_notes:
+        print("\n참고문헌 형식 통일")
+        for slug, r in ref_notes:
+            line = f"  {slug:<22} {r['count']}항목"
+            if r["dupes"]:
+                line += f" · 중복 {len(r['dupes'])}건 제거"
+            if r["dropped"]:
+                line += f" · 참고문헌 아닌 줄 {len(r['dropped'])}건 제외"
+            print(line)
+            for d in r["dropped"]:
+                print(f"      제외: {d[:60]}")
+
     print(f"\n소스: {OUT}")
 
 

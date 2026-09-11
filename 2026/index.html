@@ -396,36 +396,46 @@ main {
 .author-card {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    padding: 1rem 1.25rem;
+    gap: 1.35rem;
+    padding: 1.25rem 1.5rem;
     background: var(--gray-light);
     border: 1px solid var(--gray-mid);
     border-radius: var(--radius-card);
     margin: 1rem 0;
 }
 .author-card img {
-    width: 60px !important;
-    height: 60px !important;
-    max-width: 60px !important;
+    width: 104px !important;
+    height: 104px !important;
+    max-width: 104px !important;
     border-radius: 50% !important;
     object-fit: cover;
-    object-position: center 20%;
+    object-position: center 22%;
     flex-shrink: 0;
     margin: 0 !important;
-    box-shadow: 0 2px 8px rgba(0,0,0,.1);
-    padding: 6px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.12);
+    padding: 4px;
     background: var(--gray-mid);
 }
 .author-card .author-info span {
     display: block;
-    font-size: 0.93rem;
+    font-size: 0.97rem;
     color: var(--gray-text);
-    line-height: 1.5;
+    line-height: 1.55;
 }
 .author-card .author-info span:first-child {
     font-weight: 700;
     color: var(--green-dark);
-    font-size: 1rem;
+    font-size: 1.18rem;
+    margin-bottom: 0.15rem;
+}
+@media (max-width: 560px) {
+    .author-card { gap: 1rem; padding: 1rem 1.1rem; }
+    .author-card img {
+        width: 78px !important;
+        height: 78px !important;
+        max-width: 78px !important;
+    }
+    .author-card .author-info span:first-child { font-size: 1.08rem; }
 }
 
 /* -- ASIDE BLOCKS -- */
@@ -878,18 +888,8 @@ footer {
 <p>셋째, 제주에서 미래교육을 상상하고 실험하는 ‘교육적 상상력의 플랫폼’이 되어야 한다. 사회와 교육환경의 급격한 변화 앞에서 미래교육을 단순히 새로운 기술이나 정책을 받아들이는 문제로 접근해서는 안 된다. 오히려 “미래 학교는 지금과 같은 모습이어야 하는가?”, “제주에서 아이를 기른다는 것은 무엇인가?”, “AI 시대에 제주라서 배울 수 있는 것은 무엇인가?”, “제주의 작은 학교와 마을은 미래교육의 약점인가, 새로운 가능성인가?”와 같은 근본적인 교육적 질문이 필요하다. 바로 이 지점에서 앞서 정리한 ‘이론적 각성’이 미래와 만날 수 있다. 제주를 단순한 연구대상으로 삼는 데 머물지 않고, 그로부터 교육적 개념과 이론을 생산한다면 미래의 제주 교육을 상상하는 소중한 지적 자원이 될 수 있기 때문이다. 가령 학생 수가 감소하는 읍면지역의 작은학교 하나를 ‘없어질 가능성이 있는 학교’가 아니라 ‘미래교육을 먼저 실험할 수 있는 학교’로 바꾸어 생각해 볼 수 있다. 학교와 마을을 하나의 배움터로 연결하고, 제주의 자연·역사·문화와 AI를 결합한 교육과정을 운영하며, 필요하다면 도시지역 학생들이 일정 기간 참여하는 새로운 형태의 지역순환유학도 시도할 수 있다. 우리 제주지회는 대학·교육청·학교·마을을 연결하고 그 과정과 결과를 연구하여 제주에서 시작된 작은 실험이 미래교육의 가능성이 될 수 있는지를 검증하는 플랫폼이 되어야 한다.</p>
 <p>정리하자면, 우리 제주지회가 60년 전 학문적 자각으로 제주와 중앙을 ‘연결’했고, 1990년대의 지역적 자성으로 제주 교육의 정체성을 ‘질문’했다면, 이제 지역 기반 교육이론을 ‘창조’해야 할 시점이다. 지난 60년의 성과와 과제를 바탕으로 앞으로의 제주지회는 제주 교육의 기억을 읽고, 오늘을 질문하며, 제주로부터 미래교육을 상상하고 만들어가며 그 가능성을 보여주는 학문공동체가 되어야 한다. 그러한 노력이 쌓일 때, 제주특별자치도는 우리 제주지회와 함께 ‘교육이 특별한 제주’로 한 걸음 더 나아갈 수 있을 것이다.</p>
 <p>감사합니다.</p>
-<p><참고 문헌></p>
-<p>김봉종(1993). 제주지회의 성장. 한국교육학회 편. 교육탐구의 세월: 한국교육학회 40년사(pp. 413-416). 서울: 교육과학사.</p>
-<p>김일방(2021). ‘제주이해교육’의 실태 분석 및 미래 발전방안. 교육과학연구, 23(2), 39-63.</p>
-<p>송성대, 김정숙, 진관훈, 강만익, 정지훈(2023). 제주문화의 원류 해민정신. 제주: 각.</p>
-<p>양진건(1991). 제주교육행정사. 제주: 경신인쇄사.</p>
-<p>유홍준(2012). 나의 문화유산답사기: 돌하르방 어디 감수광. 경기: 창비.</p>
-<p>이인회(2023). 제주교육학 정립의 필요성에 대한 탐색적 연구: 학교 현장 전문가 심층면담을 중심으로. 교육과학연구교육과학연구, 제25권 제4호교육과학연구, 제23권 제2호, 25(4), 1-26.</p>
-<p>교육과학연구, 제25권 제4호</p>
-<p>교육과학연구, 제23권 제2호</p>
-<p>제주교육학연구회(2022). 지역교육학으로서 제주교육학은 가능한가? 2022 제주교육학 3차 포럼 자료집, 57.</p>
-<p>한국교육학회(1973). 한국교육학회 20년사: 1953.4.4.~1973.4.4. 서울: 대광인쇄공사.</p>
-<p>현용준(1986). 제주도 무속연구. 서울: 집문당.</p>
+<h2 id="참고문헌">참고문헌</h2>
+<div class="ref-list"><p>김봉종(1993). 제주지회의 성장. 한국교육학회 편. 교육탐구의 세월: 한국교육학회 40년사(pp. 413-416). 서울: 교육과학사.</p><p>김일방(2021). ‘제주이해교육’의 실태 분석 및 미래 발전방안. 교육과학연구, 23(2), 39-63.</p><p>송성대, 김정숙, 진관훈, 강만익, 정지훈(2023). 제주문화의 원류 해민정신. 제주: 각.</p><p>양진건(1991). 제주교육행정사. 제주: 경신인쇄사.</p><p>유홍준(2012). 나의 문화유산답사기: 돌하르방 어디 감수광. 경기: 창비.</p><p>이인회(2023). 제주교육학 정립의 필요성에 대한 탐색적 연구: 학교 현장 전문가 심층면담을 중심으로. 교육과학연구교육과학연구, 제25권 제4호교육과학연구, 제23권 제2호, 25(4), 1-26.</p><p>제주교육학연구회(2022). 지역교육학으로서 제주교육학은 가능한가? 2022 제주교육학 3차 포럼 자료집, 57.</p><p>한국교육학회(1973). 한국교육학회 20년사: 1953.4.4.~1973.4.4. 서울: 대광인쇄공사.</p><p>현용준(1986). 제주도 무속연구. 서울: 집문당.</p></div>
 </div>
   </div>
 </div>
@@ -1108,7 +1108,7 @@ footer {
 <p>음악은 감정을 표현하고 타인과 공감하며 자신을 이해하도록 매개하는 예술이다. 그렇기에 음악 교육은 단순한 기교 습득이나 기술적 완성에 머무르기보다 음악을 통해 자신의 삶을 성찰하고 돌볼 수 있는 전인적 방향으로 나아갈 필요가 있다. 평가의 기준에서 잠시 벗어나 자신의 감정을 있는 그대로 마주할 수 있는 자리를 마련하는 것, 그것이 오늘날 음악웰니스가 음악 교육에 던지는 중요한 질문이며, 우리가 다시 시작해야 할 음악교육의 모습일 것이다.</p>
 <p><img src="images/974b2706_김지원_01.jpeg" alt="image" loading="lazy"></p>
 <h2 id="참고문헌">참고문헌</h2>
-<p>교육부, 『제2022-33호 [별책12]』 (서울: 교육부, 2022), 1108쪽.</p>
+<div class="ref-list"><p>교육부(2022). 『제2022-33호 [별책12]』. 서울: 교육부, 1108쪽.</p></div>
 
     </div>
     <div class="article-back-bar article-back-bottom" onclick="backToSection()">
@@ -1139,12 +1139,7 @@ footer {
 <p>여기에 본문을 자유롭게 작성해주세요.</p>
 <p>이미지를 넣고 싶은 위치에 직접 삽입하시면 됩니다.(삽입 → 그림 → 이 디바이스에서)</p>
 <h2 id="참고문헌">참고문헌</h2>
-<p>데일리제주. (2026, 6월). 제주대-조지아공대 글로벌 런케이션 캡스톤 프로그램 성료. .</p>
-<p>문지윤. (2019). 상담학 박사과정생의 연구자 되어가기 과정에 대한 자문화기술지. 상담학연구, 20(6), 1-25. 제주대학교, & 제주특별자치도. (2025). 제주형 글로컬 고등교육 혁신을 위한 K-런케이션 추진 계획안. 제주대학교·제주특별자치도.</p>
-<p>데일리제주. (2026, 7월 6일). 제주대-조지아텍, 신평리서 '글로벌 런케이션 캡스톤' 성료. 데일리제주. http://www.dailyjeju.net/news/articleView.html?idxno=42431</p>
-<p>문지윤. (2019). 상담학 박사과정생의 연구자 되어가기 과정에 대한 자문화기술지. 상담학연구, 20(6), 1-25.</p>
-<p>제주대학교, & 제주특별자치도. (2025). 제주형 글로컬 고등교육 혁신을 위한 K-런케이션 추진 계획안. 제주대학교·제주특별자치도.</p>
-<p>Yu, X. (2025). Developing additive multidisciplinary identities in higher education: A conceptual framework for boundary-crossing researchers. Studies in Higher Education, 50(3), 412–428.</p>
+<div class="ref-list"><p>데일리제주(2026. 6.). 제주대-조지아공대 글로벌 런케이션 캡스톤 프로그램 성료.</p><p>데일리제주(2026. 7. 6.). 제주대-조지아텍, 신평리서 '글로벌 런케이션 캡스톤' 성료. 데일리제주. http://www.dailyjeju.net/news/articleView.html?idxno=42431.</p><p>문지윤(2019). 상담학 박사과정생의 연구자 되어가기 과정에 대한 자문화기술지. 상담학연구, 20(6), 1-25.</p><p>제주대학교, & 제주특별자치도(2025). 제주형 글로컬 고등교육 혁신을 위한 K-런케이션 추진 계획안. 제주대학교·제주특별자치도.</p><p>Yu, X. (2025). Developing additive multidisciplinary identities in higher education: A conceptual framework for boundary-crossing researchers. Studies in Higher Education, 50(3), 412–428.</p></div>
 
     </div>
     <div class="article-back-bar article-back-bottom" onclick="backToSection()">
@@ -1178,14 +1173,7 @@ footer {
 <p>‘모두가 주인공’이라는 교육지표는 아이 한 명이 자신의 삶을 당당히 설계하고, 교사가 존중받고 수업에 집중할 수 있으며, 학부모가 학교 교육을 신뢰할 때 비로소 완성된다. 고의숙 교육감이 이끄는 시간이, 헛된 구호의 시간이 아니라 신뢰가 쌓이는 시간이 되기를 바란다.</p>
 <p>고의숙 교육감의 취임을 축하하며, 그 여정을 응원한다.</p>
 <h2 id="참고문헌">참고문헌</h2>
-<p>홍지오. (2023. 4. 25.). 제주도 마을교육공동체 바라보는 기대의 시선. 제민일보, 15면.</p>
-<p>홍지오. (2023. 5. 22.). 팬데믹이 제주 교육에 남긴 숙제. 제민일보, 14면.</p>
-<p>홍지오. (2023. 8. 25.). 제주의 마을 활동가는 지치고 있다. 제민일보, 15면.</p>
-<p>홍지오. (2024. 6. 13.). 제주의 오래된 ‘미래 교육’을 위한 제언. 제민일보, 15면.</p>
-<p>홍지오. (2024. 7. 17.). 소멸 위험 제주를 위한 문제 해결 프로젝트 제안. 제민일보, 14면.</p>
-<p>홍지오. (2024. 8. 19.). 제주의 미래 위한 숙론(熟論)과 교육. 제민일보, 15면.</p>
-<p>홍지오. (2024. 12. 24.). 신뢰 사회, 제주. 제민일보, 15면.</p>
-<p>제18대 제주특별자치도교육감직인수위원회. (2026). 모두가 주인공, 함께 성장하는 제주교육: 제18대 제주특별자치도교육감직인수위원회 백서. 제주특별자치도교육청.</p>
+<div class="ref-list"><p>제18대 제주특별자치도교육감직인수위원회(2026). 모두가 주인공, 함께 성장하는 제주교육: 제18대 제주특별자치도교육감직인수위원회 백서. 제주특별자치도교육청.</p><p>홍지오(2023. 4. 25.). 제주도 마을교육공동체 바라보는 기대의 시선. 제민일보, 15면.</p><p>홍지오(2023. 5. 22.). 팬데믹이 제주 교육에 남긴 숙제. 제민일보, 14면.</p><p>홍지오(2023. 8. 25.). 제주의 마을 활동가는 지치고 있다. 제민일보, 15면.</p><p>홍지오(2024. 6. 13.). 제주의 오래된 ‘미래 교육’을 위한 제언. 제민일보, 15면.</p><p>홍지오(2024. 7. 17.). 소멸 위험 제주를 위한 문제 해결 프로젝트 제안. 제민일보, 14면.</p><p>홍지오(2024. 8. 19.). 제주의 미래 위한 숙론(熟論)과 교육. 제민일보, 15면.</p><p>홍지오(2024. 12. 24.). 신뢰 사회, 제주. 제민일보, 15면.</p></div>
 
     </div>
     <div class="article-back-bar article-back-bottom" onclick="backToSection()">
@@ -1234,9 +1222,7 @@ footer {
 <p>물론 모든 장황한 설명이나 또래 갈등을 화용언어의 어려움으로 설명할 수는 없다. 중요한 것은 아이의 행동을 성격이나 의지의 문제로 단정하기 전에 “이 아이는 친구들이 보내는 신호를 알아차렸을까?”, “상대방의 말과 행동에 담긴 감정과 의도를 이해했을까?”, “자신이 속상한 이유를 말로 설명할 수 있었을까?” 를 한 번 더 묻는 것이다.</p>
 <p>결국 화용언어를 지원한다는 것은 아이에게 정해진 ‘바른 말’을 가르치는 것이 아니다. 아이가 상황과 상대방의 의도를 이해하고, 자신의 생각과 감정을 그 상황에 맞는 방식으로 표현할 수 있도록 돕는 것이다. 겉으로 드러난 행동만을 보기보다 그 행동에 이르기까지 아이가 무엇을 이해했고 무엇을 놓쳤는지를 살펴볼 때, 교실에서 미처 발견하지 못했던 지원의 지점도 보이기 시작한다.</p>
 <h2 id="참고문헌">참고문헌</h2>
-<p>Adams, C. (2002). Practitioner review: The assessment of language pragmatics. Journal of Child Psychology and Psychiatry, 43(8), 973–987.</p>
-<p>Levinson, S. C. (1983). Pragmatics. Cambridge University Press.</p>
-<p>Norbury, C. F. (2014). Practitioner review: Social (pragmatic) communication disorder conceptualization, evidence and clinical implications. Journal of Child Psychology and Psychiatry, 55(3), 204–216.</p>
+<div class="ref-list"><p>Adams, C. (2002). Practitioner review: The assessment of language pragmatics. Journal of Child Psychology and Psychiatry, 43(8), 973–987.</p><p>Levinson, S. C. (1983). Pragmatics. Cambridge University Press.</p><p>Norbury, C. F. (2014). Practitioner review: Social (pragmatic) communication disorder conceptualization, evidence and clinical implications. Journal of Child Psychology and Psychiatry, 55(3), 204–216.</p></div>
 
     </div>
     <div class="article-back-bar article-back-bottom" onclick="backToSection()">

@@ -1136,36 +1136,46 @@ main {
 .author-card {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    padding: 1rem 1.25rem;
+    gap: 1.35rem;
+    padding: 1.25rem 1.5rem;
     background: var(--gray-light);
     border: 1px solid var(--gray-mid);
     border-radius: var(--radius-card);
     margin: 1rem 0;
 }
 .author-card img {
-    width: 60px !important;
-    height: 60px !important;
-    max-width: 60px !important;
+    width: 104px !important;
+    height: 104px !important;
+    max-width: 104px !important;
     border-radius: 50% !important;
     object-fit: cover;
-    object-position: center 20%;
+    object-position: center 22%;
     flex-shrink: 0;
     margin: 0 !important;
-    box-shadow: 0 2px 8px rgba(0,0,0,.1);
-    padding: 6px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.12);
+    padding: 4px;
     background: var(--gray-mid);
 }
 .author-card .author-info span {
     display: block;
-    font-size: 0.93rem;
+    font-size: 0.97rem;
     color: var(--gray-text);
-    line-height: 1.5;
+    line-height: 1.55;
 }
 .author-card .author-info span:first-child {
     font-weight: 700;
     color: var(--green-dark);
-    font-size: 1rem;
+    font-size: 1.18rem;
+    margin-bottom: 0.15rem;
+}
+@media (max-width: 560px) {
+    .author-card { gap: 1rem; padding: 1rem 1.1rem; }
+    .author-card img {
+        width: 78px !important;
+        height: 78px !important;
+        max-width: 78px !important;
+    }
+    .author-card .author-info span:first-child { font-size: 1.08rem; }
 }
 
 /* -- ASIDE BLOCKS -- */
@@ -1892,13 +1902,29 @@ def build(src_root, out_dir):
     # Convert <ul><li> lists after 참고문헌 headings to hanging-indent ref-list blocks
 
     def convert_ref_lists(html_text):
-        """Convert <ul> after 참고문헌 heading to hanging-indent ref-list div."""
+        """참고문헌 뒤의 목록을 내어쓰기(ref-list) 블록으로 바꾼다.
+
+        원고에 따라 참고문헌이 <ul> 목록으로도, 문단(<p>)의 연속으로도 들어온다.
+        헤딩 수준도 원고마다 h2~h4로 갈린다. 어느 쪽이든 같은 모양으로 정렬한다.
+        """
+        head = r'(<h([2-4])[^>]*id="참고문헌"[^>]*>[^<]*</h\2>\s*)'
+
+        def wrap(items):
+            return '<div class="ref-list">' + ''.join(
+                f'<p>{i.strip()}</p>' for i in items if i.strip()) + '</div>'
+
+        # (1) <ul><li> 형태
         html_text = re.sub(
-            r'(<h3[^>]*id="참고문헌"[^>]*>참고문헌</h3>\s*)<ul>(.*?)</ul>',
-            lambda m: m.group(1) + '<div class="ref-list">' + ''.join(
-                f'<p>{item.strip()}</p>'
-                for item in re.findall(r'<li>(.*?)</li>', m.group(2), re.DOTALL)
-            ) + '</div>',
+            head + r'<ul>(.*?)</ul>',
+            lambda m: m.group(1) + wrap(
+                re.findall(r'<li>(.*?)</li>', m.group(3), re.DOTALL)),
+            html_text, flags=re.DOTALL)
+
+        # (2) <p> 문단이 이어지는 형태 — 다음 헤딩이나 블록 끝에서 멈춘다
+        html_text = re.sub(
+            head + r'((?:\s*<p>.*?</p>)+)(?=\s*(?:<h[1-6]|<div|</div>|$))',
+            lambda m: m.group(1) + wrap(
+                re.findall(r'<p>(.*?)</p>', m.group(3), re.DOTALL)),
             html_text, flags=re.DOTALL)
         return html_text
 

@@ -75,11 +75,15 @@ SECTIONS = [
         'id': 'member',
         'title': '회원 동정',
         'nav_title': '회원 동정',
-        'subtitle': '',
+        'subtitle': '회원들의 학위 취득, 연구 수주, 소식을 전합니다.',
         'icon': '',
         'color': '#40916c',
-        'file_key': '회원동정',
-        'subsections': []
+        'file_key': '',
+        'subsections': [
+            {'title': '박사학위 취득', 'file_key': '회원동정_박사학위'},
+            {'title': '연구비 수주', 'file_key': '회원동정_연구비수주'},
+            {'title': '회원 소식', 'file_key': '회원동정_회원소식'},
+        ]
     },
     {
         'id': 'activities',

@@ -1136,6 +1136,51 @@ main {
     }
 }
 
+/* -- NEWS CARD (회원 소식: 좌 사진 · 우 소식) -- */
+.news-card {
+    display: flex;
+    gap: 1.35rem;
+    align-items: flex-start;
+    background: var(--gray-light);
+    border: 1px solid var(--gray-mid);
+    border-radius: var(--radius-card);
+    padding: 1.25rem 1.5rem;
+    margin: 1rem 0;
+}
+.news-card .nc-photo { flex: 0 0 auto; }
+.news-card .nc-photo img {
+    width: 92px !important;
+    height: 92px !important;
+    max-width: 92px !important;
+    border-radius: 50% !important;
+    object-fit: cover;
+    object-position: center 20%;
+    margin: 0 !important;
+    padding: 4px;
+    background: var(--gray-mid);
+    box-shadow: 0 2px 10px rgba(0,0,0,.12);
+}
+.news-card .nc-text { flex: 1; min-width: 0; }
+.news-card .nc-text span {
+    display: block;
+    font-size: 0.95rem;
+    color: var(--black);
+    line-height: 1.7;
+}
+.news-card .nc-text span:first-child {
+    font-weight: 700;
+    font-size: 1.08rem;
+    color: var(--green-dark);
+}
+.news-card .nc-text span:nth-child(2) {
+    color: var(--gray-text);
+    font-size: 0.9rem;
+    margin-bottom: 0.35rem;
+}
+@media (max-width: 620px) {
+    .news-card { flex-direction: column; align-items: center; text-align: left; }
+}
+
 /* -- TABLE CAPTION (표 바로 위에 붙는 제목) -- */
 /* 본문 문단 규칙(.article-body p 등)보다 뒤에 오도록 선택자를 강하게 둔다 */
 p.table-caption,
@@ -2094,6 +2139,30 @@ def build(src_root, out_dir):
             in_article, html_text, flags=re.DOTALL)
 
     html = convert_degree_cards(html)
+
+    # 회원 소식: <hr>로 나뉜 aside를 좌(사진)·우(소식) 카드로 만든다.
+    def convert_news_cards(html_text):
+        def rebuild(m):
+            inner = m.group(1)
+            if '<hr>' not in inner:
+                return m.group(0)
+            left, right = inner.split('<hr>', 1)
+            img = re.search(r'<img[^>]*>', left)
+            if not img:
+                return m.group(0)
+            return ('<div class="news-card">'
+                    f'<div class="nc-photo">{img.group(0)}</div>'
+                    f'<div class="nc-text">{right.strip()}</div></div>')
+
+        def in_article(am):
+            return re.sub(r'<div class="aside-block">(.*?)</div>',
+                          rebuild, am.group(0), flags=re.DOTALL)
+
+        return re.sub(
+            r'id="article-member-회원-소식".*?(?=id="article-|id="view-)',
+            in_article, html_text, flags=re.DOTALL)
+
+    html = convert_news_cards(html)
 
     # Split single-span "이름 (소속)" into separate name + affiliation spans
     def split_author_name(m):

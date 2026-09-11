@@ -51,12 +51,21 @@ HWPX = [
     dict(file="뉴스레터 2026 주론-0906.hwpx", slug="주론_이인회",
          title="지나온 60년, 새롭게 열어갈 제주 교육",
          name="이인회", affil="한국교육학회 제주지회", role="회장",
+         photo="이인회 교수.jpg", photo_crop=(5, 0, 195, 190),
          drop_first=2),
     dict(file="한국교육학회 제주지회 창립 60주년 축사-교육감(0825).hwpx",
          slug="인사말_고의숙",
          title="한국교육학회 제주지회 창립 60주년을 향한 축하말씀",
          name="고의숙", affil="제주특별자치도교육청", role="교육감",
+         # webp 원본이 해상도가 높아 그쪽을 쓴다
+         photo="고의숙 교육감.webp", photo_crop=(8, 0, 988, 980),
          drop_first=1),
+]
+
+# 회원 소식에 넣을 인물 사진 — 얼굴이 원 중앙에 오도록 자른다.
+NEWS_PHOTOS = [
+    ("강동호", "강동호 교수.jpg", (18, 0, 132, 114)),
+    ("김대영", "김대영 교수.jpg", (23, 23, 153, 153)),
 ]
 
 # --------------------------------------------------------------------------
@@ -202,6 +211,8 @@ STATIC = [
     # 회원 소식 — 발령 내용은 PI가 전달한 인사 공고문에 근거한다(2026-09-11).
     dict(slug="회원동정_회원소식", title="회원 소식", body="""
 <aside>
+![강동호 프로필](images/강동호_photo.jpg)
+---
 **강동호 조교수 (제주대 교육대학원 교육학과)**
 비서실장 겸보 발령
 제주대학교 교육대학원 교육학과 강동호 조교수께서 **비서실장** 겸보를 명받으셨습니다. (기간: 2026. 7. 29. ~ 2028. 3. 29.)
@@ -210,6 +221,8 @@ STATIC = [
 </aside>
 
 <aside>
+![김대영 프로필](images/김대영_photo.jpg)
+---
 **김대영 부교수 (제주대 교육대학원 교육학과)**
 교수학습지원센터장 겸보 발령
 제주대학교 교육대학원 교육학과 김대영 부교수께서 **교수학습지원센터장** 겸보를 명받으셨습니다. (기간: 2026. 5. 14. ~ 후임자 임명 시까지)
@@ -359,6 +372,29 @@ def promote_numbered_headings(body):
     return NUM_HEADING.sub(repl, body)
 
 
+# 구글 드라이브의 뉴스레터 폴더 — 인물 사진이 여기 모여 있다.
+PHOTO_DIR = Path(os.environ.get(
+    "NEWSLETTER_PHOTOS", r"G:\내 드라이브\2026 제주지회 뉴스레터"))
+
+
+def add_photo(filename, slug, box):
+    """드라이브의 인물 사진을 잘라 소스 트리에 넣고 상대경로를 돌려준다."""
+    from PIL import Image
+    src = PHOTO_DIR / filename
+    if not src.exists():
+        return None
+    img_dir = SUB / "images"
+    img_dir.mkdir(parents=True, exist_ok=True)
+    im = Image.open(src).convert("RGB")
+    if box:
+        im = im.crop(box)
+    side = min(im.size)
+    im = im.crop((0, 0, side, side))
+    name = f"{slug}_photo.jpg"
+    im.save(img_dir / name, quality=92)
+    return f"images/{name}"
+
+
 def crop_square(path, box):
     """프로필 사진을 지정 영역으로 잘라 정사각형으로 만든다.
 
@@ -491,9 +527,17 @@ def main():
                 body, drop=REF_DROP.get(spec["slug"]))
         if ref:
             ref_notes.append((spec["slug"], ref))
-        author = author_block(spec["name"], spec["affil"], spec["role"])
+        prof = None
+        if spec.get("photo"):
+            prof = add_photo(spec["photo"], spec["slug"], spec.get("photo_crop"))
+        author = author_block(spec["name"], spec["affil"], spec["role"], prof)
         write_md(spec["slug"], spec["title"], author, body)
         rows.append((spec["slug"], "수합", len(body), len(images), spec["title"]))
+
+    # ---- 회원 소식 인물 사진 ----
+    for slug, fname, box in NEWS_PHOTOS:
+        if not add_photo(fname, slug, box):
+            print(f"  ! 사진 없음: {fname}")
 
     # ---- 고정 지면 (구성원 소개·회비 납부자 명단) ----
     for spec in STATIC:

@@ -25,6 +25,7 @@ DEFAULT_OUT = str(Path(__file__).parent)
 NEWSLETTER_TITLE = "한국교육학회 제주지회 뉴스레터"
 NEWSLETTER_SUBTITLE = "재창간호"
 PUBLICATION_DATE = "2025년 10월 15일"
+COPYRIGHT_YEAR = "2025"
 SINCE = "Since 1993"
 PUBLISHER = "한국교육학회 제주지회"
 PUBLISHER_NAME = "이인회"
@@ -1680,7 +1681,7 @@ def build_html(toc_html, intro_html, sections_html, article_views_html, hero_img
       </div>
     </div>
     <hr class="footer-divider">
-    <p class="footer-copy">&copy; 2025 {PUBLISHER}. All rights reserved.</p>
+    <p class="footer-copy">&copy; {COPYRIGHT_YEAR} {PUBLISHER}. All rights reserved.</p>
   </div>
 </footer>
 
@@ -1746,10 +1747,13 @@ def build(src_root, out_dir):
                     if root_md:
                         hero_img_src = register_image(root_md, unquote('%ED%95%9C%EA%B5%AD%EA%B5%90%EC%9C%A1%ED%95%99%ED%9A%8C%20%EC%A0%9C%EC%A3%BC%EC%A7%80%ED%9A%8C%20%EB%89%B4%EC%8A%A4%EB%A0%88%ED%84%B0/image.png'))
                     break
-    # Register the old hero (하르방) for use in intro
+    # Register the old hero (하르방) for use in intro.
+    # 해당 이미지가 없는 호(2026~)에서는 깨진 이미지가 되므로 존재할 때만 등록한다.
     old_hero_src = ''
     if root_md:
-        old_hero_src = register_image(root_md, unquote('%ED%95%9C%EA%B5%AD%EA%B5%90%EC%9C%A1%ED%95%99%ED%9A%8C%20%EC%A0%9C%EC%A3%BC%EC%A7%80%ED%9A%8C%20%EB%89%B4%EC%8A%A4%EB%A0%88%ED%84%B0/image.png'))
+        hero_rel = unquote('%ED%95%9C%EA%B5%AD%EA%B5%90%EC%9C%A1%ED%95%99%ED%9A%8C%20%EC%A0%9C%EC%A3%BC%EC%A7%80%ED%9A%8C%20%EB%89%B4%EC%8A%A4%EB%A0%88%ED%84%B0/image.png')
+        if (Path(root_md).parent / hero_rel).exists():
+            old_hero_src = register_image(root_md, hero_rel)
 
     # Build sections
     print("  Building sections...")
@@ -1958,7 +1962,7 @@ def build(src_root, out_dir):
             info_html = ''.join(f'<span>{s}</span>' for s in span_texts)
             return f'<div class="author-card">{img_tag}<div class="author-info">{info_html}</div></div>'
         html_text = re.sub(
-            r'<div class="aside-block"><span>(<img[^>]*alt="[^"]*(?:교수|선생님|증명|image\.png)[^"]*"[^>]*>)</span>\s*((?:<span>.*?</span>\s*)+)</div>',
+            r'<div class="aside-block"><span>(<img[^>]*alt="[^"]*(?:교수|선생님|증명|프로필|image\.png)[^"]*"[^>]*>)</span>\s*((?:<span>.*?</span>\s*)+)</div>',
             replace_author, html_text, flags=re.DOTALL)
         return html_text
 
@@ -2116,13 +2120,39 @@ def build(src_root, out_dir):
     print(f"  Images copied: {img_count}")
 
 
+def apply_config(config_path):
+    """연도별 설정 파일을 읽어 대문자 전역값(SECTIONS, 발간정보 등)을 덮어쓴다.
+
+    설정 파일을 주지 않으면 이 파일에 적힌 2025년(재창간호) 기본값이 그대로 쓰인다.
+    """
+    import importlib.util
+    path = Path(config_path)
+    if not path.exists():
+        raise FileNotFoundError(f"설정 파일이 없습니다: {config_path}")
+    spec = importlib.util.spec_from_file_location('newsletter_config', str(path))
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    g = globals()
+    overridden = []
+    for key in dir(mod):
+        if key.isupper() and not key.startswith('_'):
+            g[key] = getattr(mod, key)
+            overridden.append(key)
+    print(f"  Config: {path.name} ({', '.join(overridden)})")
+
+
 def main():
     parser = argparse.ArgumentParser(description='Build newsletter HTML from Notion export')
     parser.add_argument('--src', default=DEFAULT_SRC,
                         help='Source directory (Notion export root)')
     parser.add_argument('--out', default=DEFAULT_OUT,
                         help='Output directory')
+    parser.add_argument('--config', default=None,
+                        help='연도별 설정 파일 (예: config_2026.py). '
+                             '생략하면 2025년 재창간호 기준 기본값을 쓴다.')
     args = parser.parse_args()
+    if args.config:
+        apply_config(args.config)
     build(args.src, args.out)
 
 

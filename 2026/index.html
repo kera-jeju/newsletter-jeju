@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="format-detection" content="telephone=no, email=no, address=no">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+  <meta name="description" content="한국교육학회 제주지회 뉴스레터 제2호 2026년 10월 1일">
+  <title>한국교육학회 제주지회 뉴스레터 | 제2호</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;900&family=Noto+Sans+KR:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+/* ============================================================
+   Newsletter CSS - 한국교육학회 제주지회 (Modern Magazine)
+   ============================================================ */
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --green-dark:   #1a5c35;
+    --green-mid:    #2d7d46;
+    --green-light:  #52b788;
+    --green-pale:   #d8f3dc;
+    --green-faint:  #f0faf3;
+    --white:        #ffffff;
+    --gray-light:   #f6f7f8;
+    --gray-mid:     #e4e8ec;
+    --gray-text:    #64748b;
+    --black:        #1e2630;
+    --font-main:    'Noto Serif KR', 'NanumMyeongjo', Georgia, serif;
+    --font-ui:      'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+    --shadow-sm:    0 1px 4px rgba(0,0,0,.07);
+    --shadow-md:    0 4px 16px rgba(0,0,0,.10);
+    --shadow-card:  0 2px 12px rgba(26,92,53,.10);
+    --radius:       10px;
+    --radius-card:  12px;
+    --max-width:    960px;
+    --transition:   0.2s ease;
+}
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+    font-family: var(--font-main);
+    color: var(--black);
+    background: var(--gray-light);
+    line-height: 1.85;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* -- NAV -- */
+nav.site-nav {
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    background: var(--green-dark);
+    box-shadow: 0 2px 12px rgba(0,0,0,.18);
+}
+.nav-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0 1.5rem;
+    height: 52px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+.nav-brand {
+    color: var(--white);
+    font-family: var(--font-ui);
+    font-size: 0.95rem;
+    font-weight: 700;
+    white-space: nowrap;
+    text-decoration: none;
+    flex-shrink: 0;
+    letter-spacing: -0.01em;
+    opacity: 0.92;
+    transition: opacity var(--transition);
+    cursor: pointer;
+}
+.nav-brand:hover { opacity: 1; }
+.toc-list {
+    display: flex;
+    list-style: none;
+    gap: 0;
+    flex-wrap: nowrap;
+    flex-shrink: 1;
+    min-width: 0;
+}
+.toc-list a {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    font-family: var(--font-ui);
+    font-size: 0.92rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 6px;
+    transition: background var(--transition), color var(--transition);
+    white-space: nowrap;
+    display: block;
+}
+.toc-list a:hover {
+    background: rgba(255,255,255,0.12);
+    color: var(--white);
+}
+.toc-list a.active {
+    background: rgba(255,255,255,0.18);
+    color: var(--white);
+    font-weight: 700;
+}
+
+/* -- MASTHEAD -- */
+.masthead {
+    background: #1a1a1a;
+    color: var(--white);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+.masthead-inner {
+    position: relative;
+}
+.masthead-eyebrow {
+    font-family: var(--font-ui);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    padding: 1rem 1.5rem 0.5rem;
+    background: var(--green-dark);
+}
+.masthead-calligraphy {
+    background: var(--green-dark);
+    text-align: center;
+    padding: 0.5rem 2rem;
+}
+.masthead-calligraphy img {
+    width: 100%;
+    max-width: 460px;
+    height: auto;
+    display: inline-block;
+}
+.masthead-hero-img {
+    width: 100%;
+    line-height: 0;
+}
+.masthead-hero-img img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+.masthead-meta {
+    font-family: var(--font-ui);
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.8);
+    padding: 0.8rem 1.5rem;
+    background: var(--green-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+.masthead-meta .dot { opacity: 0.4; }
+
+/* -- VIEW SHELL -- */
+main {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 2rem 1.5rem 3rem;
+    min-height: 60vh;
+}
+
+/* -- VIEWS (level 1, 2, 3) -- */
+.view { display: none; }
+.view.active { display: block; }
+
+/* -- SECTION CARD (level-1 page) -- */
+.newsletter-section {
+    background: var(--white);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 0;
+    overflow: hidden;
+    animation: fadeUp 0.25s ease both;
+}
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+.section-header {
+    padding: 2rem 2rem 1.25rem;
+    border-bottom: 1px solid var(--gray-mid);
+    background: var(--white);
+}
+.section-kicker {
+    font-family: var(--font-ui);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--green-mid);
+    margin-bottom: 0.4rem;
+}
+.section-title {
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: var(--black);
+    font-family: var(--font-ui);
+    line-height: 1.25;
+    word-break: keep-all;
+    letter-spacing: -0.02em;
+}
+.section-desc,
+.article-body .section-desc,
+.section-content .section-desc {
+    font-size: 0.78rem !important;
+    color: #aaa !important;
+    font-family: var(--font-ui);
+    margin: 0.3rem 0 0.8rem;
+    line-height: 1.4 !important;
+}
+.section-subtitle {
+    font-family: var(--font-ui);
+    font-size: 0.88rem;
+    color: var(--green-mid);
+    margin-top: 0.3rem;
+    line-height: 1.5;
+}
+.section-content {
+    padding: 1.75rem 2rem;
+    overflow-wrap: break-word;
+    word-break: keep-all;
+}
+
+/* -- TYPOGRAPHY (article content) -- */
+.article-body h1,
+.article-body h2,
+.article-body h3,
+.article-body h4,
+.section-content h1,
+.section-content h2,
+.section-content h3,
+.section-content h4 {
+    font-family: var(--font-ui);
+    color: var(--green-dark);
+    margin: 1.75rem 0 0.65rem;
+    line-height: 1.4;
+}
+.article-body h1, .section-content h1 {
+    font-size: 1.3rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid var(--green-pale);
+}
+.article-body h2, .section-content h2 { font-size: 1.15rem; }
+.article-body h3, .section-content h3 { font-size: 1.02rem; }
+.article-body h4, .section-content h4 { font-size: 0.95rem; color: var(--green-mid); }
+
+.article-body p,
+.section-content p {
+    margin-bottom: 1.1rem;
+    line-height: 2;
+    color: #2c3440;
+    font-size: 1rem;
+}
+.article-body strong,
+.section-content strong { color: var(--green-dark); font-weight: 700; }
+.article-body em,
+.section-content em { font-style: italic; }
+.article-body code,
+.section-content code {
+    background: var(--green-pale);
+    color: var(--green-dark);
+    padding: 0.1em 0.4em;
+    border-radius: 4px;
+    font-family: var(--font-ui);
+    font-size: 0.85em;
+}
+.article-body hr,
+.section-content hr {
+    border: none;
+    border-top: 1px solid var(--gray-mid);
+    margin: 2rem 0;
+}
+.article-body blockquote,
+.section-content blockquote {
+    border-left: 3px solid var(--green-light);
+    padding: 0.85rem 1.25rem;
+    margin: 1.25rem 0;
+    background: var(--green-faint);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    font-style: italic;
+    color: var(--gray-text);
+}
+.article-body ul, .article-body ol,
+.section-content ul, .section-content ol {
+    padding-left: 1.6rem;
+    margin-bottom: 1.1rem;
+}
+.article-body li,
+.section-content li { margin-bottom: 0.35rem; line-height: 1.85; }
+.article-body a,
+.section-content a {
+    color: var(--green-mid);
+    text-decoration: underline;
+    text-decoration-color: var(--green-pale);
+    transition: color var(--transition);
+}
+.article-body a:hover,
+.section-content a:hover { color: var(--green-dark); }
+
+/* -- IMAGES -- */
+.article-body img,
+.section-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius-card);
+    display: block;
+    margin: 1.5rem auto;
+    box-shadow: var(--shadow-sm);
+}
+.article-body img[alt*="교수"],
+.article-body img[alt*="선생님"],
+.article-body img[alt*="사진"],
+.article-body img[alt*="증명"],
+.section-content img[alt*="교수"],
+.section-content img[alt*="선생님"],
+.section-content img[alt*="사진"],
+.section-content img[alt*="증명"] {
+    max-width: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    aspect-ratio: 1;
+    object-position: top;
+    box-shadow: 0 2px 10px rgba(0,0,0,.12);
+}
+
+/* -- FIGURE CAPTIONS -- */
+.figure-caption {
+    font-size: 0.85rem;
+    color: #666;
+    text-align: center;
+    font-family: var(--font-ui);
+    margin: 0.5rem 0 1.5rem;
+    line-height: 1.5;
+}
+
+/* -- FOOTNOTES -- */
+.fn-ref a {
+    color: var(--green-mid);
+    text-decoration: none;
+    font-weight: 600;
+}
+.fn-ref a:hover { text-decoration: underline; }
+.footnote-def {
+    font-size: 0.85rem;
+    color: var(--gray-text);
+    padding: 0.5rem 0;
+    border-top: 1px solid var(--gray-mid);
+    line-height: 1.6;
+}
+.footnote-def .fn-num {
+    font-weight: 700;
+    color: var(--green-dark);
+}
+.fn-back {
+    color: var(--green-mid);
+    text-decoration: none;
+    font-size: 0.8rem;
+}
+
+/* -- REFERENCE LIST (참고문헌) -- */
+.ref-list {
+    margin: 0.5rem 0 1.5rem 0;
+}
+.ref-list p {
+    padding-left: 2em;
+    text-indent: -2em;
+    margin: 0.35rem 0;
+    font-size: 0.93rem;
+    line-height: 1.75;
+    color: var(--black);
+    word-break: keep-all;
+}
+
+/* -- AUTHOR CARD (aside with portrait photo) -- */
+.author-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    background: var(--gray-light);
+    border: 1px solid var(--gray-mid);
+    border-radius: var(--radius-card);
+    margin: 1rem 0;
+}
+.author-card img {
+    width: 60px !important;
+    height: 60px !important;
+    max-width: 60px !important;
+    border-radius: 50% !important;
+    object-fit: cover;
+    object-position: center 20%;
+    flex-shrink: 0;
+    margin: 0 !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,.1);
+    padding: 6px;
+    background: var(--gray-mid);
+}
+.author-card .author-info span {
+    display: block;
+    font-size: 0.93rem;
+    color: var(--gray-text);
+    line-height: 1.5;
+}
+.author-card .author-info span:first-child {
+    font-weight: 700;
+    color: var(--green-dark);
+    font-size: 1rem;
+}
+
+/* -- ASIDE BLOCKS -- */
+.aside-block {
+    background: var(--gray-light);
+    border: 1px solid var(--gray-mid);
+    border-radius: var(--radius-card);
+    padding: 1.1rem 1.4rem;
+    margin: 1.25rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+.aside-block span {
+    display: block;
+    font-size: 0.93rem;
+    color: var(--gray-text);
+    line-height: 1.75;
+    word-break: keep-all;
+}
+.aside-block strong { color: var(--green-dark); }
+.aside-block code {
+    background: var(--green-pale);
+    color: var(--green-dark);
+    padding: 0.1em 0.35em;
+    border-radius: 3px;
+    font-size: 0.85em;
+    font-family: var(--font-ui);
+}
+.aside-block hr { border: none; border-top: 1px solid var(--gray-mid); margin: 0.25rem 0; }
+.aside-block img {
+    max-width: 110px;
+    border-radius: 50%;
+    display: block;
+    margin: 0.25rem auto;
+    box-shadow: none;
+}
+
+/* -- TABLES -- */
+.table-wrap {
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    border-radius: var(--radius);
+    border: 1px solid var(--gray-mid);
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 600px;
+    font-family: var(--font-ui);
+    font-size: 0.88rem;
+}
+th {
+    background: var(--green-dark);
+    color: var(--white);
+    padding: 0.7rem 1rem;
+    text-align: left;
+    font-weight: 600;
+    white-space: nowrap;
+}
+td {
+    padding: 0.6rem 1rem;
+    border-bottom: 1px solid var(--gray-mid);
+    vertical-align: top;
+    line-height: 1.65;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+}
+tr:last-child td { border-bottom: none; }
+tr:nth-child(even) td { background: #fafbfc; }
+tr:hover td { background: var(--green-faint); }
+
+/* -- CARD LIST (level-2: subsection list) -- */
+.card-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.6rem;
+    padding: 1.5rem 2rem;
+}
+.subsection-divider {
+    grid-column: 1 / -1;
+    padding: 1.1rem 0 0.35rem;
+    font-family: var(--font-ui);
+    font-size: 0.73rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--green-mid);
+    border-top: 1px solid var(--gray-mid);
+    margin-top: 0.5rem;
+}
+.subsection-divider:first-child {
+    padding-top: 0;
+    border-top: none;
+    margin-top: 0;
+}
+.sub-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    background: var(--white);
+    border: 1px solid var(--gray-mid);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+    text-align: left;
+    text-decoration: none;
+    color: inherit;
+}
+.sub-card:hover {
+    border-color: var(--green-light);
+    box-shadow: var(--shadow-card);
+    transform: translateY(-1px);
+}
+.sub-card-body { flex: 1; min-width: 0; }
+.sub-title {
+    font-family: var(--font-ui);
+    font-weight: 700;
+    font-size: 0.97rem;
+    color: var(--black);
+    line-height: 1.4;
+    word-break: keep-all;
+}
+.sub-subtitle {
+    font-family: var(--font-ui);
+    font-size: 0.82rem;
+    color: var(--gray-text);
+    margin-top: 0.2rem;
+    line-height: 1.5;
+}
+.sub-card-arrow {
+    color: var(--green-light);
+    font-size: 1rem;
+    flex-shrink: 0;
+    transition: color var(--transition), transform var(--transition);
+}
+.sub-card:hover .sub-card-arrow {
+    color: var(--green-dark);
+    transform: translateX(3px);
+}
+
+/* -- ARTICLE VIEW (level-3) -- */
+.article-view {
+    background: var(--white);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    animation: fadeUp 0.22s ease both;
+}
+.article-back-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.85rem 1.75rem;
+    background: var(--gray-light);
+    border-bottom: 1px solid var(--gray-mid);
+    font-family: var(--font-ui);
+    font-size: 0.83rem;
+    color: var(--green-dark);
+    cursor: pointer;
+    transition: background var(--transition);
+    user-select: none;
+}
+.article-back-bar:hover { background: var(--green-pale); }
+.article-back-bar .back-arrow { font-size: 1.05rem; }
+.article-header {
+    padding: 2rem 2rem 1.25rem;
+    border-bottom: 1px solid var(--gray-mid);
+}
+.article-kicker {
+    font-family: var(--font-ui);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--green-mid);
+    margin-bottom: 0.5rem;
+}
+.article-title {
+    font-family: var(--font-ui);
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--black);
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+    word-break: keep-all;
+}
+.article-subtitle {
+    font-family: var(--font-ui);
+    font-size: 0.88rem;
+    color: var(--gray-text);
+    margin-top: 0.5rem;
+}
+.article-body {
+    padding: 1.75rem 2rem 2.5rem;
+    overflow-wrap: break-word;
+    word-break: keep-all;
+}
+
+/* -- FOOTER -- */
+footer {
+    background: var(--green-dark);
+    color: rgba(255,255,255,0.8);
+    padding: 2.5rem 1.5rem 2rem;
+    text-align: center;
+    font-family: var(--font-ui);
+    font-size: 0.85rem;
+    margin-top: 3rem;
+}
+.footer-inner { max-width: var(--max-width); margin: 0 auto; }
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem 1.5rem;
+    text-align: left;
+    margin-bottom: 1.5rem;
+}
+.footer-item label {
+    display: block;
+    color: var(--green-pale);
+    font-size: 0.7rem;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+}
+.footer-item span, .footer-item a {
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    line-height: 1.6;
+    font-size: 0.85rem;
+}
+.footer-item a:hover { color: var(--green-pale); }
+.footer-contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+.footer-contact-item label {
+    display: block;
+    color: var(--green-pale);
+    font-size: 0.7rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+}
+.footer-contact-item > span {
+    color: rgba(255,255,255,0.8);
+    font-size: 0.85rem;
+    text-decoration: none;
+    line-height: 1.6;
+}
+.footer-contact-item > span a {
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+}
+.footer-contact-item > span a:hover { color: var(--green-pale); }
+.footer-contact-item a:hover { color: var(--green-pale); }
+.footer-divider { border: none; border-top: 1px solid rgba(255,255,255,0.12); margin: 1.25rem 0; }
+.footer-copy { font-size: 0.77rem; opacity: 0.45; }
+.feedback-box {
+    background: rgba(255,255,255,0.06);
+    border-radius: var(--radius);
+    padding: 1rem 1.25rem;
+    margin: 0 0 1rem;
+    font-size: 0.84rem;
+    line-height: 1.9;
+    text-align: left;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+.feedback-box a { color: var(--green-pale); }
+.donation-box { font-size: 0.79rem; opacity: 0.65; margin-bottom: 0.5rem; }
+
+/* -- BACK TO TOP -- */
+.back-top {
+    position: fixed;
+    bottom: 1.75rem;
+    right: 1.75rem;
+    background: var(--green-dark);
+    color: white;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 1.1rem;
+    box-shadow: var(--shadow-md);
+    transition: background var(--transition), transform var(--transition);
+    opacity: 0.85;
+    z-index: 50;
+}
+.back-top:hover { background: var(--green-mid); transform: translateY(-2px); opacity: 1; }
+
+/* -- DESKTOP -- */
+@media (min-width: 641px) {
+    .nav-inner {
+        max-width: 100%;
+        justify-content: center;
+        gap: 1rem;
+    }
+    .nav-brand { font-size: 1.05rem; }
+    .toc-list a { font-size: 1rem; padding: 0.4rem 0.85rem; }
+    .masthead-eyebrow { font-size: 0.9rem; padding: 1.2rem 1.5rem 0.6rem; }
+    .masthead-meta { font-size: 1rem; padding: 1rem 1.5rem; }
+}
+
+/* -- MOBILE -- */
+@media (max-width: 640px) {
+    .nav-inner {
+        padding: 0 0.75rem;
+        height: 48px;
+    }
+    .nav-brand { font-size: 0.72rem; }
+    .toc-list a { font-size: 0.75rem; padding: 0.25rem 0.45rem; }
+    main { padding: 1rem 0.875rem 2rem; }
+    .masthead-eyebrow { font-size: 0.68rem; padding: 0.6rem 1rem 0.3rem; }
+    .masthead-meta { font-size: 0.78rem; padding: 0.4rem 1rem; }
+    .masthead-calligraphy { padding: 0.5rem 1rem; }
+    .masthead-calligraphy img { max-width: 280px; }
+    .section-header,
+    .article-header { padding: 1.25rem 1.25rem 1rem; }
+    .section-content,
+    .article-body { padding: 1.25rem 1.25rem 1.75rem; }
+    .card-list { padding: 1rem 1.25rem; grid-template-columns: 1fr; }
+    .article-back-bar { padding: 0.75rem 1.25rem; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 0.6rem 1rem; }
+    .footer-grid .footer-item:last-child { grid-column: 1 / -1; }
+    .footer-contact-grid { grid-template-columns: 1fr; }
+    .section-title { font-size: 1.35rem; }
+    .article-title { font-size: 1.25rem; }
+}
+
+@media print {
+    nav.site-nav, .back-top, .article-back-bar { display: none !important; }
+    .view { display: block !important; }
+    .newsletter-section { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    .sub-card { page-break-inside: avoid; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="site-nav" role="navigation" aria-label="목차">
+  <div class="nav-inner">
+    <a class="nav-brand" href="#" onclick="event.preventDefault(); showSection('intro');">제주교육마루</a>
+    <ul class="toc-list"><li><a href="#" data-section="greeting">인사말</a></li><li><a href="#" data-section="juron">주론</a></li><li><a href="#" data-section="siron">시론</a></li><li><a href="#" data-section="jeju-news">제주교육소식</a></li><li><a href="#" data-section="member">회원 동정</a></li><li><a href="#" data-section="activities">활동 소개</a></li></ul>
+  </div>
+</nav>
+
+<!-- MASTHEAD -->
+<header class="masthead" role="banner">
+  <div class="masthead-inner">
+    <div class="masthead-eyebrow">Since 1993 &#183; 제2호</div>
+    <div class="masthead-hero-img"><img src="images/banner.jpg" alt="뉴스레터 헤더 이미지"></div>
+    <div class="masthead-calligraphy" style="display:none;"><img src="images/calligraphy-white.png" alt="제주교육마루"></div>
+    <div class="masthead-meta">
+      <span>한국교육학회 제주지회 뉴스레터</span>
+      <span class="dot">&#183;</span>
+      <span>2026년 10월 1일</span>
+    </div>
+  </div>
+</header>
+
+<!-- CONTENT (all views, JS shows/hides) -->
+<main>
+  <!-- Level 1: Intro -->
+  <div id="view-intro" class="view">
+    <div class="newsletter-section">
+    <div class="section-header">
+      <div class="section-kicker">발간사</div>
+      <h2 class="section-title">발간의 글</h2>
+    </div>
+    <div class="section-content">
+      
+      <div class="aside-block"><span>회장 명의 발간사는 준비 중입니다.</span></div>
+<p>2026 제주교육마루(제2호)를 펴냅니다. 한국교육학회 제주지회는 창립 60주년을 앞두고 있습니다.</p>
+
+    </div>
+  </div>
+  </div>
+
+  <!-- Level 1+2: Section views (card list or direct content) -->
+  <div id="view-greeting" class="view">
+  <div class="newsletter-section">
+    <div class="section-header">
+      <div class="section-kicker">인사말</div>
+      <h2 class="section-title">한국교육학회 제주지회 창립 60주년을 향한 축하말씀</h2>
+      
+    </div>
+    <div class="section-content"><div class="aside-block"><span><strong>고의숙</strong></span>
+<span>제주특별자치도교육청</span>
+<span>교육감</span></div>
+<p>안녕하세요, 반갑습니다. 제주특별자치도교육감 고의숙입니다.</p>
+<p><한국교육학회 제주지회>는 창립 60주년을 5개월 앞둔 시점에 있습니다. 뉴스레터라는 지면을 통해 다가올 창립 60주년을 미리 진심으로 축하드립니다.</p>
+<p>제주지회 발전에 열정과 노고를 다하시는 이인회 회장님과 제주지회 회원분들에게 진심으로 존경의 말씀을 드립니다. 제주지회 발전은 제주교육 발전과 맞닿아 있습니다. 제주지회는 제주교육 혁신을 위한 학문적 근거를 지속적으로 전해주고 있습니다. 우리 교육청과 제주지회는 그동안 공동학술대회 등을 통해 현안을 치열하게 공유하고 있습니다. 해결의 지혜도 충실히 나누고 있습니다. 그 과정에서 더 나은 제주교육으로 나아가는 비전을 쌓고 있습니다. 60년 동안 축적된 믿음이 있기에 가능한 결실입니다. 동행은 앞으로도 더욱 굳건할 것입니다.</p>
+<p>제주교육은 ‘모두가 주인공, 함께 성장하는 제주교육’을 지표로 아이 중심·학교 현장 중심의 정책과 행정을 펼치고 있습니다. 교육청의 의지만으로 달성이 어려운 목표입니다. 제주지회의 객관적이고 논리적인 진단과 제언이 바탕을 이뤄야 합니다. 그 위에서 실질적 추진력을 갖는 정책과 행정이 만들어집니다.</p>
+<p>앞으로도 교육 이론과 현실이 균형있게 만나고 교류하는 기회를 자주 만들어주시기를 부탁드립니다. 더 활발한 연구와 집필을 통해 제주 교육의 지표도 더 분명히 제시해 주길 바랍니다. 교육은 현재와 미래의 살아있는 희망이 돼야 한다고 믿습니다. 이를 실현하기 위해 우리 교육청은 더 노력하고 더 활발히 연대할 것입니다. 그 과정마다 제주지회와 함께 하겠습니다.</p>
+<p>다시 한번 다가올 창립 60주년을 진심으로 축하드리며, 모든 회원들의 가정에 건강과 행복이 가득하길 기원드립니다. 고맙습니다.</p>
+</div>
+  </div>
+</div>
+<div id="view-juron" class="view">
+  <div class="newsletter-section">
+    <div class="section-header">
+      <div class="section-kicker">주론</div>
+      <h2 class="section-title">지나온 60년, 새롭게 열어갈 제주 교육</h2>
+      
+    </div>
+    <div class="section-content"><div class="aside-block"><span><strong>이인회</strong></span>
+<span>한국교육학회 제주지회</span>
+<span>회장</span></div>
+<p>한국교육학회 제주지회는 창립 60주년을 4개월 앞두고 있다. 2027년 1월 24일이 창립기념일이지만 뉴스레터를 연간으로 발간하다 보니, 이번 기회를 빌려 지난 60년을 돌아보고 내일을 전망할 필요가 있다고 생각한다. 60년이라는 짧지 않은 역사를 한정된 자료를 통해 되돌아보는 것은 쉽지 않은 일이다. 그럼에도 불구하고 앞을 잘 내다보기 위해서는, 자동차의 백미러로 뒤를 보듯이 지난 60년을 거칠게나마 정리하는 것은 나름의 의미가 있다.</p>
+<ol>
+<li>제주지회의 3가지 전환점</li>
+</ol>
+<p>필자가 수합한 자료를 살펴보면 60년 제주지회의 역사는 크게 3가지 전환점으로 정리된다. 첫 번째 전환점은 누구도 부정할 수 없는 1967년일 것이다. 제주지회의 창립연도이다. 시작점이 전환점이냐고 의문을 제기할 수 있지만 제주 교육의 전체적인 측면에서 볼 때, 중요한 변화의 출발점으로 보아야 할 것이다. 왜 그럴까? 1965년 11월, 한국교육학회가 창립된 지 13주년이 지나서야 최초의 지회가 창립되었다. 경북지회를 필두로 하여 1970년까지 전국 10개 지회가 창립되었고, 제주지회는 1967년 7번째 지회로 탄생하였다. 창립 이후 우리 제주지회는 내적으로 회원수의 취약성과 재정의 열악함, 그리고 연구 여건의 어려움 가운데서도 정기총회와 연구발표회를 지속하였고, 정년퇴직 기념회와 출판기념회뿐만 아니라 회원 간 대소사 참여와 친목 도모도 꾸준히 이어왔다. 대외적으로는 교통체계의 불편함에도 매년 개최된 한국교육학학술대회에 대표들을 파견하며 중앙과의 학술적 교류를 강화하려는 노력도 발견된다(김봉종, 1993). 이러한 시도와 노력이 끊어지지 않았던 것은 소수 회원들의 열의와 학문적 자각이 있었기에 가능했을 것이다. 한국교육학회(1973)는 제주지회를 포함한 전국 지회가 중앙회와 밀접한 유대를 유지하면서 교육학 연구의 상호협조와 연구활동의 지역 파급에 큰 역할을 담당함으로써 학문적 교류에 지대한 공헌을 하였다고 평가한다. 그만큼 제주지회의 창립과 운영 그 자체는, 교육적으로 소외될 수 있었던 제주 섬이라는 지리적 한계를 넘어 중앙 학계와 연결하고 교육학 연구의 기반을 닦으려는 소중한 첫 번째 전환점이라고 보아야 할 것이다. 오늘날 상대적으로 풍요로워진 환경에 있는 필자로서 선배들에게 머리가 숙여지고, 후배들을 바라보며 어깨가 무거워지는 이유이기도 하다.</p>
+<p>두 번째 전환점은 1990년대이다. 이 시기에는 지방교육자치의 부활과 함께 제주 교육의 문제와 현상을 지역의 관점으로 바라보고자 하는 자성이 제주지회에서 일어났다. 2가지 측면이 눈에 띈다. 우선, 이 시기에 접어들면서 우리 제주지회 활동은 “역량이 성숙되었고......질적인 측면에서 세련되기 시작하였다”(김봉종, 1993: 415-416). 제주지회는 뉴스레터를 발간하여 회원뿐만 아니라 도내 일선 학교, 언론기관, 교육청 등에 배포하고, 시론(1면)을 통해 제주 교육의 현안을 논의하기 시작하였다. 또한 연구발표회가 참석 회원에게만 한정되는 단점을 극복하기 위해 연구논문을 뉴스레터(2~3면)에 게재하여 다양한 교육 가족의 관심을 학술적으로 유도하기도 하였다. 그러나 이러한 지역적 자성의 핵심은 제주지회의 정체성과 관련한 문제였다. 당시의 제주지회는 이전과 달리 학문적 관심을 제주의 교육 현실에 밀착시키고, 제주라는 지역의 관점에서 교육 현안을 바라보고자 하는 전환을 이루었다. 특히 제주지회의 1대~5대 회장(1967~1972)이었던 양치종 교장이 5대 제주도교육감이 되면서, ‘삼무정신 앙양’과 ‘탐라 학생상의 정립’을 교육현장에 적용했던 것은 지역적 자성을 위한 토대를 마련한 것으로 주목할 필요가 있다(김일방, 2021). 나아가 제주지회 전 회장 양진건(1991)은 지방교육사를 중앙사의 보조역으로 바라보지 않고 내성적 발전의 논리를 탐구하기 시작했으며, 『제주교육행정사』(1991)를 발간하여 제주 교육의 정체성을 확인하였다.</p>
+<p>필자는 세 번째 전환점을 2023년부터 시작하여 현재에 이르는 시점이라고 생각한다. 이 시기는 코로나의 충격에서 벗어나자마자 챗GPT의 등장과 디지털 대전환이라는 또 다른 거대한 변화에 직면한 시기이다. 우리 제주지회의 활동 측면에서 볼 때, 이 시기는 오랫동안 침체되어 있던 지회가 다시 활동을 본격화한 전환점이기도 하다. 2023년 6월 <제주지회 활성화를 위한 제안서>의 내용에서 그 분위기를 확인할 수 있다.</p>
+<p>......그간 제주지회는 교육학회 지회조직에는 올라 있으나 활동이 없어서 유명무실한 상태로 십수 년이 흘러왔습니다. 이번 기회에 회칙을 제대로 갖추고 지역에 있어서 교육학 연구자 간의 연구교류 네트워크 중심으로 활성화시켰으면 합니다. 특히 관광대, 국제대, 한라대 소속 교수님들의 적극적인 참여가 있으시다면 더욱 좋은 변화를 이루리라 확신합니다......지회의 목적은 교육학을 매개로 한 지역 학문공동체와 공감대를 형성해 보자는 것이 주된 것입니다.</p>
+<p>여기서 ‘활성화’란 제주지회 활동의 단순한 재개 또는 정상화만을 의미하지 않을 것이다. 제주지회는 지역의 학문공동체로서 미래교육과 교육학적 발전의 전환점을 만들 필요가 있기 때문이다. 1990년대의 전환점이 ‘지역적 자성’의 시작이었다면, 세 번째 전환점은 제주의 교육 현상을 ‘이론화하려는 각성’이라고 할 수 있다. 전자는 제주 교육의 정체성을 발견하려는 지역적 반성과 성찰이고, 후자는 제주로부터 교육을 재개념화하고 이론화하려는 각성이다. 이러한 전환점에서 우리 제주지회의 자매격인 제주교육학연구회가 창립되고, 연구회가 축적한 ‘제주교육학 정립’의 성과를 활용할 수 있다는 것은 고무적이다.</p>
+<p>이상에서 정리한 제주지회의 3가지 전환점과 그 내용을 요약하면 다음의 표와 같다.</p>
+<p><제주지회의 주요 전환점과 특징></p>
+<div class="table-wrap"><table>
+<thead><tr><th>전환 시점</th><th>시기</th><th>주요 내용</th><th>특징</th></tr></thead>
+<tbody>
+<tr><td>전환점1</td><td>1967년</td><td>제주지회 창립</td><td>학문적 자각과 교류</td></tr>
+<tr><td>전환점2</td><td>1990년대</td><td>질적 발전 추구</td><td>지역적 자성</td></tr>
+<tr><td>전환점3</td><td>2023년~현재</td><td>제주지회 활성화</td><td>이론적 각성</td></tr>
+</tbody></table></div>
+<ol>
+<li>제주 교육을 바라보는 3가지 관점</li>
+</ol>
+<p>우리 제주지회가 앞에서 정리한 3가지 전환점을 통해 직선적으로 성장해 왔다고 하기는 어렵다. 그러나 이러한 과정을 거치며 제주지회는 지난 60년 동안 그 출발점과는 무척 다른 학술적 지점에 다다랐다. 학문공동체로서의 제주지회가 세 번째 전환점에 서 있다면, 이제 제주 교육을 좀 더 다르게 인식해야 한다. 제주 교육의 ‘보이는’ 현상을 이해하고 분석하고 전망하는 것만으로 충분하지 않다는 것이다. 오랫동안 누적된 시간에 묻혀 있는 제주의 교육적 단서들을 탐사하고 그 의미를 탐구할 필요가 있다. 어제의 단서들이 오늘의 제주 교육을 설명하기도 하고 내일을 향한 소중한 길잡이가 될 수 있기 때문이다.</p>
+<p>필자는 2023년에 <제주교육론>을 제주대 대학원 박사과정의 교과목으로 개설하고 2차례 수업을 하면서, 그 단서들을 다음과 같이 시론적으로 엮어 보았다. 첫째, 제주 교육을 들여다보는 방법의 하나로 ‘교육지층구조론’을 생각할 수 있다. 이는 제주 교육의 오래된 연원과 내용 및 특징을 찾으려는 시도이며, 오늘의 제주 교육을 이해하고 분석하는 관점이다(제주교육학연구회, 2022). 이인회(2023: 21)에 따르면, 제주 교육은 크게 6시기로 구분된다: 신화교육기(구석기시대∼BC2세기), 탐라전통교육기(BC2세기∼12세기), 관학체제기+민간교육기(12세기∼19세기), 근대교육확산기(1896∼1945), 한국교육형성기(1945∼1980년대 말), 제주교육정립기(1990년대∼현재). 제주 교육의 지층구조론은 축적의 역사라는 점에서 변화의 역사를 다루는 교육사와는 차이가 있다. 예를 들어, 신화교육기에서 형성된 교육문화가 탐라전통교육기가 시작되면서 사라지거나, 다시 탐라의 전통교육이 관학체제기에 들어서면서 없어졌다고 보지 않는 논리이다. 일반적으로 교육사에서는 과거를 연구대상으로 삼지만, 교육지층구조론에서는 과거가 현재를 구성하는 설명변수 또는 문화적 기반이 된다고 본다. 이는 약 2,700여 년 전 호메로스의 『일리아스』와 『오디세이』가 사라진 과거에 머물지 않고 인류의 문화적 지층으로 축적되어, 크리스토퍼 놀런 감독의 영화 ‘오디세이’로 재해석되는 것과 유사하다. 교육지층구조론은 제주 교육의 역사를 시대별 교육제도의 단순한 교체과정으로 보는 것이 아니라, 제주인의 삶 속에서 형성된 교육적 경험·관습·가치·제도가 시대를 거쳐 축적되고 중첩되어 오늘날 제주 교육의 심층구조를 형성하고 있다고 보는 관점이다.</p>
+<p>둘째, 제주 교육을 이중적 구조로 바라볼 필요가 있다. 현용준(1986)에 의하면, 탐라전통교육기의 무속은 현재까지 제주인의 삶을 지배해 온 집단의식이자 비형식교육의 방식이다. 고려를 거쳐 조선시대에 들어 유교가 더욱 확산되면서 당신숭배의 무속은 외형적으로 그 위세를 상실하게 된다. 그러나 유교적 교육의 영향권에서 벗어날 수 있었던 여성들을 통해 무속은 여전히 현실적인 힘을 발휘하면서 계승되어 왔던 것이다. 이러한 모습은 교육지층구조론에서 말하는 ‘관학체제기+민간교육기’의 중층적 성격을 잘 보여준다. 양진건(1991: 177)은 이러한 이중조직의 문화형태가 “형식교육으로서의 유교교육과 비형식교육으로서의 무속이라는 교육의 이중구조”를 형성하였다고 주장한다. 중요한 것은 외부, 특히 중앙에서 볼 때 이러한 이중구조는 상호대치적 현상으로 파악되지만, 제주의 입장에서는 쌍방이 내면적으로 결합하여 상호보완적인 차원에서 독특한 교육체계를 형성했다는 사실이다. 제주에서 무속이 그토록 강하게 영향을 끼쳐온 이유는 절해고도의 척박한 환경과 내부 식민지라는 역사적 수탈 속에서 제주인들에게 유일한 자기구제의 방법이었기 때문이다. 이러한 교육의 이중구조는 외래적 교육문화를 일방적으로 수용하지 않고 제주적 삶의 논리로 재구성해 온 제주 교육의 적응성과 주체성을 보여준다는 점에서 중요한 의미를 가진다.</p>
+<p>셋째, ‘탐라 천년, 제주 천년’의 큰 흐름을 관통하는 교육이념으로 “따또공동체주의”를 고려할 수 있다. 유홍준(2012: 432)은 제주 남원읍사무소의 공덕비 현황 리스트를 보고, “이런 일은 육지 어느 곳에서도 볼 수 없는 일”이라며 놀랐다. “도대체 무엇이 이들에게 이런 아름다운 공동체의식을 심어주었을까......본향당 신앙이다”라고 그는 나름으로 근원을 찾아냈다. 그의 해석은 제주 교육의 이중적 구조가 지닌 의미를 잘 보여준다. 그러나 더욱 의미가 있는 것은 제주의 ‘아름다운 공동체의식’이 육지의 공동체(의식)와는 다르다는 발견이다. 무엇이 육지와 다를까? 제주에는 사당 대신 본향당이 있다. 육지의 사당은 지배계급인 양반 가문의 권세를 염원하고 혈족의 결속을 위해 남성들만 참여하는 조상숭배의 공간이다. 반면에, 제주의 본향당은 마을의 풍요와 평안을 염원하며 여성을 포함하여 마을 전체가 참여하는 공동체의 장소이다. 사당이 부자(父子) 중심 가족제도, 혈연공동체의 수직적 위계질서를 상징한다면, 본향당은 부부 중심 가족제도인 은거분가제와 관련된다. 은거분가제란 아버지는 아버지대로, 형은 형대로, 아우는 아우대로 독립된 따로따로의 생활을 영위하면서도 수평적 관계를 유지하는 가족문화를 의미한다. 하나의 공동체로 살면서도 서로 의존함이 없는 분화된 협동가족주의라고 할 수 있다. 또한 마을공동체로 살아도 각 가정은 사회경제적으로 분리된 생활을 한다(송성대 외, 2023). 그래서일까. 본향당의 상차림을 보면 각각의 가정이 개별적으로 따로따로 마련한다. 동일한 맥락에서 탐라건국신화에서 나오는 고양부 삼성인(三聖人)은, 육지와 달리 수평적 부족연합국가의 권력구조를 형성했던 것을 이해할 수 있다. 송성대 외(2023)는 이런 ‘아름다운 공동체의식’을 따또공동체주의로 명명했다. 따로 또 같이 공동체주의! 줄여서 따또공동체주의이다. 개체적 대동주의(個體的 大同主義)를 의미한다. 이를 제주 교육의 교육이념으로 삼을 수 있지 않을까? 물론 우리나라 단군신화의 홍익인간이라는 국가 교육이념과 함께 말이다. 제주에서는 홍익인간의 교육이념을 따또공동체주의라고 읽을 수 있을 듯하다.</p>
+<ol>
+<li>제주지회의 3가지 역할</li>
+</ol>
+<p>환갑을 맞은 사람에게 앞으로 어떻게 살 것인가는 지나온 삶만큼이나 중요한 질문이다. 학문공동체도 크게 다르지 않을 것이다. 창립 60주년을 맞는 우리 제주지회 역시 ‘무엇을 해왔는가’와 함께 ‘앞으로 무엇을 할 것인가’를 물어야 한다. 그러한 의미에서 제주지회의 역할을 다음 3가지로 생각해 보고자 한다.</p>
+<p>첫째, 제주 교육의 단서와 기억을 모아 ‘이곳 제주를 읽는 학문공동체’가 되어야 한다. 제주지회는 제주 교육의 누적된 지층을 기록하는 데 그치지 않고, 교육적 단서들을 발굴하여 오늘의 제주를 읽어내는 역할을 해야 한다. 지난 60년 동안 제주 교육은 수많은 제도와 정책의 변화를 겪었지만, 그 변화의 이면에는 제주만의 역사적 경험과 교육문화가 중첩되어 있다. 이를 탐사하고 기록하고 해석하는 것은 제주지회가 할 수 있는 중요한 학문적 책무이다. 앞에서 제시한 교육지층구조론과 연결하면 단순한 ‘기록자’ 이상의 역할이 필요해 보인다. 가령 제주 교육의 주요 변화를 직접 경험한 원로 교육자와 연구자들의 목소리를 구술로 기록할 수 있다. 산업화와 학교 팽창기, 제주4·3 이후의 교육, 지방교육자치의 부활, 제주 교육의 지역적 정체성에 대한 고민 등을 몸소 경험한 이들의 기억은 문헌자료만으로는 복원하기 어려운 제주 교육의 살아 있는 지층이다. 그러나 더 깊은 지층으로 내려가 제주의 일리아스와 오디세이라고 할 수 있는 신화 속으로 들어가야 한다. 교육의 이중구조 속에 남아 있는 금기어(禁忌語)와 같은 비형식교육의 단서들도 마주해야 한다. 따라서 제주지회는 제주 교육의 단서와 기억을 모으고, 그로부터 오늘의 제주를 읽어내는 학제적 학문공동체가 되어야 한다.</p>
+<p>둘째, 제주 교육의 오늘을 질문하는 ‘열린 공론장’이 되어야 한다. 제주지회는 현재의 제주 교육에 끊임없이 질문을 던지는 역할을 해야 한다. 학령인구 감소, 소규모학교와 과밀학교의 공존, 이주배경학생의 증가, 교육격차의 심화, 교육자치의 변화, 지역소멸, AI와 디지털 대전환 등 제주 교육이 직면한 문제는 어느 하나의 기관이나 조직, 학문만으로 해결하기 어렵다. 제주지회가 대학 연구자들만의 학술공동체를 넘어 학교현장의 교사, 교육행정가, 지역주민, 시민사회와 함께 논의하는 열린 교육 공론장이 되어야 하는 이유이다. 우리 제주지회 소위원회의 하나인 ‘교육공동체위원회’(위원장: 강은주 교장)가 그 기능을 충실히 수행할 수 있도록 여건을 조성해 나갈 필요가 있다. 제주지회는 이미 주어진 교육문제에 답하는 데 머물지 않고, 제주 교육이 미처 묻지 못한 문제를 먼저 발견하고 질문하는 공론장이 되어야 한다. 1990년대 뉴스레터의 ‘시론’이 당시 제주 교육의 현안에 대해 논의를 이끌었다면, 오늘날에는 그 전통을 더 넓은 공론의 장으로 발전시킬 필요가 있다.</p>
+<p>셋째, 제주에서 미래교육을 상상하고 실험하는 ‘교육적 상상력의 플랫폼’이 되어야 한다. 사회와 교육환경의 급격한 변화 앞에서 미래교육을 단순히 새로운 기술이나 정책을 받아들이는 문제로 접근해서는 안 된다. 오히려 “미래 학교는 지금과 같은 모습이어야 하는가?”, “제주에서 아이를 기른다는 것은 무엇인가?”, “AI 시대에 제주라서 배울 수 있는 것은 무엇인가?”, “제주의 작은 학교와 마을은 미래교육의 약점인가, 새로운 가능성인가?”와 같은 근본적인 교육적 질문이 필요하다. 바로 이 지점에서 앞서 정리한 ‘이론적 각성’이 미래와 만날 수 있다. 제주를 단순한 연구대상으로 삼는 데 머물지 않고, 그로부터 교육적 개념과 이론을 생산한다면 미래의 제주 교육을 상상하는 소중한 지적 자원이 될 수 있기 때문이다. 가령 학생 수가 감소하는 읍면지역의 작은학교 하나를 ‘없어질 가능성이 있는 학교’가 아니라 ‘미래교육을 먼저 실험할 수 있는 학교’로 바꾸어 생각해 볼 수 있다. 학교와 마을을 하나의 배움터로 연결하고, 제주의 자연·역사·문화와 AI를 결합한 교육과정을 운영하며, 필요하다면 도시지역 학생들이 일정 기간 참여하는 새로운 형태의 지역순환유학도 시도할 수 있다. 우리 제주지회는 대학·교육청·학교·마을을 연결하고 그 과정과 결과를 연구하여 제주에서 시작된 작은 실험이 미래교육의 가능성이 될 수 있는지를 검증하는 플랫폼이 되어야 한다.</p>
+<p>정리하자면, 우리 제주지회가 60년 전 학문적 자각으로 제주와 중앙을 ‘연결’했고, 1990년대의 지역적 자성으로 제주 교육의 정체성을 ‘질문’했다면, 이제 지역 기반 교육이론을 ‘창조’해야 할 시점이다. 지난 60년의 성과와 과제를 바탕으로 앞으로의 제주지회는 제주 교육의 기억을 읽고, 오늘을 질문하며, 제주로부터 미래교육을 상상하고 만들어가며 그 가능성을 보여주는 학문공동체가 되어야 한다. 그러한 노력이 쌓일 때, 제주특별자치도는 우리 제주지회와 함께 ‘교육이 특별한 제주’로 한 걸음 더 나아갈 수 있을 것이다.</p>
+<p>감사합니다.</p>
+<p><참고 문헌></p>
+<p>김봉종(1993). 제주지회의 성장. 한국교육학회 편. 교육탐구의 세월: 한국교육학회 40년사(pp. 413-416). 서울: 교육과학사.</p>
+<p>김일방(2021). ‘제주이해교육’의 실태 분석 및 미래 발전방안. 교육과학연구, 23(2), 39-63.</p>
+<p>송성대, 김정숙, 진관훈, 강만익, 정지훈(2023). 제주문화의 원류 해민정신. 제주: 각.</p>
+<p>양진건(1991). 제주교육행정사. 제주: 경신인쇄사.</p>
+<p>유홍준(2012). 나의 문화유산답사기: 돌하르방 어디 감수광. 경기: 창비.</p>
+<p>이인회(2023). 제주교육학 정립의 필요성에 대한 탐색적 연구: 학교 현장 전문가 심층면담을 중심으로. 교육과학연구교육과학연구, 제25권 제4호교육과학연구, 제23권 제2호, 25(4), 1-26.</p>
+<p>교육과학연구, 제25권 제4호</p>
+<p>교육과학연구, 제23권 제2호</p>
+<p>제주교육학연구회(2022). 지역교육학으로서 제주교육학은 가능한가? 2022 제주교육학 3차 포럼 자료집, 57.</p>
+<p>한국교육학회(1973). 한국교육학회 20년사: 1953.4.4.~1973.4.4. 서울: 대광인쇄공사.</p>
+<p>현용준(1986). 제주도 무속연구. 서울: 집문당.</p>
+</div>
+  </div>
+</div>
+<div id="view-siron" class="view">
+  <div class="newsletter-section">
+    <div class="section-header">
+      
+      <h2 class="section-title">시론</h2>
+      <p class="section-subtitle">시의성 있는 교육 이슈에 대한 소론입니다.</p>
+    </div>
+    <div class="card-list"><button class="sub-card" onclick="showArticle('siron','제주지회-60주년-소회와-전망')" type="button">
+  <div class="sub-card-body">
+    <div class="sub-title">제주지회 60주년 소회와 전망</div>
+    
+  </div>
+  <span class="sub-card-arrow">&rarr;</span>
+</button>
+<button class="sub-card" onclick="showArticle('siron','시론-제목-미정')" type="button">
+  <div class="sub-card-body">
+    <div class="sub-title">시론 (제목 미정)</div>
+    
+  </div>
+  <span class="sub-card-arrow">&rarr;</span>
+</button></div>
+  </div>
+</div>
+<div id="view-jeju-news" class="view">
+  <div class="newsletter-section">
+    <div class="section-header">
+      
+      <h2 class="section-title">제주교육소식</h2>
+      <p class="section-subtitle">제주 지역 교육의 소식과 연구자들의 이야기를 나눕니다.</p>
+    </div>
+    <div class="card-list"><button class="sub-card" onclick="showArticle('jeju-news','성읍마을에서-만난-작은-주인공들')" type="button">
+  <div class="sub-card-body">
+    <div class="sub-title">성읍마을에서 만난 작은 주인공들</div>
+    
+  </div>
+  <span class="sub-card-arrow">&rarr;</span>
+</button>
+<button class="sub-card" onclick="showArticle('jeju-news','첼로와-하프-사이에서-웰니스-음악을-향한-여정')" type="button">
+  <div class="sub-card-body">
+    <div class="sub-title">첼로와 하프 사이에서: 웰니스 음악을 향한 여정</div>
+    
+  </div>
+  <span class="sub-card-arrow">&rarr;</span>
+</button>
+<button class="sub-card" onclick="showArticle('jeju-news','경계를-넘어-런케이션-Learncation-으로')" type="button">
+  <div class="sub-card-body">
+    <div class="sub-title">경계를 넘어 런케이션(Learncation)으로</div>
+    
+  </div>
+  <span class="sub-card-arrow">&rarr;</span>
+</button>
+<button class="sub-card" onclick="showArticle('jeju-news','새-교육감에게-바라는-제주-교육의-방향')" type="button">
+  <div class="sub-card-body">
+    <div class="sub-title">새 교육감에게 바라는 제주 교육의 방향</div>
+    
+  </div>
+  <span class="sub-card-arrow">&rarr;</span>
+</button>
+<button class="sub-card" onclick="showArticle('jeju-news','말은-하지만-소통하기-어려운-아이들')" type="button">
+  <div class="sub-card-body">
+    <div class="sub-title">말은 하지만, 소통하기 어려운 아이들</div>
+    
+  </div>
+  <span class="sub-card-arrow">&rarr;</span>
+</button>
+<button class="sub-card" onclick="showArticle('jeju-news','지역사회-교육활동의-성과와-제언')" type="button">
+  <div class="sub-card-body">
+    <div class="sub-title">지역사회 교육활동의 성과와 제언</div>
+    
+  </div>
+  <span class="sub-card-arrow">&rarr;</span>
+</button>
+<button class="sub-card" onclick="showArticle('jeju-news','박사학위-취득-소감')" type="button">
+  <div class="sub-card-body">
+    <div class="sub-title">박사학위 취득 소감</div>
+    
+  </div>
+  <span class="sub-card-arrow">&rarr;</span>
+</button></div>
+  </div>
+</div>
+<div id="view-member" class="view">
+  <div class="newsletter-section">
+    <div class="section-header">
+      
+      <h2 class="section-title">회원 동정</h2>
+      
+    </div>
+    <div class="section-content"><div class="aside-block"><span>원고 준비 중입니다. (연구비 수주(고전·연준모·박정환), 저서 발간(연준모), 보직(강동호), 학위 취득 — 조사 예정)</span></div>
+</div>
+  </div>
+</div>
+<div id="view-activities" class="view">
+  <div class="newsletter-section">
+    <div class="section-header">
+      <div class="section-kicker">활동 소개</div>
+      <h2 class="section-title">제주지회 활동 소개</h2>
+      
+    </div>
+    <div class="card-list"><button class="sub-card" onclick="showArticle('activities','창립-59주년-기념행사-및-학술발표회')" type="button">
+  <div class="sub-card-body">
+    <div class="sub-title">창립 59주년 기념행사 및 학술발표회</div>
+    
+  </div>
+  <span class="sub-card-arrow">&rarr;</span>
+</button>
+<button class="sub-card" onclick="showArticle('activities','조천-마을탐방-항일-정신과-근대교육의-요람을-찾아서')" type="button">
+  <div class="sub-card-body">
+    <div class="sub-title">조천 마을탐방: 항일 정신과 근대교육의 요람을 찾아서</div>
+    
+  </div>
+  <span class="sub-card-arrow">&rarr;</span>
+</button></div>
+  </div>
+</div>
+
+  <!-- Level 3: Article views -->
+  <div id="article-siron-제주지회-60주년-소회와-전망" class="view">
+  <div class="article-view">
+    <div class="article-back-bar" onclick="backToSection()">
+      <span class="back-arrow">&larr;</span> 시론 목록으로
+    </div>
+    <div class="article-header">
+      <div class="article-kicker">시론</div>
+      <h1 class="article-title">제주지회 60주년 소회와 전망</h1>
+      
+    </div>
+    <div class="article-body">
+      <div class="aside-block"><span><strong>김민호</strong></span>
+<span>제주대학교</span>
+<span>명예교수</span></div>
+<div class="aside-block"><span>원고 준비 중입니다. (9월 12일(금) 제출 예정)</span></div>
+
+    </div>
+    <div class="article-back-bar article-back-bottom" onclick="backToSection()">
+      <span class="back-arrow">&larr;</span> 시론 목록으로
+    </div>
+  </div>
+</div>
+<div id="article-siron-시론-제목-미정" class="view">
+  <div class="article-view">
+    <div class="article-back-bar" onclick="backToSection()">
+      <span class="back-arrow">&larr;</span> 시론 목록으로
+    </div>
+    <div class="article-header">
+      <div class="article-kicker">시론</div>
+      <h1 class="article-title">시론 (제목 미정)</h1>
+      
+    </div>
+    <div class="article-body">
+      <div class="aside-block"><span><strong>연준모</strong></span>
+<span>제주대학교</span>
+<span>교수</span></div>
+<div class="aside-block"><span>원고 준비 중입니다. (제출 기한 확인 중)</span></div>
+
+    </div>
+    <div class="article-back-bar article-back-bottom" onclick="backToSection()">
+      <span class="back-arrow">&larr;</span> 시론 목록으로
+    </div>
+  </div>
+</div>
+<div id="article-jeju-news-성읍마을에서-만난-작은-주인공들" class="view">
+  <div class="article-view">
+    <div class="article-back-bar" onclick="backToSection()">
+      <span class="back-arrow">&larr;</span> 제주교육소식 목록으로
+    </div>
+    <div class="article-header">
+      <div class="article-kicker">제주교육소식</div>
+      <h1 class="article-title">성읍마을에서 만난 작은 주인공들</h1>
+      
+    </div>
+    <div class="article-body">
+      <div class="author-card"><img src="images/26c164ba_홍지환_03.jpg" alt="홍지환 프로필" loading="lazy"><div class="author-info"><span><strong>홍지환</strong></span><span>제주대학교</span><span>박사과정</span></div></div>
+<p><img src="images/abbe1434_홍지환_01.jpg" alt="image" loading="lazy"></p>
+<p>지난 5월, 우리 프론티어방은 교수님이 거주하시는 성읍마을을 찾았다. 늘 논문과 연구 이야기를 나누던 교수님의 삶의 자리를 직접 찾아간다는 것만으로도 평소와는 조금 다른 설렘이 있었다. 오래된 돌담과 초가가 이어진 골목을 걷고 있으니, 책상 위에서만 만나던 제주가 한층 가까이 다가오는 듯했다.</p>
+<p>마침 이날 성읍민속마을에서는 옛 정의현감의 부임 행차를 재현하는 ‘현감행차’ 시연이 열리고 있었다. 풍악 소리가 마을 안으로 번지고, 형형색색의 전통 의상을 갖춰 입은 사람들이 천천히 길을 따라 움직였다. 말을 탄 현감이 행렬의 앞을 지나갈 때에는 잠시 시간이 느리게 흐르는 듯했다. 오늘의 성읍 골목 위로 오래전 정의현의 풍경이 겹쳐지는 순간이었다.</p>
+<p>그러나 그날 우리의 시선을 가장 오래 붙잡은 것은 화려한 의상도, 웅장한 행렬도 아니었다. 그 한가운데서 제 몫을 다하며 걷고 있던 <strong>성읍초등학교 아이들</strong>이었다. 전통 의상을 입은 아이들은 마을 사람들과 나란히 행렬을 이루었다. 행사에 잠시 불려 나온 아이들이라기 보다, 오래된 마을의 이야기를 자기 몸으로 이어 가는 <strong>작은 주인공들</strong>처럼 보였다.</p>
+<p>아이들의 걸음 위에는 <strong>과거와 현재가 자연스럽게 포개져</strong> 있었다. 오래전 누군가가 걸었을 길을 오늘의 아이들이 다시 걷고 있다는 사실이 새삼 마음에 와 닿았다. 역사는 책 속에 머무는 것이 아니라, 누군가의 발걸음과 목소리를 통해 다시 살아날 수 있다는 것을 아이들이 보여주고 있었다.</p>
+<p><img src="images/dfc4f35e_홍지환_02.jpg" alt="image" loading="lazy"></p>
+<p>그 아이들 가운데에는 <strong>농어촌유학을 통해 성읍으로 온 학생</strong>들도 적지 않다고 했다. 제주에서 태어나 자란 아이와 다른 지역에서 새로운 생활을 시작한 아이가 같은 옷을 입고 같은 길을 걷고 있었다. 누가 이곳의 원래 구성원인지 구분하는 일은 그다지 중요해 보이지 않았다. 함께 걷고, 함께 배우고, 같은 마을의 이야기에 귀 기울이는 동안 아이들은 어느새 <strong>성읍의 오늘을 함께 만들어 가는 사람들</strong>이 되어 있었다.</p>
+<p>성읍의 역사는 그곳에서 태어난 사람만의 것이 아니었다. 지금 그곳에서 살아가며 관계를 맺는 사람, 마을의 이야기를 배우고 그 안에 자신의 경험을 보태는 사람 모두에게 열려 있었다. <strong>제주의 고유성</strong>은 오래된 것을 그대로 지키는 데에서만 생기는 것이 아니라, 새로운 사람을 기꺼이 품고 함께 이야기를 이어 갈 때 더욱 깊어지는 것인지도 모른다.</p>
+<p>행차를 바라보는 관광객들의 모습도 눈에 들어왔다. 사람들은 돌담과 초가를 배경으로 펼쳐지는 행렬을 사진과 영상에 담았다. 하지만 아이들이 함께하고 있었기에 그 장면은 단순히 옛 풍경을 재현하는 관광행사로만 보이지 않았다. 마을 주민과 학생, 이주민과 관광객이 저마다의 자리에서 하나의 풍경을 함께 만들어가고 있었다.</p>
+<p>누군가는 행렬을 이끌고, 누군가는 그 뒤를 따랐으며, 또 누군가는 길가에 서서 그 모습을 바라보았다. 서로 다른 사람들이 같은 시간과 공간을 나누는 동안 과거의 유산은 현재의 삶 속에서 다시 숨을 얻고 있었다. 그렇게 되살아난 기억은 아이들에게 전해지고, 관광객의 마음에 남으며, 다시 <strong>미래의 어느 순간으로 이어질</strong> 것이다.</p>
+<p>아이들은 교실에서 성읍의 역사와 문화를 배우는 데 그치지 않고, 자신들이 살아가는 마을의 길 위에서 그것을 직접 만났다. 돌담과 초가, 관아 터와 골목길은 더 이상 교과서 속 사진이나 설명만이 아니었다. 아이들이 걷고 머물며 이야기를 나누는 순간, <strong>마을 전체가 하나의 교실</strong>이 되었다.</p>
+<p>최근에는 지역소멸과 농어촌 학교의 위기를 이야기하는 목소리를 자주 듣게 된다. 학생이 줄어들면 학교가 어려워지고, 학교가 작아지면 마을의 활력도 함께 낮아진다고 한다. 숫자와 통계로 마주할 때면 농어촌의 미래는 때때로 무겁고 막막하게 느껴지기도 한다.</p>
+<p>그러나 성읍에서 본 풍경은 조금 다른 이야기를 들려주고 있었다. 농어촌유학으로 찾아온 아이들은 단순히 부족한 학생 수를 채우는 존재가 아니었다. 아이가 오면서 한 가족이 마을과 관계를 맺고, 새로운 만남과 이야기가 생겨났다. 아이들은 기존의 학생들과 함께 지역문화를 배우고, 마을의 행사에 참여하며, <strong>공동체의 새로운 구성원</strong>이 되어 가고 있었다.</p>
+<p>마을에 아이들의 목소리가 더해지고, 낯선 이들이 이웃이 되는 과정에서 오래된 전통도 조금씩 새로운 표정을 갖게 된다. 고유한 것은 변하지 않아야만 지켜지는 것이 아니라, <strong>시대와 사람을 만나며 새롭게 해석</strong>될 때 오히려 더 오래 살아남을 수 있다.</p>
+<p>제주의 고유성도 이와 다르지 않을 것이다. 제주의 자연과 역사, 문화는 그 자체로 소중하지만, 그것이 오늘의 아이들의 삶과 만날 때 비로소 <strong>제주의 차별성</strong>으로 나아갈 수 있다. 성읍초 아이들이 행렬에 참여하고, 농어촌유학생들이 마을의 역사를 함께 배우며, 주민들이 아이들의 걸음을 곁에서 지켜볼 때 제주의 고유한 문화는 살아 있는 배움이 된다. 제주만이 가진 것을 아이들의 경험으로 이어주는 순간, <strong>고유성은 자연스럽게 제주교육만의 색깔</strong>이 된다.</p>
+<p>성읍의 돌담길을 따라 함께 걷던 아이들의 모습은 지역교육이 어디로 향해야 하는지를 조용히 보여주고 있었다. 제주다움을 지키는 데서 한 걸음 더 나아가, 그것을 아이들의 삶과 배움 속에 자연스럽게 스며들게 하는 것. 그리고 그 배움이 다시 마을의 내일을 밝혀 주도록 하는 것. <strong>학교</strong>는 그 과정에서 과거와 현재를 이어주고, 서로 다른 배경의 사람들을 <strong>하나의 공동체로 만나게 하는 따뜻한 자리</strong>가 된다.</p>
+<p>그날 현감행차는 과거를 향해 가는 행렬처럼 보였지만, 어쩌면 아이들은 <strong>미래를 향해 걷고 </strong>있었는지도 모른다. 오래된 돌담 사이로 이어지던 작은 발걸음 속에서, 제주다움이 새로운 사람을 만나고 새로운 이야기로 이어지는 순간을 보았다. 제주의 미래는 어쩌면 그렇게, 과거를 품은 아이들의 걸음에서 조용히 시작되고 있었다.</p>
+
+    </div>
+    <div class="article-back-bar article-back-bottom" onclick="backToSection()">
+      <span class="back-arrow">&larr;</span> 제주교육소식 목록으로
+    </div>
+  </div>
+</div>
+<div id="article-jeju-news-첼로와-하프-사이에서-웰니스-음악을-향한-여정" class="view">
+  <div class="article-view">
+    <div class="article-back-bar" onclick="backToSection()">
+      <span class="back-arrow">&larr;</span> 제주교육소식 목록으로
+    </div>
+    <div class="article-header">
+      <div class="article-kicker">제주교육소식</div>
+      <h1 class="article-title">첼로와 하프 사이에서: 웰니스 음악을 향한 여정</h1>
+      
+    </div>
+    <div class="article-body">
+      <div class="author-card"><img src="images/89e642d6_김지원_02.png" alt="김지원 프로필" loading="lazy"><div class="author-info"><span><strong>김지원</strong></span><span>제주대학교 / 교육학과</span><span>박사과정</span></div></div>
+<p>어릴 적 첼로를 시작한 건 부모님의 권유였다. 그렇게 시작한 악기는 자연스럽게 나의 전공이 되었다. 반면 하프는 예술치료학 대학원 시절 온전히 내가 좋아서 배우기 시작한 악기였다. 첼로가 내게 요구한 것이 ‘틀리지 않아야 한다’는 압박감이었다면, 하프가 건넨 것은 ‘있는 그대로도 괜찮다’는 편안함이었다. 같은 음악이지만 두 악기를 통해 마주한 경험은 이처럼 서로 다른 결을 지니고 있었다.</p>
+<p>교육학 박사과정에 들어서면서 이 개인적인 경험은 자연스럽게 음악교육에 대한 본질적인 질문으로 이어졌다. 본래 음악은 인간의 감정과 경험을 소리로 표현하는 사회·문화적 산물로, 음악을 연주하고 노래를 부르거나 악기를 연주하는 활동은 즐거움이나 기쁨과 같은 정서적 안정뿐만 아니라 바른 호흡이나 자세를 통한 신체적 건강으로 연결되어 균형 있는 인간의 성장과 발달에 기여한다(교육부, 2022). 그러나 오랫동안 우리의 음악교육은 음악이 주는 정서적 풍요로움보다 ‘얼마나 정확하게 연주했는지’, ‘얼마나 잘 해냈는지’와 같은 기술적 평가에 더 익숙해져 있었다. 음악을 하는 동안 무엇을 느끼고, 그 경험이 자신의 삶과 어떻게 연결되는지는 충분히 묻지 못했던 것이다. 최근 교육 현장에서 주목받는 ‘웰니스(Wellness)’는 이처럼 우리가 놓쳐왔던 음악의 본질적 질문을 다시 돌아보게 한다.</p>
+<p>음악교육은 연주 기술의 향상을 넘어, 우리의 정서와 삶을 함께 돌보는 교육이어야 하지 않을까. 그렇다고 거창한 프로그램이 필요한 것은 아니다. 음악을 함께 듣고 떠오른 감정을 한 단어로 표현해 보거나, 연주를 마친 뒤 "어디가 틀렸니?"보다 "오늘 연주하면서 어떤 기분이 들었니?"라고 묻는 것만으로도 충분하다. 이러한 작은 질문은 음악을 평가의 대상으로 바라보기보다 자신을 이해해가는 경험으로 다가가게 만든다. 돌아보면 내가 좋아하는지도 모른 채 묵묵히 몰두했던 첼로도, 스스로 선택해 애정을 담아 시작한 하프도 결국은 저마다의 방식으로 나를 성장시켰다. 다만 첼로 앞에서는 더 잘 연주하는 방법을 배우는 데 집중했다면, 하프 앞에서는 잘 연주하는 것보다 ‘지금 내 마음은 어떠한지’, ‘나는 왜 음악을 이어가고자 하는지’, 그리고 ‘이 음악이 내 삶에 어떤 의미인지’를 스스로에게 묻게 되었다.</p>
+<p>음악은 감정을 표현하고 타인과 공감하며 자신을 이해하도록 매개하는 예술이다. 그렇기에 음악 교육은 단순한 기교 습득이나 기술적 완성에 머무르기보다 음악을 통해 자신의 삶을 성찰하고 돌볼 수 있는 전인적 방향으로 나아갈 필요가 있다. 평가의 기준에서 잠시 벗어나 자신의 감정을 있는 그대로 마주할 수 있는 자리를 마련하는 것, 그것이 오늘날 음악웰니스가 음악 교육에 던지는 중요한 질문이며, 우리가 다시 시작해야 할 음악교육의 모습일 것이다.</p>
+<p><img src="images/974b2706_김지원_01.jpeg" alt="image" loading="lazy"></p>
+<h2 id="참고문헌">참고문헌</h2>
+<p>교육부, 『제2022-33호 [별책12]』 (서울: 교육부, 2022), 1108쪽.</p>
+
+    </div>
+    <div class="article-back-bar article-back-bottom" onclick="backToSection()">
+      <span class="back-arrow">&larr;</span> 제주교육소식 목록으로
+    </div>
+  </div>
+</div>
+<div id="article-jeju-news-경계를-넘어-런케이션-Learncation-으로" class="view">
+  <div class="article-view">
+    <div class="article-back-bar" onclick="backToSection()">
+      <span class="back-arrow">&larr;</span> 제주교육소식 목록으로
+    </div>
+    <div class="article-header">
+      <div class="article-kicker">제주교육소식</div>
+      <h1 class="article-title">경계를 넘어 런케이션(Learncation)으로</h1>
+      
+    </div>
+    <div class="article-body">
+      <div class="author-card"><img src="images/b70afd7e_전새미_02.png" alt="전새미 프로필" loading="lazy"><div class="author-info"><span><strong>전새미</strong></span><span>제주대학교 교육학과</span><span>박사과정</span></div></div>
+<p>마흔 중반의 나이에 박사과정을 시작하기까지 전새미라는 한 인간으로서의 정체성과 연구자로서의 여정은 삶을 둘러싼 현상에 대한 호기심과 인간성 탐구에 대한 일관적인 움직임이었다. 학사 과정에서부터 하나의 전공에 머무르지 않고 끊임없이 질문을 던지며 학문의 경계를 넘나들었다. 학사 전공으로 관광경영에서 출발하여 관광 기반 현장의 경험을 탐색하던 시절, 나는 ‘여행으로 쌓이는 경험이 인간 내면의 지속적인 성찰과 배움으로 이어질 수 있을까’라는 근본적인 물음을 던지곤 했다. 그 물음에 대한 답을 찾고자 인간의 정서와 무의식, 상징과 카타르시스를 다루는 미술치료를 이어서 전공했다. 이후 상담 현장에서 마주한 내담자들을 심층적으로 이해하기 위해 정서와 관계, 심리 역동을 본격적으로 탐구하는 상담심리를 전공하게 되었다. 학문의 깊이와 인간 대상 연구의 다양성에 갈증을 느끼던 차에 나는 한 인간의 자아실현 과정에서 유의미한 경험을 바탕으로 체계적으로 온전하게 존재감을 실현해 나갈 수 있는 연구 분야가 무엇일지 고민하게 되었다. 이어 개인의 잠재력과 성장을 구조적으로 지원하는 교육학 영역에 관심을 가지게 되며 박사과정 교육공학 전공에 이르게 되었다.</p>
+<p>학사에 이은 석사 전공의 맥락과 연결성이 부족하다고 느끼며 연구자로서의 학문적 정체성이 흔들리던 시기에 박사과정에서 수학한 질적연구방법론(담당: 교육학과 김민호 명예교수님) 과목을 통해 더 깊이 고민하고 성찰하며 자문화기술지(Autoethnography) 연구를 계획하게 되었다. 국내에서도 박사과정 대학원생이 자신의 연구자 되어가기 과정을 자문화기술지로 탐색한 선행 연구(문지윤, 2019)가 있다.</p>
+<p>연구계획서를 작성하고 한때 파편적으로 여겨지던 전공의 연결성을 채우게 되면서 나는 관광경영으로 관광자원 분석, 지역성과 현장의 연결, 미술치료로 통찰력과 정서적 교감, 상담심리로 관계 역동적 시선과 다양한 심리적 자원을, 교육공학에서의 체계적 연구 설계 역량을 이을 수 있는 연구자가 되어야겠다는 방향을 잡을 수 있었다. 이 과정은 20대부터 끊임없이 새로운 전공으로 심리적, 학문적 공백을 메우기 위한 요원한 도전이 아니라 여러 겹으로 누적되어 학문의 경계를 넘나들어 상호작용하는 ‘가산적(additive)’ 성장 과정이었다(Yu, 2025). 복수의 학문 배경을 지닌 연구자의 정체성이 기존 것을 배제하지 않고 누적되며 발전한다는 가산적 정체성 모델처럼, 나의 다학문적 궤적이 수렴한 지점에서 자연스럽게 명명할 수 있게 된 개념이 바로 ‘런케이션(Learncation)’이다. 런케이션은 배움(Learning)과 쉼·경험(Vacation)이 수단과 목적의 관계로 나뉘는 것을 넘어, 여행을 통한 삶의 경험 자체가 배움이 되는 통합적 상태를 지향한다. 기존의 수학여행이나 일회성 해외연수 같은 단편적 교육관광을 넘어, 지역에 체류하며 삶과 학습을 일치시키는 새로운 교육 패러다임으로 주목받기 시작한 개념이다. 실제로 제주대학교와 제주특별자치도는 이러한 흐름에 발맞추어 제주의 고유한 생태 자원과 글로벌 교육을 융합한 핵심 고등교육 혁신 전략으로 ‘K-런케이션’ 모델을 공식 도입하였다(제주대학교·제주특별자치도, 2025). 이러한 정책적·교육적 전환의 흐름 속에서 나는 런케이션을 단순한 지역 사업에 머무르지 않고, 박사과정의 연구와 교육 설계를 현장에 직접 구현하는 실천적 연구의 틀로 확장하여 적용하게 되었다.</p>
+<p>2026년 6월, 1주일간 미국 조지아주 조지아공대 학생들이 제주도를 방문하며 제주대학교 대학생, 조지아공대 대학생, 제주 세인트존스베리아카데미 제주(SJA Jeju) 국제학교 고등학생 등 총 32명이 참여한 ‘글로벌 런케이션 캡스톤 프로그램’을 기획하고 운영하며 런케이션이 실제 교육 현장과 지역사회 맥락 속에서 어떻게 살아 숨 쉬는지 증명할 수 있었다(데일리제주, 2026). 즉, 해외인구가 제주라는 관광지에서 지역성과 마을 자원(대정읍 신평리 논농사 생태교육 등)을 경험하며 관광과 삶의 현장이 곧 배움의 실험실이 되는 것을 경험할 수 있게 현장을 마련하였다. 단기 집중 과정으로 국적과 전공, 관심 영역이 다른 배경의 학생들이 제주의 지역 현안에 대해 토론하고 문제점을 인식하여 해결방안까지 제시하는 국제교류 캡스톤 프로젝트를 통해 성장하는 모습은 내가 걸어온 학문적 전이의 궤적이 결코 헛된 것이 아니었음을 증명해 주었다.</p>
+<p>2026학년도 여름방학 동안 운영된 ‘글로벌 런케이션 캡스톤 프로그램(제주대-조지아텍)’ 기획과 계절학기 ‘예비부모교육: 비교과 런케이션 경험’의 공동운영을 통해 나는 런케이션이 단순한 관광상품이나 일회성 체험을 넘어서는 영역을 체계적으로 설계할 수 있을 것이라는 확신을 얻을 수 있었다. 제주의 천혜 자원인 바다와 숲, 마을 공동체라는 물리적·문화적 공간 자체가 살아 숨 쉬는 학습 환경이 되고, 학습자들은 그 안에서 자신을 성찰하며 타인 및 지역과 깊이 있게 연결될 수 있는 것이다. 여기서 나는 석사와 박사 전공의 연결고리를 재발견하며 박사과정에서 개발하고 검증한 ‘AI 심리상담 보조도구 Care’On’을 런케이션의 교육적·심리적 인프라로 결합하고자 한다.</p>
+<p>런케이션 현장에 참여하는 학습자들은 일상을 떠나 새로운 환경 속에서 낯선 자아와 마주하게 된다. 이어서 나는 ‘인공지능과 교육연구’(담당: 교육학과 양은별 교수님)와 ‘AI상담 및 교육’(담당: 교육학과 박정환 교수님) 교과목을 통해 개발하고 검증한 AI 심리상담 보조도구 앱이 런케이션과 만날 수 있는 지점을 고민하게 되었다. 예를 들어, 학생들의 심리상담과 정서지원을 담당하는 초·중·고 전문상담교사와 일반인의 마음건강을 돌보는 전문상담사들이 제주에 체류하며 행정 실무 및 상담 기술을 돕는 AI 심리상담 보조도구 활용법을 익히는 직무연수형 런케이션을 기획할 수 있다. 이로써 참가자들은 새로운 테크놀로지 역량을 함양하는 동시에 일상을 벗어난 자연 속에서 자기 내면을 들여다보고, 정서적 쉼과 회복을 촉진하는 치유형 런케이션을 경험하게 된다. 이처럼 ‘AI 기반 정서 케어 기술’과 ‘제주의 자연·경험 자원’이 교육공학적 설계를 통해 융합될 때, 런케이션은 진정한 의미의 ‘치유형 몰입 학습 모델’로 완성될 수 있을 것이다.</p>
+<p>아직 생생하게 고민하고 치열하게 연구할 수 있는 박사과정 중에 있는 내가 거쳐 온 학문적 방황과 결핍은 무의미한 여정이 아니었다. 이는 나를 더 넓은 통찰의 장으로 이끈 나침반이었으며, 박사과정에서 만난 교수님들과의 학문적 호흡, 그리고 동료들과 함께 일구어낸 AI 연구개발의 성과는 이 파편화된 경험들을 하나의 단단한 연구 패러다임으로 엮어내는 결정적 계기가 되었다. 자문화기술지(Autoethnography)라는 질적 방법론을 통해, 학문적 전이를 거치며 내부로부터 런케이션 개념을 길어 올린 연구자 정체성 형성 과정을 학술적으로 깊이 있게 규명하고자 한다. 그리고 이에 멈추지 않고, AI 에듀테크와 심리상담, 지역 생태계와 글로벌 무대가 유기적으로 결합된 ‘제주형 AI 런케이션 설계 원리 및 교육연구 모델’을 지속적으로 개발하고 실증해 나갈 것이다. 제주라는 천혜의 시공간 위에서, 배움과 쉼, 기술과 인간의 마음을 따뜻하게 연결하는 연구자로서 나의 탐구는 이제 막 새로운 장을 열어가고 있다.</p>
+<p><img src="images/a488f591_전새미_01.png" alt="image" loading="lazy"></p>
+<p>여기에 본문을 자유롭게 작성해주세요.</p>
+<p>이미지를 넣고 싶은 위치에 직접 삽입하시면 됩니다.(삽입 → 그림 → 이 디바이스에서)</p>
+<h2 id="참고문헌">참고문헌</h2>
+<p>데일리제주. (2026, 6월). 제주대-조지아공대 글로벌 런케이션 캡스톤 프로그램 성료. .</p>
+<p>문지윤. (2019). 상담학 박사과정생의 연구자 되어가기 과정에 대한 자문화기술지. 상담학연구, 20(6), 1-25. 제주대학교, & 제주특별자치도. (2025). 제주형 글로컬 고등교육 혁신을 위한 K-런케이션 추진 계획안. 제주대학교·제주특별자치도.</p>
+<p>데일리제주. (2026, 7월 6일). 제주대-조지아텍, 신평리서 '글로벌 런케이션 캡스톤' 성료. 데일리제주. http://www.dailyjeju.net/news/articleView.html?idxno=42431</p>
+<p>문지윤. (2019). 상담학 박사과정생의 연구자 되어가기 과정에 대한 자문화기술지. 상담학연구, 20(6), 1-25.</p>
+<p>제주대학교, & 제주특별자치도. (2025). 제주형 글로컬 고등교육 혁신을 위한 K-런케이션 추진 계획안. 제주대학교·제주특별자치도.</p>
+<p>Yu, X. (2025). Developing additive multidisciplinary identities in higher education: A conceptual framework for boundary-crossing researchers. Studies in Higher Education, 50(3), 412–428.</p>
+
+    </div>
+    <div class="article-back-bar article-back-bottom" onclick="backToSection()">
+      <span class="back-arrow">&larr;</span> 제주교육소식 목록으로
+    </div>
+  </div>
+</div>
+<div id="article-jeju-news-새-교육감에게-바라는-제주-교육의-방향" class="view">
+  <div class="article-view">
+    <div class="article-back-bar" onclick="backToSection()">
+      <span class="back-arrow">&larr;</span> 제주교육소식 목록으로
+    </div>
+    <div class="article-header">
+      <div class="article-kicker">제주교육소식</div>
+      <h1 class="article-title">새 교육감에게 바라는 제주 교육의 방향</h1>
+      
+    </div>
+    <div class="article-body">
+      <div class="author-card"><img src="images/29b7f95a_홍지오_01.jpg" alt="홍지오 프로필" loading="lazy"><div class="author-info"><span><strong>홍지오</strong></span><span>세한대학교 대학원 교육학과</span><span>교수</span></div></div>
+<p>제18대 제주특별자치도교육감직 인수위원회 백서를 읽었다. ‘모두가 주인공, 함께 성장하는 제주교육’이라는 교육지표 아래, 40일을 4년처럼 일하며 만들어낸 47개 추진과제가 담겨 있었다. 페이지를 넘길수록 인상적이었던 것은 정책의 세밀함뿐만 아니라 백서 곳곳에 담겨 있는 ‘사람 중심’의 철학이었다. 필자는 교육정책을 고민할 때 자문하곤 한다. “이 정책이 실제로 제주 아이들의 삶을 위한 것인가?”라고 말이다. 이 질문을 품고, 새 교육감에게 바라는 방향을 나누고자 한다.</p>
+<p>■ 정책보다 사람이 먼저다: 책임교육의 출발점</p>
+<p>백서가 제시한 첫 번째 시책, ‘삶의 힘을 기르는 책임교육’의 핵심은 초개별화 맞춤교육이다. 학생 한 명 한 명의 학력, 정서, 건강, 사회적 환경을 종합적으로 이해하고 지원하겠다는 구상은 명확하다(제18대 제주특별자치도교육감직인수위원회, 2026). 여기에 제주AI미래교육원(지능형 교육 허브) 구축, AI시대 기초 체력을 기르는 독서교육, 질문과 토론 중심 인문학 교육 등이 연계된다. 세상에 나쁜 교육정책은 없다. 중요한 것은 교육정책을 현장에서 실천하는 사람이 중요하다(홍지오, 2023. 8. 25.; 홍지오, 2024. 7. 17.). AI 플랫폼이 아무리 정밀해도, 학생 한 명의 변화를 발견하고 다가가는 교사 한 사람을 대신할 수는 없다. 초개별화 교육이 살아있는 체계가 되려면, 그 플랫폼을 운영하는 교사에 대한 지원과 신뢰가 먼저 확보되어야 한다. 결국 교육의 변화는 교실에서 이루어지고, 교실의 변화는 교사를 통해 이루어지기 때문이다. 책임교육의 출발점은 사람에 있다.</p>
+<p>■ 형식이 아닌 실제: 꿈꾸는 오후와 행정-교육 원팀의 조건</p>
+<p>백서에서 가장 눈길을 끄는 정책은 ‘꿈꾸는 오후’다. 학교 수업이 끝난 오후 시간, 마을 안에서 아이들이 안전하게 돌봄을 받고 꿈을 키워가는 지자체 협력 기반의 온마을 돌봄·교육 모델이다(제18대 제주특별자치도교육감직인수위원회, 2026). 또한, 도-교육청 인수위가 합의한 9대 핵심 협력과제, ‘행정-교육 원팀’ 기조는 제도적으로 기대를 갖게 한다. 그러나 필자는 현재까지도 전국의 많은 도-교육청 협의체가 서류로만 존재하고 있다는 현실을 마주한다(홍지오, 2023. 5. 22.; 홍지오, 2023. 4. 25.). 그동안 마을, 공동체와 관련된 사업을 보면, 예산과 시설은 갖춰졌지만 운영 및 참여할 사람이 없는 경우를 수없이 목격해왔다. 공간과 예산이 먼저인가, 사람이 먼저인가. 꿈꾸는 오후에서는 도-교육청 간 진정한 협력이 이루어지고, 마을교육공동체에 대한 지속적인 지원과 행정의 진정성이 채워져야 한다. 그 출발점은 도-교육청으로 구성된 ‘꿈꾸는 오후 TF’라고 할 수 있겠다. “제주의 행정과 교육은 좀 다른가요?”라는 질문에, “제주는 형식이 아니라 실제적인 행정-교육 원팀이 있다”라며, 가능성을 이야기할 수 있는 날이 오기를 기대한다.</p>
+<p>■ 신뢰가 없으면 교육도 없다: 포용과 청렴</p>
+<p>백서에는 교육감 직속 ‘교육활동보호담당관’ 신설을 제시하며, 교원과 학생이 상호 인권을 존중하는 문화를 만들겠다고 제시된다(제18대 제주특별자치도교육감직인수위원회, 2026). 갈등조정전문가 배치, 야간·주말 안심콜센터 배치 등은 교육 현장의 목소리에 응답하는 구체적 조치다. 다만, 이와 같은 조치는 학교에 대한 신뢰, 행정에 대한 신뢰가 전제되어야 한다. 필자는 그동안 우리 사회에서 신뢰가 무너지면 그 어떤 교육 제도도 제대로 작동하지 않는다는 점을 반복해서 이야기해 왔다(홍지오, 2024. 12. 24.). 교사가 교육활동에서 신뢰받지 못하면 학생도 배울 수 없고, 행정이 투명하지 않으면 공동체도 유지될 수 없다. 현장을 지원하는 청렴행정(불필요한 업무 혁신, 투명한 예산 집행, 공정한 인사 등)은 단순한 행정 개혁이 아니라 제주 교육공동체의 신뢰를 다시 세우는 일임을 기억할 필요가 있다.</p>
+<p>■ 제주의 오래된 미래: 숙론과 제주다움교육</p>
+<p>이번 백서는 제주만의 교육이 핵심이다. ‘미래를 여는 제주다움교육’은 제주형 IB 교육의 내실화, 학교와 마을이 함께하는 제주다움 교육생태계 구축 등을 담고 있다. 또한, 도민 251건의 목소리를 담은 도민 소통 플랫폼 운영과 ‘제주교육자치 시민의회’는 제주가 자신만의 교육 언어를 만들어가겠다는 선언이라고 할 수 있다. 제주의 미래 교육은 기술을 넘어 ‘지식’에서 ‘경험’으로, ‘경쟁’에서 ‘협력’으로, ‘도구’에서 ‘사람’으로의 전환에 있다(홍지오, 2024. 6. 13.). 그 전환은 빠른 결정이 아닌 충분한 숙론(熟論)을 통해 이루어진다(홍지오, 2024. 8. 19.). 2027년부터 구성될 ‘제주교육자치 시민의회’는 그 숙론의 제도적 장치라고 할 수 있다. 도민이 교육 의제를 직접 발굴하고 토론하는 이 구조가, 구호에 머물지 않고 진정한 숙의의 장이 되기를 기대한다.</p>
+<p>■ “이 정책이 실제로 제주 아이들의 삶을 위한 것인가?”</p>
+<p>앞서 언급한 교육정책에 관한 필자의 고민에 답은 ‘정책은 지속가능해야 완성되고, 실제로 제주 아이들의 삶을 위한 변화와 발전은 지속가능한 정책을 통해서 이루어질 수 있다’이다. 백서가 담은 47개 과제는 고의숙 교육감의 지도다. 지도는 함께 걷는 사람이 있어야 지속된다. 그 길 위에 동행하는 제주 교육공동체의 구성원을 응원한다.</p>
+<p>‘모두가 주인공’이라는 교육지표는 아이 한 명이 자신의 삶을 당당히 설계하고, 교사가 존중받고 수업에 집중할 수 있으며, 학부모가 학교 교육을 신뢰할 때 비로소 완성된다. 고의숙 교육감이 이끄는 시간이, 헛된 구호의 시간이 아니라 신뢰가 쌓이는 시간이 되기를 바란다.</p>
+<p>고의숙 교육감의 취임을 축하하며, 그 여정을 응원한다.</p>
+<h2 id="참고문헌">참고문헌</h2>
+<p>홍지오. (2023. 4. 25.). 제주도 마을교육공동체 바라보는 기대의 시선. 제민일보, 15면.</p>
+<p>홍지오. (2023. 5. 22.). 팬데믹이 제주 교육에 남긴 숙제. 제민일보, 14면.</p>
+<p>홍지오. (2023. 8. 25.). 제주의 마을 활동가는 지치고 있다. 제민일보, 15면.</p>
+<p>홍지오. (2024. 6. 13.). 제주의 오래된 ‘미래 교육’을 위한 제언. 제민일보, 15면.</p>
+<p>홍지오. (2024. 7. 17.). 소멸 위험 제주를 위한 문제 해결 프로젝트 제안. 제민일보, 14면.</p>
+<p>홍지오. (2024. 8. 19.). 제주의 미래 위한 숙론(熟論)과 교육. 제민일보, 15면.</p>
+<p>홍지오. (2024. 12. 24.). 신뢰 사회, 제주. 제민일보, 15면.</p>
+<p>제18대 제주특별자치도교육감직인수위원회. (2026). 모두가 주인공, 함께 성장하는 제주교육: 제18대 제주특별자치도교육감직인수위원회 백서. 제주특별자치도교육청.</p>
+
+    </div>
+    <div class="article-back-bar article-back-bottom" onclick="backToSection()">
+      <span class="back-arrow">&larr;</span> 제주교육소식 목록으로
+    </div>
+  </div>
+</div>
+<div id="article-jeju-news-말은-하지만-소통하기-어려운-아이들" class="view">
+  <div class="article-view">
+    <div class="article-back-bar" onclick="backToSection()">
+      <span class="back-arrow">&larr;</span> 제주교육소식 목록으로
+    </div>
+    <div class="article-header">
+      <div class="article-kicker">제주교육소식</div>
+      <h1 class="article-title">말은 하지만, 소통하기 어려운 아이들</h1>
+      
+    </div>
+    <div class="article-body">
+      <div class="author-card"><img src="images/0995a45e_석진아_01.jpg" alt="석진아 프로필" loading="lazy"><div class="author-info"><span><strong>석진아</strong></span><span>제주대학교 대학원 교육학과</span><span>박사과정 〮1급 언어재활사</span></div></div>
+<h2 id="말을-한다는-것과-소통할-수-있다는-것">말을 한다는 것과 소통할 수 있다는 것</h2>
+<p>모둠활동 시간, 한 학생이 자신이 좋아하는 이야기를 신이 나서 이어 간다. 친구들이 활동지를 넘기거나 다른 의견을 말하려 해도 설명은 계속된다. 결국 한 친구가 “이제 우리 활동하자”라고 말하자 아이는 말을 멈추지만, 자신의 이야기를 갑자기 끊었다고 느껴 속상해한다. 또 다른 학생은 조별 토의 과제 중 친구가 화가 나서 “너 혼자 다 해”라고 말하자, 그 말을 실제 부탁으로 이해하고 활동을 혼자 이어 간다. 두 학생 모두 자신의 생각을 말로 표현할 수 있다. 그러나 상황과 상대방의 반응을 함께 고려하는 데 어려움을 보이면서, 교실에서는 ‘눈치가 없다’, ‘말을 안 듣는다’, ‘자기중심적이다’라는 평가를 받기 쉽다. 이처럼 자신의 생각을 말로 표현할 수 있어도 상황과 상대방에 맞게 소통하는 데 어려움을 보이는 아이들이 있다. 이때 살펴볼 필요가 있는 것이 ‘화용언어’이다. 화용언어는 단어나 문장의 문자적인 의미를 이해하는 데서 더 나아가, 말이 사용된 상황과 상대방의 표정·말투, 앞뒤 맥락을 함께 고려하여 말에 담긴 의도를 이해하고 그에 맞게 표현하는 능력을 말한다(Levinson, 1983; Adams, 2002). 따라서 같은 말이라도 누가, 어떤 상황에서, 어떤 의도로 말했는지에 따라 다르게 이해될 수 있다.</p>
+<p>또한 어휘가 풍부하고 문장을 잘 구성한다고 해서 화용 능력까지 반드시 충분한 것은 아니다. 무엇을 말할 수 있는가와 그 말을 언제, 누구에게, 어떻게 사용할 것인가는 서로 다른 능력을 요구한다. 따라서 겉으로 드러나는 말하기 능력만으로 판단하기보다 실제 상호작용 속에서 아이가 상대방의 의도와 맥락을 어떻게 이해하고, 자신의 말을 어떻게 조절하는지 살펴볼 필요가 있다(Adams, 2002; Norbury, 2014).</p>
+<h2 id="행동이나-태도의-문제로-오해되는-어려움">행동이나 태도의 문제로 오해되는 어려움</h2>
+<p>화용언어의 어려움은 교실에서 언어 문제로 바로 인식되기보다 행동이나 태도의 문제처럼 보이기도 한다. 질문의 핵심을 파악하지 못해 엉뚱하게 대답하거나, 상대방의 반응과 관계없이 자신의 이야기만 길게 이어 갈 수 있다. 대화 차례를 기다리거나 화제를 자연스럽게 바꾸는 데 어려움을 보이고, 농담이나 비유, 돌려 말하는 표현을 문자 그대로 받아들이기도 한다. 갈등 상황에서는 무슨 일이 있었는지 순서대로 설명하거나 자신의 감정과 이유를 말로 표현하는 데 어려움을 보여 울음, 소리 지르기, 분노, 회피 등의 행동으로 반응하기도 한다.</p>
+<p>화용언어의 어려움은 하나의 특정 진단에만 국한되지 않으며, 어휘나 문장 구성과 같은 구조적 언어 능력만으로는 충분히 판단하기 어렵다(Norbury, 2014). 따라서 수업, 놀이, 모둠 활동과 같은 실제 상호작용에서 아이가 언어를 어떻게 이해하고 사용하는지 함께 관찰할 필요가 있다(Adams, 2002).</p>
+<h2 id="교실에서-조금-더-살펴볼-모습">교실에서 조금 더 살펴볼 모습</h2>
+<ul>
+<li>대화할 때 질문이나 화제에 맞게 반응하고, 상대방의 반응을 살피며 말의 차례와 내용·분량을 조절하는가?</li>
+</ul>
+<ul>
+<li>경험이나 사건을 설명할 때 일어난 일을 순서와 맥락에 맞게 이야기하고, 상대방이 이해하는 데 필요한 정보와 이유를 충분히 전달하는가?</li>
+</ul>
+<ul>
+<li>표정과 말투, 앞뒤 상황과 같은 맥락 단서를 활용하여 농담·비유·간접표현에 담긴 의미와 의도를 추론하는가?</li>
+</ul>
+<ul>
+<li>요청하기, 거절하기, 설명하기 등 필요한 의사소통 기능을 적절하게 사용하고, 자신의 말이 잘 전달되지 않았을 때 다시 설명하거나 표현을 바꾸어 말할 수 있는가?</li>
+</ul>
+<p>※ 한두 번의 행동만으로 판단하기보다 이러한 모습이 여러 사람과 상황에서 반복되는지 살펴보아야 한다. 필요한 경우 구체적인 질문이나 그림·선택지 등의 단서를 제공했을 때 수행이 어떻게 달라지는지도 기록해 두면 이후 지원 방법을 계획하는 데 참고할 수 있다.</p>
+<h2 id="교실에서-시작할-수-있는-세-가지-지원">교실에서 시작할 수 있는 세 가지 지원</h2>
+<p>첫째, 말의 의미를 구체적으로 알려 준다. 화용언어에 어려움이 있는 학생에게는 추상적이거나 간접적인 표현보다 상황과 기대 행동을 분명하게 설명하는 것이 도움이 된다. 예를 들어 “수업 태도를 바르게 하자”보다는 “연필을 내려놓고 선생님을 보자”라고 말할 수 있다. “친구 마음을 생각해 봐”라고 하기보다 “네가 계속 이야기할 때 친구가 고개를 돌렸어. 왜 그랬을까?”처럼 관찰할 수 있는 단서를 함께 제시하는 것도 좋다. 농담이나 비유, 돌려 말하기를 이해하기 어려워한다면 말에 담긴 의도를 직접 설명해 줄 수 있다.</p>
+<p>둘째, 상황 속 단서를 함께 살펴본다. 갈등이 생겼을 때 곧바로 “왜 그랬어?”라고 묻기보다 무슨 일이 있었는지, 상대방이 어떤 말과 행동을 했는지를 차례로 살펴보도록 돕는다. “친구가 그때 어떤 표정을 지었어?”, “그 말을 어떤 말투로 했어?”, “그 상황에서 친구는 무엇을 원했던 것 같아?”처럼 표정, 말투, 행동, 앞뒤 상황을 함께 확인하면 상대방의 의도와 감정을 추론하는 데 도움이 된다. 말로 설명하기 어려운 학생에게는 그림이나 선택지, 핵심어를 활용할 수 있다.</p>
+<p>셋째, 오해가 생겼을 때 확인하고 다시 말하는 방법을 알려 준다. 대화에서는 상대방의 말을 잘못 이해하거나 자신의 뜻이 충분히 전달되지 않을 수 있다. 이때 “무슨 뜻이야?”, “다시 설명해 줄래?”, “내가 말한 건 그런 뜻이 아니었어”처럼 의미를 확인하거나 자신의 말을 다시 설명하는 방법을 알려 줄 수 있다. 중요한 것은 특정 문장을 외우게 하는 것이 아니라, 말이 잘 통하지 않을 때 상대방에게 확인하고 자신의 표현을 조절해 보는 경험을 반복해서 제공하는 것이다.</p>
+<h2 id="아이의-행동-앞에서-다시-질문하기">아이의 행동 앞에서 다시 질문하기</h2>
+<p>처음의 교실 장면으로 돌아가 보자. 친구가 자신의 말을 끊었다고 느껴 속상해하는 아이에게는 모둠활동이 자신의 생각만 말하는 것이 아니라 모둠원 각자의 의견을 함께 나누는 활동이라는 점을 알려 줄 수 있다. 이와 함께 친구들이 활동지를 넘기거나 다른 의견을 말하려 했던 모습을 짚어 주며, 당시 친구들이 어떤 뜻을 나타내고 있었는지 생각해 보도록 돕는다. 또 “너 혼자 다 해”라는 말을 그대로 받아들인 아이에게는 친구의 표정과 말투, 당시 상황을 함께 고려해, 말 그대로의 의미와 상황 속에서 전달하려는 의도를 추론해 보도록 도울 수 있다.</p>
+<p>물론 모든 장황한 설명이나 또래 갈등을 화용언어의 어려움으로 설명할 수는 없다. 중요한 것은 아이의 행동을 성격이나 의지의 문제로 단정하기 전에 “이 아이는 친구들이 보내는 신호를 알아차렸을까?”, “상대방의 말과 행동에 담긴 감정과 의도를 이해했을까?”, “자신이 속상한 이유를 말로 설명할 수 있었을까?” 를 한 번 더 묻는 것이다.</p>
+<p>결국 화용언어를 지원한다는 것은 아이에게 정해진 ‘바른 말’을 가르치는 것이 아니다. 아이가 상황과 상대방의 의도를 이해하고, 자신의 생각과 감정을 그 상황에 맞는 방식으로 표현할 수 있도록 돕는 것이다. 겉으로 드러난 행동만을 보기보다 그 행동에 이르기까지 아이가 무엇을 이해했고 무엇을 놓쳤는지를 살펴볼 때, 교실에서 미처 발견하지 못했던 지원의 지점도 보이기 시작한다.</p>
+<h2 id="참고문헌">참고문헌</h2>
+<p>Adams, C. (2002). Practitioner review: The assessment of language pragmatics. Journal of Child Psychology and Psychiatry, 43(8), 973–987.</p>
+<p>Levinson, S. C. (1983). Pragmatics. Cambridge University Press.</p>
+<p>Norbury, C. F. (2014). Practitioner review: Social (pragmatic) communication disorder conceptualization, evidence and clinical implications. Journal of Child Psychology and Psychiatry, 55(3), 204–216.</p>
+
+    </div>
+    <div class="article-back-bar article-back-bottom" onclick="backToSection()">
+      <span class="back-arrow">&larr;</span> 제주교육소식 목록으로
+    </div>
+  </div>
+</div>
+<div id="article-jeju-news-지역사회-교육활동의-성과와-제언" class="view">
+  <div class="article-view">
+    <div class="article-back-bar" onclick="backToSection()">
+      <span class="back-arrow">&larr;</span> 제주교육소식 목록으로
+    </div>
+    <div class="article-header">
+      <div class="article-kicker">제주교육소식</div>
+      <h1 class="article-title">지역사회 교육활동의 성과와 제언</h1>
+      
+    </div>
+    <div class="article-body">
+      <div class="aside-block"><span><strong>김경주</strong></span>
+<span>박사</span></div>
+<div class="aside-block"><span>원고 준비 중입니다. (추석 전 제출 예정)</span></div>
+
+    </div>
+    <div class="article-back-bar article-back-bottom" onclick="backToSection()">
+      <span class="back-arrow">&larr;</span> 제주교육소식 목록으로
+    </div>
+  </div>
+</div>
+<div id="article-jeju-news-박사학위-취득-소감" class="view">
+  <div class="article-view">
+    <div class="article-back-bar" onclick="backToSection()">
+      <span class="back-arrow">&larr;</span> 제주교육소식 목록으로
+    </div>
+    <div class="article-header">
+      <div class="article-kicker">제주교육소식</div>
+      <h1 class="article-title">박사학위 취득 소감</h1>
+      
+    </div>
+    <div class="article-body">
+      <div class="aside-block"><span><strong>강한호</strong></span>
+<span>제주대학교</span>
+<span>박사</span></div>
+<div class="aside-block"><span>원고 준비 중입니다. (수합 완료로 기록돼 있으나 드라이브에 파일 없음 — 확인 필요)</span></div>
+
+    </div>
+    <div class="article-back-bar article-back-bottom" onclick="backToSection()">
+      <span class="back-arrow">&larr;</span> 제주교육소식 목록으로
+    </div>
+  </div>
+</div>
+<div id="article-activities-창립-59주년-기념행사-및-학술발표회" class="view">
+  <div class="article-view">
+    <div class="article-back-bar" onclick="backToSection()">
+      <span class="back-arrow">&larr;</span> 활동 소개 목록으로
+    </div>
+    <div class="article-header">
+      <div class="article-kicker">활동 소개</div>
+      <h1 class="article-title">창립 59주년 기념행사 및 학술발표회</h1>
+      
+    </div>
+    <div class="article-body">
+      <div class="author-card"><img src="images/b6f61e53_황현철_06.jpg" alt="황현철 프로필" loading="lazy"><div class="author-info"><span><strong>황현철</strong></span><span>제주영송학교</span><span>교사</span></div></div>
+<p>2026년 1월 23일(금) ‘거인의 정원’에서는 거인처럼 크지는 않지만 알찬 행사가 열렸습니다. 한국교육학회 제주지회 창립59주년을 기념하는 자리로, 제주지회 임원과 사무국, 여러 회원들이 함께하셨습니다. 이번 창립기념행사는 임시총회와 학술발표를 겸하면서도 제주지회의  여러 현안을 함께 다루는 의미 있는 자리가 되었습니다.</p>
+<p><img src="images/77ddb761_황현철_01.jpg" alt="image" loading="lazy"></p>
+<p><img src="images/9a799bf5_황현철_02.jpg" alt="image" loading="lazy"></p>
+<p>[사진설명= 창립행사가 진행된 거인의 정원(제주시 아라동 소재), 사진제공=사무국]</p>
+<p>준비하면서 고민이 되었던 지점은 2025년 창립58주년 행사였습니다. 지난 58주년을 생각하면 이번 행사는 또 다른 느낌의 행사임이 분명합니다. 58주년에는 정년퇴임하시는 김민호(전 제주지회장) 교수님의 퇴임식과 박사학위를 수여받은 신진학자들의 학술발표 함께 진행되었습니다. 이번 창립기념행사는 반대로 소박하면서도 실리를 추구하는 컨셉으로 진행되었습니다.  규모는 줄이되 내실은 높일 수 있는 방안을 찾는 것이 창립기념행사를 앞두고 사무국에 내려진 미션이었습니다.  결국 장소는 외부 대관으로 하되 대상은 임원과 스텝 및 참가 희망 회원으로 하고, 사업보고와 학술발표, 그리고 임시총회로 이어지는 순서로 진행키로 했습니다.</p>
+<p><img src="images/f6222819_황현철_03.jpg" alt="image" loading="lazy"></p>
+<p>[사진설명= 창립행사 진행 모습, 사진제공=사무국]</p>
+<p>행사에는 약15명 남짓의 회원이 모였지만 다뤄진 내용은 어느 때보다 풍성했습니다.  먼저 마을 탐방과 제주교육마루 발간, 공동학술대회, 창립기념행사로 이어지는 제주지회 4대 행사에 대한 사업 보고와 결산보고, 감사보고가 이어졌습니다. 이어 제주지회 운영과 관련된 다양한 주제들이 심도있게 논의 되며 향후 지회의 방향을 함께 모색하는 시간이 되었습니다.</p>
+<p><img src="images/ba3c5c0e_황현철_04.jpg" alt="image" loading="lazy"></p>
+<p>[사진설명= 양은별 교수의 학술발표 모습, 사진제공=사무국]</p>
+<p>이어서, 뉴스레터위원장인 제주대 양은별 교수의 학술발표가 진행되었습니다. 주제는 ‘학습경험의 과정과 구조에 대한 분석: LDX 관점에서의 데이터 기반 실증연구’로 교육공학 적 관점에서 학습경험을 바라보는 새로운 시각을 흥미롭게 발표해주셨습니다. 학술발표를 듣는 다른 회원도 큰 관심을 보였으며, 특히 인공지능( AI) 등을 활용한 다양한 교육방법이 확산되는 현시점에서 교육현장에 시사하는 바가 크다는 소감이 있었습니다. 이후 점심식사와 차담회로 이어졌으며 임시총회도 함께 진행되었습니다. 이번 임시총회에서는 수석부회장을 선임하기로 하고, 선임된 수석부회장께서 차년도 지회장을 자동으로 승계하는 내용을 담은 내용과 3개의 소위원회(교육공동체위원회(위원장 강은주), 상담교육위원회(위원장 박한샘), 영유아교육위원회(위원장 김은정))를 구성하여 기존 네트워크위원회(위원장 연준모), 사무국과 함께 활동을 강화하기로 결정하고 활성화 방안을 협의하였습니다. 앞으로의 제주지회 활동이 더 기대되는 부분입니다.</p>
+<p><img src="images/dcd678ee_황현철_05.jpg" alt="image" loading="lazy"></p>
+<p>[사진설명= 제주지회 창립59주년 기념행사 및 학술발표 기념단체 사진, 사진제공=사무국]</p>
+<p>우리 제주지회는 2027년 1월 창립60주년을 맞이합니다. 현재 한국교육학회 제주지회는 4개 대학 5개 캠퍼스가 함께하고 있습니다. 앞으로도 제주지회가 제주교육을 위하 다양한 활동을 지원하는 교류와 협력의 장이 되기를 소원합니다.</p>
+
+    </div>
+    <div class="article-back-bar article-back-bottom" onclick="backToSection()">
+      <span class="back-arrow">&larr;</span> 활동 소개 목록으로
+    </div>
+  </div>
+</div>
+<div id="article-activities-조천-마을탐방-항일-정신과-근대교육의-요람을-찾아서" class="view">
+  <div class="article-view">
+    <div class="article-back-bar" onclick="backToSection()">
+      <span class="back-arrow">&larr;</span> 활동 소개 목록으로
+    </div>
+    <div class="article-header">
+      <div class="article-kicker">활동 소개</div>
+      <h1 class="article-title">조천 마을탐방: 항일 정신과 근대교육의 요람을 찾아서</h1>
+      
+    </div>
+    <div class="article-body">
+      <p><em>― 한국교육학회 제주지회 「조천 마을탐방: 항일 정신과 근대교육의 요람을 찾아서」를 다녀와서</em></p>
+<div class="aside-block"><span><strong>양유정</strong></span>
+<span>한국교육학회 제주지회</span>
+<span>총무</span></div>
+<p>지난 4월 25일, 한국교육학회 제주지회 회원들과 함께 ‘항일 정신과 근대교육의 요람을 찾아서’라는 주제로 조천 마을을 걸었다. 이번 탐방은 초등학교 교장으로 퇴임한 뒤에도 오랫동안 제주 역사와 문화유산을 연구하고 현장에서 알려 온 흥사단 고영철 선생님의 안내로 진행되었다. 북촌초등학교와 너븐숭이, 조천 만세동산과 금대, 연북정으로 이어지는 길에서 평소 무심히 지나쳤던 장소들은 제주교육과 항일운동, 제주4·3의 기억이 살아 숨 쉬는 교육의 현장으로 새롭게 다가왔다.</p>
+<p><img src="images/cfd291ca_양유정_01.jpg" alt="image" loading="lazy"></p>
+<p>너븐숭이에서 고영철 선생님의 설명을 듣는 탐방 참가자들</p>
+<p><strong>마을이 함께 세운 학교, 다시 일으킨 배움</strong></p>
+<p>가장 먼저 찾은 북촌초등학교의 역사는 특히 인상 깊었다. 북촌의 근대교육은 1918년 문을 연 창흥사숙에서 시작되었다. ‘날로 번창한다’는 뜻을 지닌 창흥사숙에서는 한문뿐 아니라 산술, 조선어, 일본어, 창가, 도화 등 당시의 신학문을 가르쳤다고 한다. 상투를 자르고 삭발해야 입학할 수 있었다는 이야기는 새로운 시대를 향한 주민들의 결단과 교육적 열망이 얼마나 컸는지를 짐작하게 했다. 이후 주민들은 학교 설립을 위해 돈과 토지를 내놓았고, 해녀들은 공동 미역 작업에 참여했으며, 마을 사람들은 직접 건축에 힘을 보탰다. 오늘의 북촌초등학교는 그렇게 마을 전체가 함께 세운 학교였다.</p>
+<p>그러나 배움의 공간이었던 학교는 제주4·3의 과정에서 전혀 다른 의미의 장소가 되었다. 북촌초등학교 운동장은 주민들이 강제로 집결했던 곳이었고, 북촌마을은 수많은 주민이 희생되고 마을 전체가 불타는 참화를 겪었다. 첫 졸업생 배출을 앞둔 학교 역시 폐교되었다. 이어 찾은 너븐숭이와 애기무덤 앞에서는 글과 숫자로 접했던 역사가 한층 무겁게 다가왔다. 작은 돌무덤들을 바라보며 희생자 한 사람 한 사람에게도 가족과 일상, 그리고 이어졌어야 할 삶이 있었다는 사실을 다시 생각하게 되었다.</p>
+<p>그런 비극 속에서도 북촌의 교육은 사라지지 않았다. 주민들은 다시 흙과 돌을 나르고 노동력을 보태 학교를 재건했다. 삶의 터전과 가족을 잃은 상황에서도 학교부터 다시 세웠다는 사실은 교육이 북촌 사람들에게 어떤 의미였는지를 보여준다. 학교는 아이들이 공부하는 시설을 넘어, 무너진 공동체를 다시 일으켜 세우는 중심이자 미래를 포기하지 않겠다는 의지의 표현이었다.</p>
+<p><strong>배움이 항일의 실천으로 이어진 조천</strong></p>
+<p>조천에서 만난 또 하나의 중요한 역사는 항일운동이었다. 조천 만세동산에서는 1919년 3월 21일부터 24일까지 네 차례에 걸쳐 전개된 조천만세운동의 이야기를 들었다. 학생과 유림, 지역 주민들은 함께 태극기를 만들고 독립선언서를 낭독하며 대한독립만세를 외쳤다. 조천 지역의 높은 향학열과 신문화 수용, 사숙과 독서회관을 통한 교육은 지역민의 항일의식을 형성하는 중요한 기반이 되었다. 배움이 지식 습득에 머물지 않고 시대를 인식하며 공동체의 문제에 참여하는 힘으로 이어졌다는 점에서 조천의 교육사는 오늘에도 깊은 의미를 지닌다.</p>
+<p><img src="images/62b292a1_양유정_02.jpg" alt="image" loading="lazy"></p>
+<p>조천만세운동 기념탑 앞에서 항일운동의 역사를 되새기는 탐방 참가자들</p>
+<p>탐방의 마지막에 찾은 연북정 역시 그러한 교육의 흐름을 품고 있었다. 본래 제주와 육지를 잇는 관문의 역할을 했던 이곳에는 1906년 사립 의흥학교가 들어섰다. 주민들의 의연금으로 운영된 의흥학교에서는 한문과 일본어를 비롯한 신학문과 새로운 기술을 가르쳤고, 이곳에서 공부한 청년들 가운데 여러 사람이 이후 국권회복운동에 참여하였다. 특히 김명식·홍두표·고순흠이 연북정에서 송·매·죽처럼 변절하지 않겠다는 뜻을 세우고 항일의 의지를 다졌다는 이야기는 교육이 삶의 태도와 실천으로 확장되는 모습을 생생하게 보여주었다.</p>
+<p><strong>지역을 걷는 일이 교육이 될 때</strong></p>
+<p>무엇보다 이번 탐방에서 새삼 느낀 것은 현장을 걷는 교육의 힘이었다. 오랫동안 제주역사기행과 문화유산 답사를 이끌어 온 고영철 선생님의 설명은 연도와 사건을 전달하는 데 그치지 않았다. 돌 하나, 학교 터 하나, 마을길 하나에 얽힌 사람들의 이야기를 들려주었고, 그 이야기를 따라가며 우리는 장소와 역사를 함께 읽을 수 있었다. 교육을 연구하는 사람에게 이러한 경험은 ‘지역이 곧 하나의 교과서’가 될 수 있음을 다시 확인하게 한다.</p>
+<p>짧은 시간이었지만 조천의 길에서는 근대교육, 항일운동, 제주4·3, 그리고 공동체의 회복이 하나의 흐름으로 이어졌다. 배우고자 했던 사람들이 시대를 인식하고 행동했으며, 폭력으로 공동체가 무너진 뒤에도 주민들은 다시 학교를 세웠다. 결국 이날 조천에서 만난 교육의 역사는 학교 제도의 역사가 아니라, 더 나은 삶과 공동체를 포기하지 않았던 사람들의 역사였다.</p>
+<p>조천의 길을 돌아 나오며 한 가지 질문이 오래 남았다. 우리는 지역의 이러한 기억을 다음 세대에게 어떻게 가르치고 전할 것인가. 제주교육의 미래를 이야기하기 위해서는 먼저 우리가 서 있는 땅에 어떤 배움과 저항, 아픔과 회복의 역사가 쌓여 있는지를 아는 일부터 필요하지 않을까. 이번 조천 마을탐방은 제주교육의 과거를 찾아간 시간이면서, 동시에 오늘의 교육이 무엇을 기억하고 이어가야 하는지를 다시 생각하게 한 시간이었다.</p>
+<p><img src="images/e0dd05b5_양유정_03.jpg" alt="image" loading="lazy"></p>
+<p>조천의 역사 현장에서 함께한 한국교육학회 제주지회 회원들</p>
+
+    </div>
+    <div class="article-back-bar article-back-bottom" onclick="backToSection()">
+      <span class="back-arrow">&larr;</span> 활동 소개 목록으로
+    </div>
+  </div>
+</div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-item">
+        <label>발행처</label>
+        <span>한국교육학회 제주지회</span>
+      </div>
+      <div class="footer-item">
+        <label>발행인</label>
+        <span>이인회</span>
+      </div>
+      <div class="footer-item">
+        <label>편집위원</label>
+        <span>양은별</span>
+      </div>
+      <div class="footer-item">
+        <label>주소</label>
+        <span>제주대학교 아라캠퍼스<br>사범대학 2호관 1312호</span>
+      </div>
+      <div class="footer-item">
+        <label>카페</label>
+        <a href="https://cafe.naver.com/kerajeju" target="_blank" rel="noopener">한국교육학회 제주지회 카페 &rarr;</a>
+      </div>
+    </div>
+    <hr class="footer-divider">
+    <div class="feedback-box">
+      <p style="margin-bottom:1.2rem;">이번 뉴스레터 어떠셨나요? 여러분의 생각과 의견을 기다립니다. 소중한 의견을 메일로 보내주시면 다음 호에 적극 반영하겠습니다.</p>
+      <div class="footer-contact-grid">
+        <div class="footer-contact-item">
+          <label>뉴스레터 문의</label>
+          <span><a href="mailto:e.yang@jejunu.ac.kr">e.yang@jejunu.ac.kr</a> (제주대학교 양은별)</span>
+        </div>
+        <div class="footer-contact-item">
+          <label>뉴스레터 후원</label>
+          <span>(농협) 302-2028-2520-51  이인회(제주지회)</span>
+        </div>
+      </div>
+    </div>
+    <hr class="footer-divider">
+    <p class="footer-copy">&copy; 2026 한국교육학회 제주지회. All rights reserved.</p>
+  </div>
+</footer>
+
+<a href="#" class="back-top" aria-label="맨 위로">&uarr;</a>
+
+<script>
+// 3-level drill-down navigation
+// Level 1: top tabs  - view-{id}   (shows section card with card-list or full content)
+// Level 2: card list - article-{sectionId}-{subId}  (shows article view)
+// Level 3: article   - back button returns to level 2
+
+var _currentSection = 'intro';
+
+// Show a level-1 view (section index or intro)
+function showSection(id) {
+  document.querySelectorAll('.view').forEach(function(v) { v.classList.remove('active'); });
+  var view = document.getElementById('view-' + id);
+  if (view) view.classList.add('active');
+  _currentSection = id;
+
+  // Update nav active state
+  document.querySelectorAll('.toc-list a').forEach(function(a) { a.classList.remove('active'); });
+  var link = document.querySelector('.toc-list a[data-section="' + id + '"]');
+  if (link) link.classList.add('active');
+
+  // Show/hide hero banner vs calligraphy
+  var heroImg = document.querySelector('.masthead-hero-img');
+  var calligraphy = document.querySelector('.masthead-calligraphy');
+  if (heroImg) heroImg.style.display = (id === 'intro') ? '' : 'none';
+  if (calligraphy) calligraphy.style.display = (id === 'intro') ? 'none' : 'block';
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Show a level-3 article within a section
+function showArticle(sectionId, subId) {
+  // Hide the section view
+  document.querySelectorAll('.view').forEach(function(v) { v.classList.remove('active'); });
+
+  // Show the article view
+  var art = document.getElementById('article-' + sectionId + '-' + subId);
+  if (art) {
+    art.classList.add('active');
+    _currentSection = sectionId;
+    var heroImg = document.querySelector('.masthead-hero-img');
+    if (heroImg) heroImg.style.display = 'none';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+// Back from article to section list
+function backToSection() {
+  showSection(_currentSection);
+}
+
+// Nav click handlers
+document.querySelectorAll('.toc-list a').forEach(function(a) {
+  a.addEventListener('click', function(e) {
+    e.preventDefault();
+    var sectionId = a.getAttribute('data-section');
+    if (sectionId) showSection(sectionId);
+  });
+});
+
+// Show intro by default
+showSection('intro');
+</script>
+</body>
+</html>

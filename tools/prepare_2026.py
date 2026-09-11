@@ -39,6 +39,7 @@ DOCX = [
     dict(file="조천_마을탐방_뉴스레터_원고_양유정 (4) (1).docx", slug="활동소개_양유정",
          title_from_body=True),
     dict(file="뉴스레터 원고_템플릿 _창립기념행사_황현철.docx", slug="활동소개_황현철"),
+    dict(file="뉴스레터 원고_강한호.docx", slug="제주교육소식_강한호"),
 ]
 
 HWPX = [
@@ -64,9 +65,6 @@ PENDING = [
     dict(slug="제주교육소식_김경주", title="지역사회 교육활동의 성과와 제언",
          name="김경주", affil="", role="박사",
          note="추석 전 제출 예정"),
-    dict(slug="제주교육소식_강한호", title="박사학위 취득 소감",
-         name="강한호", affil="제주대학교", role="박사",
-         note="수합 완료로 기록돼 있으나 드라이브에 파일 없음 — 확인 필요"),
     dict(slug="회원동정", title="회원 동정", name="", affil="", role="",
          note="연구비 수주(고전·연준모·박정환), 저서 발간(연준모), "
               "보직(강동호), 학위 취득 — 조사 예정"),
@@ -83,14 +81,30 @@ def parse_meta(md):
     return meta
 
 
+# 템플릿이 두 종류다.
+#   (가) "# 실제 제목"            — 제목을 H1에 바로 쓴 원고
+#   (나) "## 제목" 다음 줄에 제목 — 템플릿의 항목 이름을 그대로 둔 원고
+TITLE_HEADING = re.compile(r"^#{1,3}\s*제목\s*$", re.M)
+
+
 def parse_title(md):
+    """(제목, 본문 시작 위치)를 돌려준다."""
+    m = TITLE_HEADING.search(md)
+    if m:
+        tail = md[m.end():]
+        for line in tail.split("\n"):
+            if line.strip():
+                cut = m.end() + tail.index(line) + len(line)
+                return line.strip().strip("*").strip(), cut
     m = re.search(r"^#\s+(.*)$", md, re.M)
-    return m.group(1).strip() if m else ""
+    if m:
+        return m.group(1).strip(), m.end()
+    return "", 0
 
 
 def split_body(md):
-    m = re.search(r"^#\s+.*$", md, re.M)
-    body = md[m.end():] if m else md
+    _, cut = parse_title(md)
+    body = md[cut:] if cut else md
     body = re.sub(r"^\|.*\|\s*$\n?", "", body, flags=re.M)
     body = re.sub(r"^\|-+\|.*$\n?", "", body, flags=re.M)
 
@@ -176,7 +190,7 @@ def main():
         raw, images = docx_convert(src, SUB, spec["slug"].split("_")[-1])
         meta = parse_meta(raw)
         body, prof = split_body(raw)
-        title = parse_title(raw)
+        title, _ = parse_title(raw)
         subtitle = ""
 
         if spec.get("title_from_body"):

@@ -877,6 +877,22 @@ nav.site-nav {
     color: rgba(255,255,255,0.7);
     padding: 1rem 1.5rem 0.5rem;
     background: var(--green-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.85rem;
+}
+/* 호수는 지면에서 가장 먼저 눈에 들어와야 한다 — 호끼리 헷갈리지 않게 */
+.masthead-eyebrow .mh-since { color: rgba(255,255,255,0.55); }
+.masthead-eyebrow .mh-issue {
+    color: var(--white);
+    font-size: 1.02rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    border: 1px solid rgba(255,255,255,0.45);
+    border-radius: 999px;
+    padding: 0.22rem 0.85rem;
+    line-height: 1.3;
 }
 .masthead-calligraphy {
     background: var(--green-dark);
@@ -1739,7 +1755,7 @@ def build_html(toc_html, intro_html, sections_html, article_views_html, hero_img
 <!-- MASTHEAD -->
 <header class="masthead" role="banner">
   <div class="masthead-inner">
-    <div class="masthead-eyebrow">{SINCE} &#183; {NEWSLETTER_SUBTITLE}</div>
+    <div class="masthead-eyebrow"><span class="mh-since">{SINCE}</span><span class="mh-issue">{COPYRIGHT_YEAR} &#183; {NEWSLETTER_SUBTITLE}</span></div>
     {hero}
     <div class="masthead-calligraphy" style="display:none;"><img src="images/calligraphy-white.png" alt="제주교육마루"></div>
     <div class="masthead-meta">

@@ -44,6 +44,9 @@ def main():
     ap.add_argument("--out", default=None, help="출력 파일")
     ap.add_argument("--max-px", type=int, default=1000, help="이미지 긴 변 최대")
     ap.add_argument("--quality", type=int, default=78, help="JPEG 품질")
+    ap.add_argument("--flat", action="store_true",
+                    help="탭을 없애고 모든 꼭지를 이어 펼친 평면본. "
+                         "자바스크립트를 걷어내므로 메신저 내장 뷰어에서도 열린다")
     args = ap.parse_args()
 
     src_dir = REPO / args.src
@@ -85,6 +88,32 @@ def main():
         '검토본입니다 · 아직 발간되지 않았습니다 · 외부 공유를 삼가 주십시오'
         '</div>')
     html = re.sub(r'(<body[^>]*>)', r'\1' + banner, html, count=1)
+
+    if args.flat:
+        # 스크립트를 걷어내고 모든 꼭지를 이어 펼친다.
+        # 탭이 동작하지 않는 환경(메신저 내장 뷰어)에서도 전부 읽히게 하는 것이 목적.
+        html = re.sub(r'<script\b[^>]*>.*?</script>', '', html, flags=re.DOTALL)
+
+        # 탭은 지우지 않고 앵커 목차로 바꾼다 — 스크립트 없이도 눌러서 이동한다.
+        def to_anchor(m):
+            before, section = m.group(1), m.group(2)
+            return f'<a{before}href="#view-{section}" data-section="{section}"'
+        html = re.sub(
+            r'<a([^>]*?)href="#"([^>]*?)data-section="([^"]+)"',
+            lambda m: f'<a{m.group(1)}href="#view-{m.group(3)}"{m.group(2)}'
+                      f'data-section="{m.group(3)}"',
+            html)
+
+        flat_css = (
+            '<style>'
+            '.view { display: block !important; scroll-margin-top: 7rem; }'
+            '.article-back-bar { display: none !important; }'
+            '.back-top { display: none !important; }'
+            '.masthead-calligraphy { display: block !important; }'
+            # 3만 픽셀짜리 문서라 부드러운 스크롤은 느리기만 하다 — 즉시 이동한다
+            'html { scroll-behavior: auto !important; }'
+            '</style>')
+        html = html.replace('</head>', flat_css + '</head>', 1)
 
     out.write_text(html, encoding="utf-8")
     size = out.stat().st_size / 1024 / 1024

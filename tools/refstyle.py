@@ -89,11 +89,24 @@ def sort_key(entry):
     return (0 if HANGUL.match(first) else 1, padded)
 
 
-def normalize_section(body):
+def replace_section(body, entries):
+    """참고문헌 절을 주어진 항목들로 통째로 갈아끼운다.
+
+    PI가 확인해 준 확정본을 넣을 때 쓴다. 자동 정리를 거치지 않는다.
+    """
+    m = HEADING.search(body)
+    before = body[:m.start()].rstrip() if m else body.rstrip()
+    items = [l.strip() for l in entries.strip().split("\n") if l.strip()]
+    return before + "\n\n## 참고문헌\n\n" + "\n\n".join(items) + "\n"
+
+
+def normalize_section(body, drop=None):
     """본문에서 참고문헌 절을 찾아 통일한다.
 
+    drop: 이 문구가 들어 있는 항목은 빼라고 지정된 것들(PI 확인 사항).
     (새 본문, 리포트) 를 돌려준다. 참고문헌이 없으면 원본 그대로.
     """
+    drop = drop or []
     m = HEADING.search(body)
     if not m:
         return body, None
@@ -120,8 +133,13 @@ def normalize_section(body):
         seen.add(e)
         unique.append(e)
 
+    # 빼기로 지정된 항목 제거
+    removed = [e for e in unique if any(d in e for d in drop)]
+    unique = [e for e in unique if e not in removed]
+
     unique.sort(key=sort_key)
 
     new_body = before + "\n\n## 참고문헌\n\n" + "\n\n".join(unique) + "\n"
-    report = {"count": len(unique), "dropped": dropped, "dupes": dupes}
+    report = {"count": len(unique), "dropped": dropped,
+              "dupes": dupes, "removed": removed}
     return new_body, report

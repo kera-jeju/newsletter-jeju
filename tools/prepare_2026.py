@@ -40,7 +40,8 @@ DOCX = [
     dict(file="조천_마을탐방_뉴스레터_원고_양유정 (4) (1).docx", slug="활동소개_양유정",
          title_from_body=True),
     dict(file="뉴스레터 원고_템플릿 _창립기념행사_황현철.docx", slug="활동소개_황현철"),
-    dict(file="뉴스레터 원고_강한호.docx", slug="제주교육소식_강한호"),
+    dict(file="뉴스레터 원고_강한호.docx", slug="제주교육소식_강한호",
+         photo_crop=(35, 0, 145, 110)),   # 세로 사진 — 얼굴이 원 중앙에 오게
 ]
 
 HWPX = [
@@ -54,6 +55,30 @@ HWPX = [
          name="고의숙", affil="제주특별자치도교육청", role="교육감",
          drop_first=1),
 ]
+
+# --------------------------------------------------------------------------
+# PI 확인을 거친 참고문헌 확정본 — 자동 정리를 거치지 않고 그대로 쓴다.
+# (주론은 원본 hwpx의 필드가 깨져 학술지 정보가 겹쳐 있었다. 2026-09-11 PI 확인)
+# --------------------------------------------------------------------------
+REF_OVERRIDE = {
+    "주론_이인회": """
+김봉종(1993). 제주지회의 성장. 한국교육학회 편. 교육탐구의 세월: 한국교육학회 40년사(pp. 413-416). 서울: 교육과학사.
+김일방(2021). ‘제주이해교육’의 실태 분석 및 미래 발전방안. 교육과학연구, 23(2), 39-63.
+송성대, 김정숙, 진관훈, 강만익, 정지훈(2023). 제주문화의 원류 해민정신. 제주: 각.
+양진건(1991). 제주교육행정사. 제주: 경신인쇄사.
+유홍준(2012). 나의 문화유산답사기: 돌하르방 어디 감수광. 경기: 창비.
+이인회(2023). 제주교육학 정립의 필요성에 대한 탐색적 연구: 학교 현장 전문가 심층면담을 중심으로. 교육과학연구, 25(4), 1-26.
+제주교육학연구회(2022). 지역교육학으로서 제주교육학은 가능한가? 2022 제주교육학 3차 포럼 자료집, 57.
+한국교육학회(1973). 한국교육학회 20년사: 1953.4.4.~1973.4.4. 서울: 대광인쇄공사.
+현용준(1986). 제주도 무속연구. 서울: 집문당.
+""",
+}
+
+# 빼기로 한 항목 — 항목에 이 문구가 들어 있으면 제외한다.
+# (전새미: 7월 6일 기사와 같은 사안인데 출처 URL이 비어 있어 중복으로 판단. PI 확인)
+REF_DROP = {
+    "제주교육소식_전새미": ["제주대-조지아공대 글로벌 런케이션 캡스톤 프로그램 성료"],
+}
 
 # 미제출 원고 — 자리(placeholder)만 만들어 레이아웃에서 보이게 한다
 PENDING = [
@@ -143,7 +168,34 @@ def lift_title_from_body(body):
     return title, sub, "\n".join(rest).strip()
 
 
+def crop_square(path, box):
+    """프로필 사진을 지정 영역으로 잘라 정사각형으로 만든다.
+
+    세로로 긴 사진은 원형 틀에서 얼굴이 위로 몰린다. 얼굴을 감싸는
+    정사각형으로 미리 잘라두면 원 중앙에 얼굴이 온다.
+    """
+    from PIL import Image
+    im = Image.open(path)
+    mode = im.mode
+    im = im.crop(box)
+    side = min(im.size)
+    im = im.crop((0, 0, side, side))
+    im.convert(mode).save(path)
+
+
+# hwp·워드에서 넘어오는 방점(U+302E/302F)은 대부분 글꼴에 없어 ○ 로 보인다.
+# 구분 기호로 쓰인 것이므로 가운뎃점으로 바꾼다.
+TONE_MARKS = {"〮": "·", "〯": "·"}
+
+
+def clean_text(s):
+    for bad, good in TONE_MARKS.items():
+        s = s.replace(bad, good)
+    return re.sub(r"\s*·\s*", " · ", s).strip() if "·" in s else s.strip()
+
+
 def author_block(name, affil, role, profile_img=None):
+    name, affil, role = clean_text(name), clean_text(affil), clean_text(role)
     if not name:
         return ""
     p = ["<aside>"]
@@ -204,9 +256,19 @@ def main():
         if not title or "제목을 적어" in title:
             title = spec.get("title_override") or "(제목 미정)"
 
-        body, ref = refstyle.normalize_section(body)
+        if spec["slug"] in REF_OVERRIDE:
+            body = refstyle.replace_section(body, REF_OVERRIDE[spec["slug"]])
+            ref = {"count": 0, "dropped": [], "dupes": [], "removed": [],
+                   "override": True}
+        else:
+            body, ref = refstyle.normalize_section(
+                body, drop=REF_DROP.get(spec["slug"]))
         if ref:
             ref_notes.append((spec["slug"], ref))
+
+        if prof and spec.get("photo_crop"):
+            crop_square(SUB / prof, spec["photo_crop"])
+
         author = author_block(meta.get("필자", ""), meta.get("소속", ""),
                               meta.get("직함", ""), prof)
         write_md(spec["slug"], title, author, body, subtitle)
@@ -228,7 +290,13 @@ def main():
                 continue
             kept.append(l)
         body = "\n".join(kept).strip()
-        body, ref = refstyle.normalize_section(body)
+        if spec["slug"] in REF_OVERRIDE:
+            body = refstyle.replace_section(body, REF_OVERRIDE[spec["slug"]])
+            ref = {"count": 0, "dropped": [], "dupes": [], "removed": [],
+                   "override": True}
+        else:
+            body, ref = refstyle.normalize_section(
+                body, drop=REF_DROP.get(spec["slug"]))
         if ref:
             ref_notes.append((spec["slug"], ref))
         author = author_block(spec["name"], spec["affil"], spec["role"])
@@ -278,11 +346,16 @@ def main():
     if ref_notes:
         print("\n참고문헌 형식 통일")
         for slug, r in ref_notes:
+            if r.get("override"):
+                print(f"  {slug:<22} PI 확정본 적용")
+                continue
             line = f"  {slug:<22} {r['count']}항목"
             if r["dupes"]:
                 line += f" · 중복 {len(r['dupes'])}건 제거"
             if r["dropped"]:
                 line += f" · 참고문헌 아닌 줄 {len(r['dropped'])}건 제외"
+            if r.get("removed"):
+                line += f" · 빼기로 한 항목 {len(r['removed'])}건 제외"
             print(line)
             for d in r["dropped"]:
                 print(f"      제외: {d[:60]}")

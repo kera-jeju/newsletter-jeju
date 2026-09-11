@@ -41,7 +41,10 @@ DOCX = [
          title_from_body=True),
     dict(file="뉴스레터 원고_템플릿 _창립기념행사_황현철.docx", slug="활동소개_황현철"),
     dict(file="뉴스레터 원고_강한호.docx", slug="제주교육소식_강한호",
-         photo_crop=(35, 0, 145, 110)),   # 세로 사진 — 얼굴이 원 중앙에 오게
+         photo_crop=(35, 0, 145, 110),    # 세로 사진 — 얼굴이 원 중앙에 오게
+         # 원고에는 '교사'로만 적혀 있으나 이번 호 회원 동정에 박사학위 취득이
+         # 함께 실리므로 직함에 박사를 덧붙였다. (PI 확인 2026-09-11)
+         role_override="교사 · 교육학박사"),
 ]
 
 HWPX = [
@@ -159,31 +162,39 @@ STATIC = [
 2026년 제주대학교 대학원 교육학과에서 박사학위를 취득하신 분들입니다. 축하드립니다.
 
 <aside>
-**박사학위논문**
-**학교 밖 청소년의 회복탄력성 증진을 위한 현실치료 기반 집단상담 프로그램 개발 및 효과**
+강윤심 박사
+지도교수 최보영
+2026. 2.
+---
+학교 밖 청소년의 회복탄력성 증진을 위한 현실치료 기반 집단상담 프로그램 개발 및 효과
 (Development and Effectiveness of a Reality Therapy-Based Group Counseling Program to Enhance Resilience in Out-of-School Youth)
-**강윤심 박사 (지도교수 최보영) / 2026. 2.**
 </aside>
 
 <aside>
-**박사학위논문**
-**상담심리학과 교육공학 전문가의 융합적 실천 과정**
+이승록 박사
+지도교수 박정환
+2026. 8.
+---
+상담심리학과 교육공학 전문가의 융합적 실천 과정
 (The Convergent Practice Process of Counseling Psychology Professionals and Educational Technology)
-**이승록 박사 (지도교수 박정환) / 2026. 8.**
 이 연구는 상담심리학과 교육공학을 한 실천 안에서 함께 수행해 온 전문가들이 두 전문성의 경계에서 겪는 위기와 정체성의 재구성 과정을 근거이론으로 규명한다. 융합적 실천 전문가 15명을 면담한 결과, 그 한가운데에는 ‘전문성 경계 위기’가 놓여 있었다. 이 위기는 능력의 부족이 아니라 충분한 숙련 끝에 자기 전문성의 구조적 한계를 자각할 때 비로소 나타났으며, 위기를 학습으로 밀고 간 동력은 외적 보상이 아니라 과거에 충분히 돕지 못한 대상에 대한 윤리적 책임감이었다. 융합적 실천은 자각기·결단기·학습기·통합기·결말기의 다섯 단계를 거치며, 양쪽 어디에도 온전히 속하지 못하는 ‘경계인’의 자리를 약점이 아니라 양쪽을 함께 조망하는 강점으로 다시 읽을 때 ‘통합자’로의 전환이 일어났다. 연구는 융합을 지식의 양적 결합이 아니라 전문가의 존재 방식이 바뀌는 과정으로 재개념화하고, 두 논리가 한 실천 안에서 부딪히고 재구성되는 현상을 다루는 새로운 탐구 영역으로 ‘상담공학’의 가능성을 제안한다.
 </aside>
 
 <aside>
-**박사학위논문**
-**대학상담센터 상담자의 심리적 소진과 회복 경험에 관한 근거이론적 접근**
-**양순미 박사 (지도교수 김성봉) / 2026. 8.**
+양순미 박사
+지도교수 김성봉
+2026. 8.
+---
+대학상담센터 상담자의 심리적 소진과 회복 경험에 관한 근거이론적 접근
 </aside>
 
 <aside>
-**박사학위논문**
-**지역사회 기반 대안학교 설립·운영 사례연구 : ‘광명YMCA 볍씨학교’를 중심으로**
+강한호 박사
+지도교수 이인회
+2026. 8.
+---
+지역사회 기반 대안학교 설립·운영 사례연구 : ‘광명YMCA 볍씨학교’를 중심으로
 (A Case Study of the Establishment and Operation of a Community-Based Alternative School: Focusing on Gwangmyeong YMCA Byeopssi School)
-**강한호 박사 (지도교수 이인회) / 2026. 8.**
 이 연구는 지역사회 기반 대안학교인 광명YMCA 볍씨학교가 설립된 때부터 현재에 이르기까지의 전개 과정을 사례연구로 추적한다. 학교는 공동 의사결정 구조와 지역사회 기반 시민참여형 교육과정을 갖추며 출발하였고, 지역사회 상호작용 및 확장기(2007~2017)를 거치면서 학부모와 학생이 학교 운영과 공동체 생활, 자립의 경험을 통해 교육의 주체로 성장하였다. 연구는 학교와 지역사회의 관계가 자원을 활용하거나 일방적으로 지원하는 차원을 넘어, 공동의 교육적 가치를 중심으로 서로의 역할과 의미를 다시 세우는 ‘공존적 관계’로 형성되어 왔음을 밝힌다. 관계 재구성기(2018~현재)에는 학생 수 감소와 재정·제도의 한계로 기존 관계망이 도전에 직면하였으나, 학교는 그 속에서 지역사회 기반 대안교육의 정당성을 다시 물으며 관계와 운영 방식을 새롭게 짜고 있었다. 이는 지역사회 기반 대안학교의 지속가능성이 변화하는 조건 속에서 관계를 재구성하는 역량에 의해 형성됨을 보여준다.
 </aside>
 """),
@@ -332,6 +343,22 @@ def lift_title_from_body(body):
     return title, sub, "\n".join(rest).strip()
 
 
+# '1. 제주지회의 3가지 전환점' 처럼 번호가 붙은 소제목.
+# 그대로 두면 마크다운이 번호 목록으로 읽어 각 항목이 따로 <ol>이 되고,
+# 화면에는 1. 1. 1. 로 나온다. 소제목으로 올려 번호를 글자 그대로 살린다.
+NUM_HEADING = re.compile(r"^(\d{1,2}\.\s+\S.{1,38})$", re.M)
+
+
+def promote_numbered_headings(body):
+    def repl(m):
+        line = m.group(1).strip()
+        # 문장이면 소제목이 아니다
+        if line.endswith(("다.", "요.", "까?", "다", "음.")):
+            return m.group(0)
+        return f"## {line}"
+    return NUM_HEADING.sub(repl, body)
+
+
 def crop_square(path, box):
     """프로필 사진을 지정 영역으로 잘라 정사각형으로 만든다.
 
@@ -434,7 +461,8 @@ def main():
             crop_square(SUB / prof, spec["photo_crop"])
 
         author = author_block(meta.get("필자", ""), meta.get("소속", ""),
-                              meta.get("직함", ""), prof)
+                              spec.get("role_override") or meta.get("직함", ""),
+                              prof)
         write_md(spec["slug"], title, author, body, subtitle)
         rows.append((spec["slug"], "수합", len(body), len(images), title))
 
@@ -453,7 +481,7 @@ def main():
                 dropped += 1
                 continue
             kept.append(l)
-        body = "\n".join(kept).strip()
+        body = promote_numbered_headings("\n".join(kept).strip())
         if spec["slug"] in REF_OVERRIDE:
             body = refstyle.replace_section(body, REF_OVERRIDE[spec["slug"]])
             ref = {"count": 0, "dropped": [], "dupes": [], "removed": [],

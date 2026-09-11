@@ -1084,6 +1084,74 @@ main {
     box-shadow: 0 2px 10px rgba(0,0,0,.12);
 }
 
+/* -- DEGREE CARD (박사학위 취득: 좌 사람 · 우 논문) -- */
+.degree-card {
+    display: flex;
+    gap: 1.5rem;
+    background: var(--gray-light);
+    border: 1px solid var(--gray-mid);
+    border-radius: var(--radius-card);
+    padding: 1.25rem 1.5rem;
+    margin: 1rem 0;
+}
+.degree-card .dc-person {
+    flex: 0 0 9.5rem;
+    border-right: 1px solid var(--gray-mid);
+    padding-right: 1.25rem;
+}
+.degree-card .dc-person span {
+    display: block;
+    font-size: 0.92rem;
+    color: var(--gray-text);
+    line-height: 1.6;
+}
+.degree-card .dc-person span:first-child {
+    font-weight: 700;
+    font-size: 1.12rem;
+    color: var(--green-dark);
+    margin-bottom: 0.3rem;
+}
+.degree-card .dc-thesis { flex: 1; min-width: 0; }
+.degree-card .dc-thesis span {
+    display: block;
+    font-size: 0.95rem;
+    color: var(--black);
+    line-height: 1.7;
+}
+.degree-card .dc-thesis span:first-child {
+    font-weight: 700;
+    font-size: 1.02rem;
+    line-height: 1.5;
+    margin-bottom: 0.2rem;
+}
+.degree-card .dc-thesis span + span { margin-top: 0.45rem; }
+@media (max-width: 620px) {
+    .degree-card { flex-direction: column; gap: 0.9rem; }
+    .degree-card .dc-person {
+        flex: none;
+        border-right: none;
+        border-bottom: 1px solid var(--gray-mid);
+        padding-right: 0;
+        padding-bottom: 0.8rem;
+    }
+}
+
+/* -- TABLE CAPTION (표 바로 위에 붙는 제목) -- */
+/* 본문 문단 규칙(.article-body p 등)보다 뒤에 오도록 선택자를 강하게 둔다 */
+p.table-caption,
+.article-body p.table-caption,
+.section-content p.table-caption {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #444;
+    text-align: center;
+    font-family: var(--font-ui);
+    margin-top: 1.6rem;
+    margin-bottom: 0.3rem;
+    line-height: 1.5;
+}
+p.table-caption + .table-wrap { margin-top: 0; }
+
 /* -- FIGURE CAPTIONS -- */
 .figure-caption {
     font-size: 0.85rem;
@@ -1945,6 +2013,18 @@ def build(src_root, out_dir):
         r'<p><code>(&lt;표\s*\d+&gt;[^<]*|<표[^<]*|\[그림\s*\d+\][^<]*)</code></p>',
         r'<p class="figure-caption">\1</p>', html)
 
+    # 표 바로 앞에 놓인 <…> 꼴의 한 줄은 표 제목이다.
+    # 꺾쇠를 이스케이프하고, 표에 바짝 붙는 캡션으로 만든다.
+    def table_caption(m):
+        # 저자가 쓴 꺾쇠를 그대로 살린다 (<제주지회의 주요 전환점과 특징>)
+        text = escape_html(m.group(1).strip())
+        return (f'<p class="table-caption">&lt;{text}&gt;</p>\n'
+                '<div class="table-wrap">')
+
+    html = re.sub(
+        r'<p>\s*(?:&lt;|<)([^<>\n]{2,60})(?:&gt;|>)\s*</p>\s*<div class="table-wrap">',
+        lambda m: table_caption(m), html)
+
     # --- 6. Split title fixes ----------------------------------------------
     # Notion sometimes splits long headings across an <h1> and a following <p>.
     # Remove the duplicated fragments (the real title is already in the section header).
@@ -1993,6 +2073,27 @@ def build(src_root, out_dir):
         return html_text
 
     html = convert_author_cards(html)
+
+    # 박사학위 취득: <hr>로 나뉜 aside를 좌(사람)·우(논문) 두 칸 카드로 만든다.
+    def convert_degree_cards(html_text):
+        def rebuild(m):
+            inner = m.group(1)
+            if '<hr>' not in inner:
+                return m.group(0)
+            left, right = inner.split('<hr>', 1)
+            return ('<div class="degree-card">'
+                    f'<div class="dc-person">{left.strip()}</div>'
+                    f'<div class="dc-thesis">{right.strip()}</div></div>')
+
+        def in_article(am):
+            return re.sub(r'<div class="aside-block">(.*?)</div>',
+                          rebuild, am.group(0), flags=re.DOTALL)
+
+        return re.sub(
+            r'id="article-member-박사학위-취득".*?(?=id="article-|id="view-)',
+            in_article, html_text, flags=re.DOTALL)
+
+    html = convert_degree_cards(html)
 
     # Split single-span "이름 (소속)" into separate name + affiliation spans
     def split_author_name(m):

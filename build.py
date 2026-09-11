@@ -26,6 +26,10 @@ NEWSLETTER_TITLE = "한국교육학회 제주지회 뉴스레터"
 NEWSLETTER_SUBTITLE = "재창간호"
 PUBLICATION_DATE = "2025년 10월 15일"
 COPYRIGHT_YEAR = "2025"
+
+# 검토 공개(unlisted preview) 여부. --preview 로 켠다.
+# 켜면 검색엔진 수집을 막고, 지면 맨 위에 검토본 띠를 붙인다.
+PREVIEW = False
 SINCE = "Since 1993"
 PUBLISHER = "한국교육학회 제주지회"
 PUBLISHER_NAME = "이인회"
@@ -1153,6 +1157,16 @@ main {
     }
 }
 
+.preview-bar {
+    background: #8a1c1c;
+    color: #fff;
+    font-family: var(--font-ui);
+    font-size: 0.92rem;
+    padding: 0.7rem 1rem;
+    text-align: center;
+    letter-spacing: 0.01em;
+}
+
 /* -- NEWS CARD (회원 소식: 좌 사진 · 우 소식) -- */
 .news-card {
     display: flex;
@@ -1735,6 +1749,11 @@ showSection('intro');
 # ---------------------------------------------------------------------------
 
 def build_html(toc_html, intro_html, sections_html, article_views_html, hero_img_src):
+    PREVIEW_META = ('<meta name="robots" content="noindex, nofollow">'
+                    + chr(10) + '  ' if PREVIEW else '')
+    PREVIEW_BANNER = (
+        '<div class="preview-bar">검토본입니다 &#183; 아직 발간되지 않았습니다 '
+        '&#183; 외부 공유를 삼가 주십시오</div>' if PREVIEW else '')
     hero = ''
     if hero_img_src:
         hero = f'<div class="masthead-hero-img"><img src="{hero_img_src}" alt="뉴스레터 헤더 이미지"></div>'
@@ -1748,7 +1767,7 @@ def build_html(toc_html, intro_html, sections_html, article_views_html, hero_img
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
   <meta name="description" content="{NEWSLETTER_TITLE} {NEWSLETTER_SUBTITLE} {PUBLICATION_DATE}">
-  <title>{NEWSLETTER_TITLE} | {NEWSLETTER_SUBTITLE}</title>
+  {PREVIEW_META}<title>{NEWSLETTER_TITLE} | {NEWSLETTER_SUBTITLE}</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;900&family=Noto+Sans+KR:wght@400;600;700&display=swap" rel="stylesheet">
@@ -1763,7 +1782,7 @@ def build_html(toc_html, intro_html, sections_html, article_views_html, hero_img
   </style></noscript>
 </head>
 <body>
-
+{PREVIEW_BANNER}
 <!-- NAVIGATION -->
 <nav class="site-nav" role="navigation" aria-label="목차">
   <div class="nav-inner">
@@ -2387,12 +2406,17 @@ def main():
                         help='Source directory (Notion export root)')
     parser.add_argument('--out', default=DEFAULT_OUT,
                         help='Output directory')
+    parser.add_argument('--preview', action='store_true',
+                        help='검토 공개용으로 빌드한다 — 검색엔진 수집 차단 + 검토본 띠')
     parser.add_argument('--config', default=None,
                         help='연도별 설정 파일 (예: config_2026.py). '
                              '생략하면 2025년 재창간호 기준 기본값을 쓴다.')
     args = parser.parse_args()
     if args.config:
         apply_config(args.config)
+    if args.preview:
+        globals()['PREVIEW'] = True
+        print('  Preview: 검색엔진 수집 차단 + 검토본 띠')
     build(args.src, args.out)
 
 

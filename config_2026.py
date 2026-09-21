@@ -41,6 +41,7 @@ SECTIONS = [
         'icon': '',
         'color': '#1a5c35',
         'file_key': '',
+        'show_author': True,   # 카드 목록에도 필자 이름을 보인다
         'subsections': [
             {'title': '하와이 몰로카이 주민의 선택과 ‘지속가능한 생활양식’ 교육',
              'file_key': '시론_김민호'},
@@ -55,6 +56,7 @@ SECTIONS = [
         'icon': '',
         'color': '#52b788',
         'file_key': '',
+        'show_author': True,   # 카드 목록에도 필자 이름을 보인다
         'subsections': [
             {'title': '성읍마을에서 만난 작은 주인공들',
              'file_key': '제주교육소식_홍지환'},

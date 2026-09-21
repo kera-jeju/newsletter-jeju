@@ -588,6 +588,33 @@ def extract_metadata(md):
     return meta, '\n'.join(clean)
 
 
+# 원고 첫머리의 저자 블록에서 필자 이름만 뽑는다.
+#   <aside>
+#   ![홍지환 프로필](images/…)   ← 사진은 없을 수도 있다
+#   **홍지환**                    ← 이 줄
+#   제주대학교 / 학생 …
+#   </aside>
+# 회원 동정처럼 저자 글이 아닌 aside(**강동호 조교수 (제주대 …)**)를 잘못 집지
+# 않도록, 괄호나 직함이 붙지 않은 짧은 이름만 인정한다.
+AUTHOR_IN_ASIDE = re.compile(r"<aside>(.*?)</aside>", re.DOTALL)
+
+
+def extract_author(md):
+    m = AUTHOR_IN_ASIDE.search(md)
+    if not m:
+        return ""
+    block = m.group(1)
+    if "---" in block:          # 회원 동정 카드는 사진과 본문을 ---로 나눈다
+        return ""
+    nm = re.search(r"\*\*([^*]+)\*\*", block)
+    if not nm:
+        return ""
+    name = nm.group(1).strip()
+    if len(name) > 12 or any(c in name for c in "()（）,·"):
+        return ""
+    return name
+
+
 def build_section_html(section, all_files):
     """Build level-2 section view (card list or direct content) and all level-3 article views.
     Returns (section_view_html, article_views_html).
@@ -657,10 +684,18 @@ def build_section_html(section, all_files):
             # Card in card list (level-2)
             subtitle_span = (f'<div class="sub-subtitle">{escape_html(meta_label)}</div>'
                              if meta_label else '')
+            # 필자 이름을 목록에서도 보이게 한다 (config 의 show_author 로 켠다).
+            # 본문 첫머리 저자 블록에만 있어 목록에서는 누가 쓴 글인지 알 수 없었다.
+            author_span = ''
+            if section.get('show_author'):
+                author = extract_author(sub_md)
+                if author:
+                    author_span = f'<div class="sub-author">{escape_html(author)}</div>'
             card_parts.append(f'''<button class="sub-card" onclick="showArticle('{sid}','{sub_id}')" type="button">
   <div class="sub-card-body">
     <div class="sub-title">{escape_html(sub_title)}</div>
     {subtitle_span}
+    {author_span}
   </div>
   <span class="sub-card-arrow">&rarr;</span>
 </button>''')
@@ -1451,6 +1486,14 @@ tr:hover td { background: var(--green-faint); }
     color: var(--gray-text);
     margin-top: 0.2rem;
     line-height: 1.5;
+}
+.sub-author {
+    font-family: var(--font-ui);
+    font-size: 0.82rem;
+    color: var(--green-mid);
+    margin-top: 0.28rem;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
 }
 .sub-card-arrow {
     color: var(--green-light);

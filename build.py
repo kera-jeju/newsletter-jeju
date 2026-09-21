@@ -68,8 +68,15 @@ def register_image(md_file_path, url_encoded_path):
         return _image_registry[abs_path]
 
     # Create a stable filename: hash prefix + sanitized original name
+    #
+    # 해시는 '파일 내용'으로 짓는다. 예전에는 절대경로로 지었는데, 그러면
+    # 저장소를 다른 기기에 받아 빌드할 때마다 이름이 전부 달라져 같은 사진이
+    # 여러 벌 쌓이고 커밋 차이가 크게 났다. (2026-09-21)
     orig_name = Path(decoded).name
-    h = hashlib.md5(abs_path.encode('utf-8')).hexdigest()[:8]
+    try:
+        h = hashlib.md5(Path(abs_path).read_bytes()).hexdigest()[:8]
+    except OSError:
+        h = hashlib.md5(abs_path.encode('utf-8')).hexdigest()[:8]
     # Sanitize: replace spaces and special chars
     safe_name = re.sub(r'[^\w._-]', '_', orig_name)
     local_name = f"{h}_{safe_name}"

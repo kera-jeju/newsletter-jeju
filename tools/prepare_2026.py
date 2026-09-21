@@ -512,6 +512,17 @@ def promote_numbered_headings(body):
     return NUM_HEADING.sub(repl, body)
 
 
+# '■ 정책보다 사람이 먼저다' 처럼 네모 기호로 소제목을 표시한 원고가 있다.
+# 그대로 두면 본문 문단으로 흘러 절의 층이 보이지 않고, 기호도 글꼴에 따라
+# 깨져 보인다. 소제목으로 올리면 다른 원고와 같은 초록 굵은 글씨가 된다.
+# (PI 2026-09-21)
+BULLET_HEADING = re.compile(r"^[\u25a0\u25aa\u25c6\u25cf]\s*(\S.{0,60})$", re.M)
+
+
+def promote_bullet_headings(body):
+    return BULLET_HEADING.sub(lambda m: "## " + m.group(1).strip(), body)
+
+
 # '가. 초기 저항과 토지 접근권 투쟁' / '1) 미 연방정부로부터의 자율성' 처럼
 # 한글 순서 기호·괄호 번호가 붙은 하위 소제목. 그대로 두면 본문 문단으로 흘러
 # 절의 층이 보이지 않는다.
@@ -709,6 +720,8 @@ def main():
             title = spec["title_override"]
         if not title or "제목을 적어" in title:
             title = spec.get("title_override") or "(제목 미정)"
+
+        body = promote_bullet_headings(body)
 
         if spec["slug"] in REF_OVERRIDE:
             body = refstyle.replace_section(body, REF_OVERRIDE[spec["slug"]])

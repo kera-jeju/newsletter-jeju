@@ -701,7 +701,9 @@ def build_section_html(section, all_files):
             # 필자 이름을 목록에서도 보이게 한다 (config 의 show_author 로 켠다).
             # 본문 첫머리 저자 블록에만 있어 목록에서는 누가 쓴 글인지 알 수 없었다.
             author_span = ''
-            if section.get('show_author'):
+            # card_author 를 직접 적어 준 꼭지는 그 절에 show_author 가 없어도 보인다
+            # (활동 소개처럼 저자 글과 안내 지면이 섞인 절에서 쓴다).
+            if sub.get('card_author') or section.get('show_author'):
                 # 원고마다 소속 표기가 제각각이라(제주대학교 / 제주대학교 대학원
                 # 교육학과 …) 목록에서는 편집자가 정한 표기로 맞출 수 있게 한다.
                 # 본문 저자 블록은 원고 그대로 둔다. (PI 2026-09-21)

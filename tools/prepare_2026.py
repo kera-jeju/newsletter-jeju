@@ -16,9 +16,31 @@ from docx2md import convert as docx_convert     # noqa: E402
 from hwpx2md import convert as hwpx_convert     # noqa: E402
 import refstyle                                 # noqa: E402
 
-# 원고 원본이 모여 있는 폴더. 구글 드라이브 '2026 제주지회 뉴스레터'에서
-# 내려받은 docx/hwpx를 한곳에 모아두고 --src 로 지정한다.
-DL = Path(os.environ.get("NEWSLETTER_SRC", Path.home() / "Downloads"))
+# 원고 원본이 모여 있는 폴더 — 구글 드라이브의 '2026 제주지회 뉴스레터'.
+# 기기마다 드라이브 마운트 위치가 달라 차례로 찾는다. --src 나 NEWSLETTER_SRC
+# 환경변수로 덮어쓸 수 있다.
+DRIVE_FOLDER = "2026 제주지회 뉴스레터"
+
+
+def _find_drive():
+    env = os.environ.get("NEWSLETTER_SRC")
+    if env:
+        return Path(env)
+    home = Path.home()
+    cands = [
+        Path("G:/내 드라이브") / DRIVE_FOLDER,                    # Windows
+        home / "Library/CloudStorage" / "GoogleDrive-yangbyul2@gmail.com"
+             / "내 드라이브" / DRIVE_FOLDER,                       # macOS
+        home / "Google Drive/내 드라이브" / DRIVE_FOLDER,
+        home / "Downloads",
+    ]
+    for c in cands:
+        if c.exists():
+            return c
+    return home / "Downloads"
+
+
+DL = _find_drive()
 REPO = Path(__file__).resolve().parent.parent
 OUT = REPO / "_src2026"
 SUB = OUT / "한국교육학회 제주지회 뉴스레터"
@@ -36,8 +58,8 @@ DOCX = [
     dict(file="뉴스레터 원고 (전새미).docx", slug="제주교육소식_전새미",
          title_from_body=True),
     dict(file="뉴스레터 원고_홍지오.docx", slug="제주교육소식_홍지오"),
-    dict(file="석진아_뉴스레터 원고_템플릿 (1).docx", slug="제주교육소식_석진아"),
-    dict(file="조천_마을탐방_뉴스레터_원고_양유정 (4) (1).docx", slug="활동소개_양유정",
+    dict(file="석진아_뉴스레터 원고_템플릿.docx", slug="제주교육소식_석진아"),
+    dict(file="조천_마을탐방_뉴스레터_원고_양유정 (4).docx", slug="활동소개_양유정",
          title_from_body=True),
     # 이 글은 사무국장으로서 쓴 행사 기록이다. 같은 절의 양유정(제주지회 총무)과
     # 같은 꼴로 맞춘다 — 원고의 '제주영송학교 / 교사'는 싣지 않는다.
@@ -445,6 +467,27 @@ PENDING = [
 
 
 # --------------------------------------------------------------------------
+def find_src(filename):
+    """원고 폴더에서 파일을 찾는다.
+
+    드라이브는 00_발간사 / 01_주론 / 03_제주교육소식 … 으로 나뉘어 있어
+    하위 폴더까지 뒤진다. 내려받을 때 붙는 ' (1)' 꼬리표도 떼고 찾아본다.
+    """
+    p = DL / filename
+    if p.exists():
+        return p
+    hits = sorted(DL.rglob(filename))
+    if hits:
+        return hits[0]
+    stem, dot, ext = filename.rpartition(".")
+    bare = re.sub(r"(\s*\(\d+\))+$", "", stem).strip()
+    if bare and bare != stem:
+        hits = sorted(DL.rglob(bare + dot + ext))
+        if hits:
+            return hits[0]
+    return None
+
+
 def parse_meta(md):
     meta = {}
     for key in ("필자", "소속", "직함"):
@@ -610,11 +653,6 @@ def join_reference_lines(body):
     return head + "\n" + "\n".join(merged) + "\n"
 
 
-# 구글 드라이브의 뉴스레터 폴더 — 인물 사진이 여기 모여 있다.
-PHOTO_DIR = Path(os.environ.get(
-    "NEWSLETTER_PHOTOS", r"G:\내 드라이브\2026 제주지회 뉴스레터"))
-
-
 def add_photo(filename, slug, box, src=None):
     """인물 사진을 잘라 소스 트리에 넣고 상대경로를 돌려준다.
 
@@ -622,8 +660,8 @@ def add_photo(filename, slug, box, src=None):
     지난 호에 필자가 직접 보내 실린 사진을 다시 쓸 때.
     """
     from PIL import Image
-    src = Path(src) if src else PHOTO_DIR / filename
-    if not src.exists():
+    src = Path(src) if src else find_src(filename)
+    if not src or not src.exists():
         return None
     img_dir = SUB / "images"
     img_dir.mkdir(parents=True, exist_ok=True)
@@ -721,8 +759,8 @@ def main():
     for spec in DOCX:
         if skip(spec["slug"]):
             continue
-        src = DL / spec["file"]
-        if not src.exists():
+        src = find_src(spec["file"])
+        if not src:
             rows.append((spec["slug"], "없음", 0, 0, ""))
             continue
         raw, images = docx_convert(src, SUB, spec["slug"].split("_")[-1])
@@ -766,8 +804,8 @@ def main():
     for spec in HWPX:
         if skip(spec["slug"]):
             continue
-        src = DL / spec["file"]
-        if not src.exists():
+        src = find_src(spec["file"])
+        if not src:
             rows.append((spec["slug"], "없음", 0, 0, ""))
             continue
         raw, images = hwpx_convert(src, SUB, spec["slug"].split("_")[-1])
@@ -859,8 +897,8 @@ def main():
         out_img.mkdir(parents=True, exist_ok=True)
         for src_name, dst_name in [("배너.jpg", "banner.jpg"),
                                    ("로고.png", "logo.png")]:
-            s = DL / src_name
-            if s.exists():
+            s = find_src(src_name)      # 배너_이미지/ 하위에 있다
+            if s:
                 shutil.copy2(s, out_img / dst_name)
         # 캘리그래피는 드라이브 원본에 투명 격자가 박혀 있어 2025년 확정본을 쓴다
         for name in ["calligraphy-white.png", "calligraphy-white-v2.png"]:

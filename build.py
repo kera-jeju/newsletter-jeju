@@ -1583,6 +1583,55 @@ tr:hover td { background: var(--green-faint); }
     margin-top: 0.2rem;
     line-height: 1.5;
 }
+/* -- 신간 안내: 표지를 왼편에 (PI 2026-09-21) -- */
+.book-card {
+    display: flex;
+    gap: 1.3rem;
+    align-items: flex-start;
+    background: var(--gray-light);
+    border: 1px solid var(--gray-mid);
+    border-radius: var(--radius);
+    padding: 1.3rem 1.5rem;
+    margin: 1rem 0 1.4rem;
+}
+.bc-cover { flex: 0 0 104px; }
+.bc-cover img {
+    width: 104px !important;
+    max-width: 104px !important;
+    height: auto;
+    display: block;
+    border-radius: 3px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.18);
+    margin: 0 !important;
+}
+.bc-body { flex: 1; min-width: 0; }
+.bc-body span { display: block; }
+.bc-body span:first-child {
+    font-family: var(--font-ui);
+    font-weight: 700;
+    font-size: 1.04rem;
+    color: var(--green-dark);
+    margin-bottom: 0.3rem;
+    word-break: keep-all;
+}
+.bc-body span + span {
+    font-size: 0.88rem;
+    color: var(--gray-text);
+    line-height: 1.6;
+}
+.bc-body span:last-child {
+    font-size: 0.93rem;
+    color: #3d4753;
+    line-height: 1.8;
+    margin-top: 0.7rem;
+    word-break: keep-all;
+}
+@media (max-width: 620px) {
+    .book-card { gap: 1rem; padding: 1.1rem 1.1rem; }
+    .bc-cover { flex: 0 0 76px; }
+    .bc-cover img { width: 76px !important; max-width: 76px !important; }
+}
+
 /* -- 시론: 앞부분 발췌 + 더 읽기 (PI 2026-09-21) --
    주론은 전문, 제주교육소식은 제목만. 지면마다 드러나는 정도를 달리한다. */
 .excerpt-list {
@@ -2373,6 +2422,22 @@ def build(src_root, out_dir):
         return html_text
 
     html = convert_author_cards(html)
+
+    # 신간 안내: 표지가 든 aside를 좌(표지)·우(서지·소개) 두 칸 카드로 만든다.
+    def convert_book_cards(html_text):
+        def rebuild(m):
+            img_tag, rest = m.group(1), m.group(2)
+            rest = rest.replace("<hr>", "")
+            return ('<div class="book-card">'
+                    f'<div class="bc-cover">{img_tag}</div>'
+                    f'<div class="bc-body">{rest.strip()}</div>'
+                    '</div>')
+        return re.sub(
+            r'<div class="aside-block"><span>(<img[^>]*alt="[^"]*표지[^"]*"[^>]*>)</span>\s*'
+            r'((?:<span>.*?</span>|<hr>|\s)+)</div>',
+            rebuild, html_text, flags=re.DOTALL)
+
+    html = convert_book_cards(html)
 
     # 박사학위 취득: <hr>로 나뉜 aside를 좌(사람)·우(논문) 두 칸 카드로 만든다.
     def convert_degree_cards(html_text):

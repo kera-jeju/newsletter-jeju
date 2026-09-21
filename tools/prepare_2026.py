@@ -119,6 +119,14 @@ HWPX = [
 [사진설명= Maui County Council member Keani Rawlins-Fernandez holds the gate while a National Park Service ranger tries to open it Thursday, 사진 출처=Courtesy: Walter Ritte(2026), Civil Beat(2026)에서 재인용]"""),
 ]
 
+# 신간 안내에 싣는 책 표지. 인물 사진과 달리 정사각으로 자르지 않고 그대로 옮긴다.
+# 출처는 알라딘 상품 이미지(2026-09-21 내려받음). ★ 출판사 제공본을 받으면 교체.
+BOOK_COVERS = [
+    "책표지_태극도와서명도.jpg",
+    "책표지_놀이와유아교육.jpg",
+    "책표지_오늘의교육내일의교육정책.jpg",
+]
+
 # 회원 소식에 넣을 인물 사진 — 얼굴이 원 중앙에 오도록 자른다.
 NEWS_PHOTOS = [
     ("강동호", "강동호 교수.jpg", (18, 0, 132, 114)),
@@ -382,6 +390,7 @@ STATIC = [
 회원들의 새 저서를 소개합니다.
 
 <aside>
+![태극도와 서명도 표지](images/책표지_태극도와서명도.jpg)
 **태극도와 서명도** — 성학십도 2
 **서명석** 저 / 책인숲 / 2026년 2월 출간
 ---
@@ -389,6 +398,7 @@ STATIC = [
 </aside>
 
 <aside>
+![놀이와 유아교육 표지](images/책표지_놀이와유아교육.jpg)
 **놀이와 유아교육**
 신은수 · **김은정** · 유영의 · 박현경 · 백경순 저 / 학지사
 2011년 초판 · **2026년 개정판 출간 예정**
@@ -397,6 +407,7 @@ STATIC = [
 </aside>
 
 <aside>
+![오늘의 교육 내일의 교육정책 표지](images/책표지_오늘의교육내일의교육정책.jpg)
 **오늘의 교육 내일의 교육정책**
 박수정 · 김용 · 엄문영 · **이인회** · 이희숙 · 차성현 · 한은정 저 / 학지사
 2021년 초판 · 전자책 2025년 4월 · **2026년 개정판 출간 예정**
@@ -842,6 +853,16 @@ def main():
         author = author_block(spec["name"], spec["affil"], spec["role"], prof)
         write_md(spec["slug"], spec["title"], author, body)
         rows.append((spec["slug"], "수합", len(body), len(images), spec["title"]))
+
+    # ---- 신간 안내 책 표지 ----
+    if not skip("회원동정_신간안내"):
+        (SUB / "images").mkdir(parents=True, exist_ok=True)
+        for name in BOOK_COVERS:
+            c = find_src(name)
+            if c:
+                shutil.copy2(c, SUB / "images" / name)
+            else:
+                print(f"  ! 표지 없음: {name}")
 
     # ---- 회원 소식 인물 사진 ----
     for slug, fname, box in NEWS_PHOTOS:

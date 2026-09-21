@@ -726,6 +726,55 @@ tr:hover td { background: var(--green-faint); }
     margin-top: 0.2rem;
     line-height: 1.5;
 }
+/* -- 신간 안내: 표지를 왼편에 (PI 2026-09-21) -- */
+.book-card {
+    display: flex;
+    gap: 1.3rem;
+    align-items: flex-start;
+    background: var(--gray-light);
+    border: 1px solid var(--gray-mid);
+    border-radius: var(--radius);
+    padding: 1.3rem 1.5rem;
+    margin: 1rem 0 1.4rem;
+}
+.bc-cover { flex: 0 0 104px; }
+.bc-cover img {
+    width: 104px !important;
+    max-width: 104px !important;
+    height: auto;
+    display: block;
+    border-radius: 3px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.18);
+    margin: 0 !important;
+}
+.bc-body { flex: 1; min-width: 0; }
+.bc-body span { display: block; }
+.bc-body span:first-child {
+    font-family: var(--font-ui);
+    font-weight: 700;
+    font-size: 1.04rem;
+    color: var(--green-dark);
+    margin-bottom: 0.3rem;
+    word-break: keep-all;
+}
+.bc-body span + span {
+    font-size: 0.88rem;
+    color: var(--gray-text);
+    line-height: 1.6;
+}
+.bc-body span:last-child {
+    font-size: 0.93rem;
+    color: #3d4753;
+    line-height: 1.8;
+    margin-top: 0.7rem;
+    word-break: keep-all;
+}
+@media (max-width: 620px) {
+    .book-card { gap: 1rem; padding: 1.1rem 1.1rem; }
+    .bc-cover { flex: 0 0 76px; }
+    .bc-cover img { width: 76px !important; max-width: 76px !important; }
+}
+
 /* -- 시론: 앞부분 발췌 + 더 읽기 (PI 2026-09-21) --
    주론은 전문, 제주교육소식은 제목만. 지면마다 드러나는 정도를 달리한다. */
 .excerpt-list {
@@ -1726,20 +1775,20 @@ footer {
     </div>
     <div class="article-body">
       <p>회원들의 새 저서를 소개합니다.</p>
-<div class="aside-block"><span><strong>태극도와 서명도</strong> — 성학십도 2</span>
+<div class="book-card"><div class="bc-cover"><img src="images/8d00aaec_책표지_태극도와서명도.jpg" alt="태극도와 서명도 표지" loading="lazy"></div><div class="bc-body"><span><strong>태극도와 서명도</strong> — 성학십도 2</span>
 <span><strong>서명석</strong> 저 / 책인숲 / 2026년 2월 출간</span>
-<hr>
-<span>퇴계 이황의 『성학십도』를 풀어 읽는 연속 작업의 두 번째 권이다. 『성학십도』 제1도 태극도(太極圖)와 제2도 서명도(西銘圖)를 다룬다.</span></div>
-<div class="aside-block"><span><strong>놀이와 유아교육</strong></span>
+
+<span>퇴계 이황의 『성학십도』를 풀어 읽는 연속 작업의 두 번째 권이다. 『성학십도』 제1도 태극도(太極圖)와 제2도 서명도(西銘圖)를 다룬다.</span></div></div>
+<div class="book-card"><div class="bc-cover"><img src="images/ac83f19f_책표지_놀이와유아교육.jpg" alt="놀이와 유아교육 표지" loading="lazy"></div><div class="bc-body"><span><strong>놀이와 유아교육</strong></span>
 <span>신은수 · <strong>김은정</strong> · 유영의 · 박현경 · 백경순 저 / 학지사</span>
 <span>2011년 초판 · <strong>2026년 개정판 출간 예정</strong></span>
-<hr>
-<span>놀이 이론, 놀이와 유아 발달, 놀이의 교육적 적용을 다룬다. 이론 연구와 현장 연구를 함께 엮어 유아교육에서 놀이가 갖는 의미를 짚는다.</span></div>
-<div class="aside-block"><span><strong>오늘의 교육 내일의 교육정책</strong></span>
+
+<span>놀이 이론, 놀이와 유아 발달, 놀이의 교육적 적용을 다룬다. 이론 연구와 현장 연구를 함께 엮어 유아교육에서 놀이가 갖는 의미를 짚는다.</span></div></div>
+<div class="book-card"><div class="bc-cover"><img src="images/7d4f6563_책표지_오늘의교육내일의교육정책.jpg" alt="오늘의 교육 내일의 교육정책 표지" loading="lazy"></div><div class="bc-body"><span><strong>오늘의 교육 내일의 교육정책</strong></span>
 <span>박수정 · 김용 · 엄문영 · <strong>이인회</strong> · 이희숙 · 차성현 · 한은정 저 / 학지사</span>
 <span>2021년 초판 · 전자책 2025년 4월 · <strong>2026년 개정판 출간 예정</strong></span>
-<hr>
-<span>주요 교육정책 이슈를 소개하고 함께 생각할 주제를 던지는 책이다. 학교제도와 교육과정, 교육재정, 학교교육 체제, 교육자치와 참여의 네 부분으로 나누어 오늘의 교육을 짚고 내일의 정책 방향을 묻는다.</span></div>
+
+<span>주요 교육정책 이슈를 소개하고 함께 생각할 주제를 던지는 책이다. 학교제도와 교육과정, 교육재정, 학교교육 체제, 교육자치와 참여의 네 부분으로 나누어 오늘의 교육을 짚고 내일의 정책 방향을 묻는다.</span></div></div>
 <div class="aside-block"><span>서지사항을 알려주시면 이 자리에 함께 싣습니다.</span></div>
 
     </div>

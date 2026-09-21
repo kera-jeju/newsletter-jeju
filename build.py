@@ -703,8 +703,11 @@ def build_section_html(section, all_files):
             sub_html = md_to_html(sub_md, sub_file)
 
             # Card in card list (level-2)
-            subtitle_span = (f'<div class="sub-subtitle">{escape_html(meta_label)}</div>'
-                             if meta_label else '')
+            # 부제 자리는 원래 노션 메타에서만 채워졌다. config 에 card_date 를
+            # 적어 두면 그 자리에 행사 날짜가 온다 (필자 줄 위). (PI 2026-09-21)
+            card_label = sub.get('card_date') or meta_label
+            subtitle_span = (f'<div class="sub-subtitle">{escape_html(card_label)}</div>'
+                             if card_label else '')
             # 필자 이름을 목록에서도 보이게 한다 (config 의 show_author 로 켠다).
             # 본문 첫머리 저자 블록에만 있어 목록에서는 누가 쓴 글인지 알 수 없었다.
             author_span = ''

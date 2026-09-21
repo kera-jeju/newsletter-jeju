@@ -171,6 +171,23 @@ nav.site-nav {
     width: 100%;
     line-height: 0;
 }
+/* 넓은 모니터에서 배너가 화면을 다 덮어 아래 발간사가 보이지 않았다.
+   캘리그래피가 사진 안에 박혀 있어 세로로 자르면 글씨가 잘리므로,
+   자르지 않고 본문 폭까지만 키운다. 모바일은 그대로 꽉 채운다.
+   (PI 2026-09-21) */
+@media (min-width: 641px) {
+    /* 배너 자체는 화면 끝까지 두어 좌우 여백이 위아래 초록 띠와 이어지게 하고,
+       사진만 줄인다. 배너는 2.22:1이라 폭을 89vh로 묶으면 높이가 화면의 40%를
+       넘지 않아, 세로가 짧은 노트북에서도 아래 발간사가 첫 화면에 걸린다. */
+    .masthead-hero-img {
+        background: var(--green-dark);
+        text-align: center;
+    }
+    .masthead-hero-img img {
+        max-width: min(var(--max-width), 89vh);
+        margin: 0 auto;
+    }
+}
 .masthead-hero-img img {
     width: 100%;
     height: auto;

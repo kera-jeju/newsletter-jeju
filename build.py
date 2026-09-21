@@ -600,19 +600,33 @@ AUTHOR_IN_ASIDE = re.compile(r"<aside>(.*?)</aside>", re.DOTALL)
 
 
 def extract_author(md):
+    """'홍지환 (제주대학교 박사과정)' 꼴로 돌려준다.
+
+    저자 블록의 짜임은 [이름, 소속, 직함]이지만 원고마다 줄 수가 다르다.
+    소속 없이 직함만 있는 원고(김경주)는 직함만 괄호에 넣는다.
+    """
     m = AUTHOR_IN_ASIDE.search(md)
     if not m:
         return ""
     block = m.group(1)
     if "---" in block:          # 회원 동정 카드는 사진과 본문을 ---로 나눈다
         return ""
-    nm = re.search(r"\*\*([^*]+)\*\*", block)
+    lines = [l.strip() for l in block.splitlines() if l.strip()]
+    lines = [l for l in lines if not l.startswith("![")]
+    if not lines:
+        return ""
+    nm = re.match(r"\*\*([^*]+)\*\*$", lines[0])
     if not nm:
         return ""
     name = nm.group(1).strip()
     if len(name) > 12 or any(c in name for c in "()（）,·"):
         return ""
-    return name
+    # 남은 줄이 소속·직함이다. '제주대학교 / 교육학과'처럼 슬래시로 끊어 적은
+    # 원고가 있어 공백으로 고른다.
+    detail = " ".join(lines[1:])
+    detail = re.sub(r"\s*/\s*", " ", detail)
+    detail = re.sub(r"\s{2,}", " ", detail).strip()
+    return "%s (%s)" % (name, detail) if detail else name
 
 
 def build_section_html(section, all_files):

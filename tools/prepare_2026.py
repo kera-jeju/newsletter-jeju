@@ -66,6 +66,12 @@ HWPX = [
          name="김민호", affil="제주대학교", role="명예교수",
          drop_first=2,
          sub_headings=True,     # 가./나./다. 와 1)/2)/3) 을 소제목으로 올린다
+         # 이번 원고에는 필자 사진이 오지 않았다. 2025년 재창간호의 필자 글
+         # 「강단을 떠나, 교육을 품다」 저자 카드에 실렸던 사진을 다시 쓴다 —
+         # 필자가 직접 보내 이미 지면에 실린 사진이다. ★ 재사용 확인 권장,
+         # 최근 사진을 받으면 교체.
+         photo_path="2025/images/99ec5b63_image.png",
+         photo_crop=(0, 0, 250, 250),
          # 원고의 절 번호가 '시작하며 / 2 / 3 / 3 / 4. 나오며'로 3이 두 번이다.
          # 1~5로 이어지도록 고쳤다. ★ 필자 확인 필요.
          heading_fix=[
@@ -511,10 +517,14 @@ PHOTO_DIR = Path(os.environ.get(
     "NEWSLETTER_PHOTOS", r"G:\내 드라이브\2026 제주지회 뉴스레터"))
 
 
-def add_photo(filename, slug, box):
-    """드라이브의 인물 사진을 잘라 소스 트리에 넣고 상대경로를 돌려준다."""
+def add_photo(filename, slug, box, src=None):
+    """인물 사진을 잘라 소스 트리에 넣고 상대경로를 돌려준다.
+
+    기본 출처는 드라이브의 뉴스레터 폴더다. src 를 주면 그 파일을 쓴다 —
+    지난 호에 필자가 직접 보내 실린 사진을 다시 쓸 때.
+    """
     from PIL import Image
-    src = PHOTO_DIR / filename
+    src = Path(src) if src else PHOTO_DIR / filename
     if not src.exists():
         return None
     img_dir = SUB / "images"
@@ -685,8 +695,11 @@ def main():
         if ref:
             ref_notes.append((spec["slug"], ref))
         prof = None
-        if spec.get("photo"):
-            prof = add_photo(spec["photo"], spec["slug"], spec.get("photo_crop"))
+        if spec.get("photo") or spec.get("photo_path"):
+            prof = add_photo(spec.get("photo"), spec["slug"],
+                             spec.get("photo_crop"),
+                             src=REPO / spec["photo_path"]
+                             if spec.get("photo_path") else None)
         author = author_block(spec["name"], spec["affil"], spec["role"], prof)
         write_md(spec["slug"], spec["title"], author, body)
         rows.append((spec["slug"], "수합", len(body), len(images), spec["title"]))

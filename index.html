@@ -75,7 +75,23 @@
       font-weight: 700;
       color: #1a5c35;
       margin-bottom: 0.3rem;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
     }
+    /* 발간 전 회람 중인 호. 10/1 발간하면 이 배지와 .issue-card--draft 를 뺀다. */
+    .issue-badge {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #8a1f1f;
+      background: #fbe9e9;
+      border: 1px solid #f0cccc;
+      border-radius: 999px;
+      padding: 0.15rem 0.6rem;
+      white-space: nowrap;
+    }
+    .issue-card--draft { border-left-color: #b03a3a; }
     .issue-info p {
       font-size: 0.85rem;
       color: #888;
@@ -109,6 +125,14 @@
 
   <div class="content">
     <h2>발간 목록</h2>
+    <!-- 최신 호가 위로 온다. 다음 호는 이 자리에 issue-card 를 하나 더 얹는다. -->
+    <a class="issue-card issue-card--draft" href="2026/">
+      <div class="issue-info">
+        <h3>제2호 <span class="issue-badge">검토 중</span></h3>
+        <p>2026년 10월 1일 발간 예정 &middot; 회원 회람본</p>
+      </div>
+      <span class="issue-arrow">&rarr;</span>
+    </a>
     <a class="issue-card" href="2025/">
       <div class="issue-info">
         <h3>재창간호</h3>
@@ -116,11 +140,10 @@
       </div>
       <span class="issue-arrow">&rarr;</span>
     </a>
-    <!-- 다음 호 추가 시 여기에 issue-card 추가 -->
   </div>
 
   <div class="footer">
-    <p>&copy; 2025 한국교육학회 제주지회 &middot; <a href="https://cafe.naver.com/kerajeju">카페 바로가기</a></p>
+    <p>&copy; 2026 한국교육학회 제주지회 &middot; <a href="https://cafe.naver.com/kerajeju">카페 바로가기</a></p>
   </div>
 </body>
 </html>

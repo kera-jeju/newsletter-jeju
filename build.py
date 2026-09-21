@@ -1583,6 +1583,10 @@ footer {
 .footer-contact-item a:hover { color: var(--green-pale); }
 .footer-divider { border: none; border-top: 1px solid rgba(255,255,255,0.12); margin: 1.25rem 0; }
 .footer-copy { font-size: 0.77rem; opacity: 0.45; }
+/* 호에서 발간 목록으로 돌아가는 길. 없으면 한 번 들어온 독자가 다른 호로 못 간다. */
+.footer-archive { font-size: 0.8rem; margin-bottom: 0.5rem; }
+.footer-archive a { color: rgba(255,255,255,0.75); text-decoration: none; }
+.footer-archive a:hover { color: #fff; text-decoration: underline; }
 .feedback-box {
     background: rgba(255,255,255,0.06);
     border-radius: var(--radius);
@@ -1859,6 +1863,7 @@ def build_html(toc_html, intro_html, sections_html, article_views_html, hero_img
       </div>
     </div>
     <hr class="footer-divider">
+    <p class="footer-archive"><a href="../">&larr; 지난 호 보기 (발간 목록)</a></p>
     <p class="footer-copy">&copy; {COPYRIGHT_YEAR} {PUBLISHER}. All rights reserved.</p>
   </div>
 </footer>

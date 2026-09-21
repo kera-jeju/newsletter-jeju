@@ -726,6 +726,62 @@ tr:hover td { background: var(--green-faint); }
     margin-top: 0.2rem;
     line-height: 1.5;
 }
+/* -- 시론: 앞부분 발췌 + 더 읽기 (PI 2026-09-21) --
+   주론은 전문, 제주교육소식은 제목만. 지면마다 드러나는 정도를 달리한다. */
+.excerpt-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+}
+.excerpt-item {
+    background: var(--white);
+    border: 1px solid var(--gray-mid);
+    border-left: 4px solid var(--green-mid);
+    border-radius: var(--radius);
+    padding: 1.5rem 1.7rem 1.2rem;
+}
+.excerpt-title {
+    font-family: var(--font-ui);
+    font-size: 1.12rem;
+    font-weight: 700;
+    color: var(--black);
+    line-height: 1.45;
+    word-break: keep-all;
+    margin: 0 0 0.3rem;
+}
+.excerpt-author {
+    font-family: var(--font-ui);
+    font-size: 0.84rem;
+    color: var(--green-mid);
+    margin-bottom: 0.95rem;
+}
+.excerpt-body {
+    font-size: 0.96rem;
+    line-height: 1.9;
+    color: #3d4753;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    margin: 0 0 1rem;
+}
+.excerpt-pending { color: var(--gray-text); font-style: italic; }
+.excerpt-more {
+    font-family: var(--font-ui);
+    font-size: 0.86rem;
+    font-weight: 600;
+    color: var(--green-mid);
+    background: none;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    transition: color var(--transition);
+}
+.excerpt-more:hover { color: var(--green-dark); text-decoration: underline; }
+@media (max-width: 620px) {
+    .excerpt-item { padding: 1.2rem 1.15rem 1rem; }
+    .excerpt-title { font-size: 1.04rem; }
+    .excerpt-body { font-size: 0.93rem; line-height: 1.85; }
+}
+
 .sub-author {
     font-family: var(--font-ui);
     font-size: 0.82rem;
@@ -1086,22 +1142,18 @@ footer {
       <h2 class="section-title">시론</h2>
       <p class="section-subtitle">시의성 있는 교육 이슈에 대한 소론입니다.</p>
     </div>
-    <div class="card-list"><button class="sub-card" onclick="showArticle('siron','하와이-몰로카이-주민의-선택과-지속가능한-생활양식-교육')" type="button">
-  <div class="sub-card-body">
-    <div class="sub-title">하와이 몰로카이 주민의 선택과 ‘지속가능한 생활양식’ 교육</div>
-    
-    <div class="sub-author">김민호 (제주대학교 명예교수)</div>
-  </div>
-  <span class="sub-card-arrow">&rarr;</span>
-</button>
-<button class="sub-card" onclick="showArticle('siron','시론-제목-미정')" type="button">
-  <div class="sub-card-body">
-    <div class="sub-title">시론 (제목 미정)</div>
-    
-    <div class="sub-author">연준모 (제주대학교 교수)</div>
-  </div>
-  <span class="sub-card-arrow">&rarr;</span>
-</button></div>
+    <div class="excerpt-list"><article class="excerpt-item">
+  <h3 class="excerpt-title">하와이 몰로카이 주민의 선택과 ‘지속가능한 생활양식’ 교육</h3>
+  <div class="excerpt-author">김민호 (제주대학교 명예교수)</div>
+  <p class="excerpt-body">지난 여름 하와이에 살고 있는 아들 집을 방문했다. 26년 전 호텔에 머물며 잠깐 관광하고 왔을 때랑 다르게, 43일 동안 손녀를 돌보면서도 틈틈이 하와이 이곳저곳을 돌아볼 수 있었다. 그중 8.4(화) 하룻동안 하와이 안의 작은 섬 몰로카이를 다녀온 여운이 지금도 남아 있다.</p>
+  <button class="excerpt-more" onclick="showArticle('siron','하와이-몰로카이-주민의-선택과-지속가능한-생활양식-교육')" type="button">더 읽기 &rarr;</button>
+</article>
+<article class="excerpt-item">
+  <h3 class="excerpt-title">시론 (제목 미정)</h3>
+  <div class="excerpt-author">연준모 (제주대학교 교수)</div>
+  <p class="excerpt-body excerpt-pending">원고를 기다리고 있습니다.</p>
+  <button class="excerpt-more" onclick="showArticle('siron','시론-제목-미정')" type="button">더 읽기 &rarr;</button>
+</article></div>
   </div>
 </div>
 <div id="view-jeju-news" class="view">

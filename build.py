@@ -606,6 +606,37 @@ def extract_metadata(md):
 AUTHOR_IN_ASIDE = re.compile(r"<aside>(.*?)</aside>", re.DOTALL)
 
 
+# 원고 앞부분을 발췌한다. 저자 블록·소제목·사진은 걷고 첫 문단만 쓴다.
+# 문장 중간에서 끊기지 않도록 마지막 종결부호까지 물린다.
+_EXCERPT_DROP = re.compile(
+    r"<aside>[\s\S]*?</aside>"
+    r"|^#{1,4}\s.*$"
+    r"|^!\[[^\]]*\]\([^)]*\)\s*$"
+    r"|^\[사진설명=[^\]]*\]\s*$",
+    re.MULTILINE)
+
+
+def make_excerpt(md, limit=300):
+    body = _EXCERPT_DROP.sub("", md)
+    paras = [p.strip() for p in body.split("\n") if p.strip()]
+    paras = [p for p in paras if not p.startswith(("|", ">", "-", "*"))]
+    if not paras:
+        return ""
+    text = paras[0]
+    text = re.sub(r"\*\*([^*]+)\*\*", r"\1", text)
+    text = re.sub(r"\[([^\]]*)\]\([^)]*\)", r"\1", text)
+    text = re.sub(r"\s+", " ", text).strip()
+    if len(text) <= limit:
+        return text
+    cut = text[:limit]
+    for mark in ("다. ", "요. ", "까? ", "다! "):
+        i = cut.rfind(mark)
+        if i > limit * 0.5:
+            return cut[:i + len(mark) - 1]
+    i = cut.rfind(" ")
+    return (cut[:i] if i > limit * 0.5 else cut).rstrip() + "…"
+
+
 def extract_author(md):
     """'홍지환 (제주대학교 박사과정)' 꼴로 돌려준다.
 
@@ -711,6 +742,7 @@ def build_section_html(section, all_files):
             # 필자 이름을 목록에서도 보이게 한다 (config 의 show_author 로 켠다).
             # 본문 첫머리 저자 블록에만 있어 목록에서는 누가 쓴 글인지 알 수 없었다.
             author_span = ''
+            author = ''
             # card_author 를 직접 적어 준 꼭지는 그 절에 show_author 가 없어도 보인다
             # (활동 소개처럼 저자 글과 안내 지면이 섞인 절에서 쓴다).
             if sub.get('card_author') or section.get('show_author'):
@@ -720,7 +752,22 @@ def build_section_html(section, all_files):
                 author = sub.get('card_author') or extract_author(sub_md)
                 if author:
                     author_span = f'<div class="sub-author">{escape_html(author)}</div>'
-            card_parts.append(f'''<button class="sub-card" onclick="showArticle('{sid}','{sub_id}')" type="button">
+            if section.get('layout') == 'excerpt':
+                # 앞부분을 보여주고 '더 읽기'로 전문으로 보낸다.
+                excerpt = make_excerpt(sub_md)
+                author_line = (f'<div class="excerpt-author">{escape_html(author)}</div>'
+                               if author else '')
+                body_line = (f'<p class="excerpt-body">{escape_html(excerpt)}</p>'
+                             if excerpt else
+                             '<p class="excerpt-body excerpt-pending">원고를 기다리고 있습니다.</p>')
+                card_parts.append(f'''<article class="excerpt-item">
+  <h3 class="excerpt-title">{escape_html(sub_title)}</h3>
+  {author_line}
+  {body_line}
+  <button class="excerpt-more" onclick="showArticle('{sid}','{sub_id}')" type="button">더 읽기 &rarr;</button>
+</article>''')
+            else:
+                card_parts.append(f'''<button class="sub-card" onclick="showArticle('{sid}','{sub_id}')" type="button">
   <div class="sub-card-body">
     <div class="sub-title">{escape_html(sub_title)}</div>
     {subtitle_span}
@@ -753,7 +800,10 @@ def build_section_html(section, all_files):
 </div>''')
 
         if card_parts:
-            card_items_html = '<div class="card-list">' + '\n'.join(card_parts) + '</div>'
+            wrap = ('excerpt-list' if section.get('layout') == 'excerpt'
+                    else 'card-list')
+            card_items_html = (f'<div class="{wrap}">' + '\n'.join(card_parts)
+                               + '</div>')
 
     # -- Build section view (level-2) --
     kicker_html = f'<div class="section-kicker">{escape_html(nav_title)}</div>' if nav_title != title else ''
@@ -1533,6 +1583,62 @@ tr:hover td { background: var(--green-faint); }
     margin-top: 0.2rem;
     line-height: 1.5;
 }
+/* -- 시론: 앞부분 발췌 + 더 읽기 (PI 2026-09-21) --
+   주론은 전문, 제주교육소식은 제목만. 지면마다 드러나는 정도를 달리한다. */
+.excerpt-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+}
+.excerpt-item {
+    background: var(--white);
+    border: 1px solid var(--gray-mid);
+    border-left: 4px solid var(--green-mid);
+    border-radius: var(--radius);
+    padding: 1.5rem 1.7rem 1.2rem;
+}
+.excerpt-title {
+    font-family: var(--font-ui);
+    font-size: 1.12rem;
+    font-weight: 700;
+    color: var(--black);
+    line-height: 1.45;
+    word-break: keep-all;
+    margin: 0 0 0.3rem;
+}
+.excerpt-author {
+    font-family: var(--font-ui);
+    font-size: 0.84rem;
+    color: var(--green-mid);
+    margin-bottom: 0.95rem;
+}
+.excerpt-body {
+    font-size: 0.96rem;
+    line-height: 1.9;
+    color: #3d4753;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    margin: 0 0 1rem;
+}
+.excerpt-pending { color: var(--gray-text); font-style: italic; }
+.excerpt-more {
+    font-family: var(--font-ui);
+    font-size: 0.86rem;
+    font-weight: 600;
+    color: var(--green-mid);
+    background: none;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    transition: color var(--transition);
+}
+.excerpt-more:hover { color: var(--green-dark); text-decoration: underline; }
+@media (max-width: 620px) {
+    .excerpt-item { padding: 1.2rem 1.15rem 1rem; }
+    .excerpt-title { font-size: 1.04rem; }
+    .excerpt-body { font-size: 0.93rem; line-height: 1.85; }
+}
+
 .sub-author {
     font-family: var(--font-ui);
     font-size: 0.82rem;

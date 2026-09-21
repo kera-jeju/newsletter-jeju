@@ -702,7 +702,10 @@ def build_section_html(section, all_files):
             # 본문 첫머리 저자 블록에만 있어 목록에서는 누가 쓴 글인지 알 수 없었다.
             author_span = ''
             if section.get('show_author'):
-                author = extract_author(sub_md)
+                # 원고마다 소속 표기가 제각각이라(제주대학교 / 제주대학교 대학원
+                # 교육학과 …) 목록에서는 편집자가 정한 표기로 맞출 수 있게 한다.
+                # 본문 저자 블록은 원고 그대로 둔다. (PI 2026-09-21)
+                author = sub.get('card_author') or extract_author(sub_md)
                 if author:
                     author_span = f'<div class="sub-author">{escape_html(author)}</div>'
             card_parts.append(f'''<button class="sub-card" onclick="showArticle('{sid}','{sub_id}')" type="button">

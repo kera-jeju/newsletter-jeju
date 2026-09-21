@@ -60,6 +60,30 @@ HWPX = [
          # webp 원본이 해상도가 높아 그쪽을 쓴다
          photo="고의숙 교육감.webp", photo_crop=(8, 0, 988, 980),
          drop_first=1),
+    # 2026-09-21 수합. 원고에 필자 사진은 오지 않았다.
+    dict(file="김민호_몰로카이 주민의 선택.hwpx", slug="시론_김민호",
+         title="하와이 몰로카이 주민의 선택과 ‘지속가능한 생활양식’ 교육",
+         name="김민호", affil="제주대학교", role="명예교수",
+         drop_first=2,
+         sub_headings=True,     # 가./나./다. 와 1)/2)/3) 을 소제목으로 올린다
+         # 원고의 절 번호가 '시작하며 / 2 / 3 / 3 / 4. 나오며'로 3이 두 번이다.
+         # 1~5로 이어지도록 고쳤다. ★ 필자 확인 필요.
+         heading_fix=[
+             ("4. 나오며", "5. 나오며"),
+             ("3. 지역사회 기반 몰로카이의 교육 프로그램",
+              "4. 지역사회 기반 몰로카이의 교육 프로그램"),
+             ("시작하며", "1. 시작하며"),
+         ],
+         # 본문 사진 2장이 빈 표 한 칸에 캡션만 담겨 있었다. 표를 걷어내고
+         # 사진과 캡션을 이 호의 사진 표기 방식으로 다시 놓는다.
+         # 캡션 문구는 필자가 쓴 것을 그대로 옮겼다(영문 포함). ★ 필자 확인 필요.
+         table_replace="""![image](images/김민호_01.jpg)
+
+[사진설명= Meli Watanuki, 사진 출처=Kevin Fujii/Civil Beat(2025), Civil Beat(2026)에서 재인용]
+
+![image](images/김민호_02.jpg)
+
+[사진설명= Maui County Council member Keani Rawlins-Fernandez holds the gate while a National Park Service ranger tries to open it Thursday, 사진 출처=Courtesy: Walter Ritte(2026), Civil Beat(2026)에서 재인용]"""),
 ]
 
 # 회원 소식에 넣을 인물 사진 — 얼굴이 원 중앙에 오도록 자른다.
@@ -84,6 +108,51 @@ REF_OVERRIDE = {
 한국교육학회(1973). 한국교육학회 20년사: 1953.4.4.~1973.4.4. 서울: 대광인쇄공사.
 현용준(1986). 제주도 무속연구. 서울: 집문당.
 """,
+}
+
+# --------------------------------------------------------------------------
+# 오탈자 교정 — 명백한 오기만 고친다.
+#   '고칠 것이 확실한 것'의 기준: 같은 원고 안에 바른 표기가 이미 있거나
+#   (화와이/하와이, 오하우/오아후, 수늘음/수눌음), 고유명사의 철자가 정해져
+#   있는 것(Molokai, Smithsonian, Television). 판단이 필요한 것은 고치지 않고
+#   PI·필자 확인 목록으로 넘긴다.
+# --------------------------------------------------------------------------
+TYPO_FIX = {
+    "시론_김민호": [
+        # 국문
+        ("화와이", "하와이"),
+        ("오하우", "오아후"),
+        ("인프라카", "인프라가"),
+        ("정잭", "정책"),
+        ("호화시러운", "호화스러운"),
+        ("반대할 수 밌는", "반대할 수 있는"),
+        ("풀뿔리", "풀뿌리"),
+        ("통합 자치 제제", "통합 자치 체제"),
+        ("수늘음", "수눌음"),
+        # 영문 고유명사·철자
+        ("Nwews", "News"),
+        ("Molikai", "Molokai"),
+        ("Molokia", "Molokai"),
+        ("Foiundation", "Foundation"),
+        ("Televion", "Television"),
+        ("Smithonian", "Smithsonian"),
+        ("respod", "respond"),
+        ("immesion", "immersion"),
+        ("comming soon", "coming soon"),
+        ("os the least developed", "is the least developed"),
+        # 본문 인용 표기
+        ("Kilohana elementary school,2026", "Kilohana elementary school, 2026"),
+        ("Hawaii Public Radio. 2020", "Hawaii Public Radio, 2020"),
+        # 참고문헌: 주소의 이음줄 두 개가 붙임표(—)로 자동 변환돼 링크가 죽어
+        # 있었다. 실제 주소는 하이픈 두 개다 (2026-09-21 접속 확인, 200).
+        ("culture—699256ina-based", "culture--699256ina-based"),
+        # 참고문헌: 두 항목이 줄바꿈 없이 붙어 있었다
+        ("2026.9.14.인출Pacific American",
+         "2026.9.14. 인출\nPacific American"),
+        # 참고문헌: 괄호 연도가 없어 항목으로 인식되지 않던 것
+        ("Maui District Television. Facebook July 29, 2026.",
+         "Maui District Television(2026). Facebook, July 29, 2026."),
+    ],
 }
 
 # 빼기로 한 항목 — 항목에 이 문구가 들어 있으면 제외한다.
@@ -273,9 +342,6 @@ STATIC = [
 
 # 미제출 원고 — 자리(placeholder)만 만들어 레이아웃에서 보이게 한다
 PENDING = [
-    dict(slug="시론_김민호", title="제주지회 60주년 소회와 전망",
-         name="김민호", affil="제주대학교", role="명예교수",
-         note="9월 12일(금) 제출 예정"),
     dict(slug="시론_연준모", title="시론",
          name="연준모", affil="제주대학교", role="교수",
          note="제출 기한 확인 중"),
@@ -372,6 +438,74 @@ def promote_numbered_headings(body):
     return NUM_HEADING.sub(repl, body)
 
 
+# '가. 초기 저항과 토지 접근권 투쟁' / '1) 미 연방정부로부터의 자율성' 처럼
+# 한글 순서 기호·괄호 번호가 붙은 하위 소제목. 그대로 두면 본문 문단으로 흘러
+# 절의 층이 보이지 않는다.
+GANADA_HEADING = re.compile(r"^([가나다라마바사아자차카타파하]\.\s+\S.{1,40})$", re.M)
+PAREN_HEADING = re.compile(r"^(\d\)\s+\S.{1,40})$", re.M)
+
+
+def promote_sub_headings(body):
+    def repl(level):
+        def inner(m):
+            line = m.group(1).strip()
+            if line.endswith(("다.", "요.", "까?", "음.")):
+                return m.group(0)
+            return f"{level} {line}"
+        return inner
+    body = GANADA_HEADING.sub(repl("###"), body)
+    return PAREN_HEADING.sub(repl("####"), body)
+
+
+def apply_fixes(body, pairs):
+    """오탈자·절 번호 교정. (틀린 것, 바른 것) 순서대로 적용한다."""
+    for wrong, right in pairs or []:
+        body = body.replace(wrong, right)
+    return body
+
+
+def replace_table(body, block):
+    """본문의 표를 주어진 덩어리로 갈아끼운다.
+
+    사진 캡션만 담긴 빈 표를 사진+캡션으로 바꿀 때 쓴다.
+    """
+    if not block:
+        return body
+    lines = body.split("\n")
+    start = next((i for i, l in enumerate(lines) if l.startswith("|")), None)
+    if start is None:
+        return body
+    end = start
+    while end < len(lines) and lines[end].startswith("|"):
+        end += 1
+    return "\n".join(lines[:start] + block.split("\n") + lines[end:])
+
+
+# 참고문헌 한 항목이 여러 줄로 끊겨 있는 원고가 있다.
+#   Hawaii State Department of Education(2026). Adult education.
+#   https://hawaiipublicschools.org/...에서
+#   2026.9.14. 인출
+# refstyle은 줄 단위로 항목을 가르므로, 이어지는 줄(URL·인출일)이 참고문헌이
+# 아닌 부스러기로 버려진다. 넘기기 전에 한 줄로 이어 붙인다.
+REF_ENTRY_START = re.compile(r"^[A-Z가-힣][^()\n]{0,70}\(\s*\d{4}[a-z]?\s*\)")
+
+
+def join_reference_lines(body):
+    m = refstyle.HEADING.search(body)
+    if not m:
+        return body
+    head, tail = body[:m.end()], body[m.end():]
+    merged = []
+    for line in (l.strip() for l in tail.split("\n")):
+        if not line:
+            continue
+        if merged and not REF_ENTRY_START.match(line):
+            merged[-1] = f"{merged[-1]} {line}"
+        else:
+            merged.append(line)
+    return head + "\n" + "\n".join(merged) + "\n"
+
+
 # 구글 드라이브의 뉴스레터 폴더 — 인물 사진이 여기 모여 있다.
 PHOTO_DIR = Path(os.environ.get(
     "NEWSLETTER_PHOTOS", r"G:\내 드라이브\2026 제주지회 뉴스레터"))
@@ -453,17 +587,32 @@ def main():
     ap = argparse.ArgumentParser(description="2026 제주교육마루 원고 → 마크다운 소스 트리")
     ap.add_argument("--src", default=str(DL),
                     help="원고 원본(docx/hwpx)이 모여 있는 폴더")
-    DL = Path(ap.parse_args().src)
+    ap.add_argument("--only", default=None,
+                    help="이 슬러그 하나만 다시 만든다 (나머지 파일은 그대로 둔다). "
+                         "원고가 한 편 늦게 도착했을 때 쓴다 — 전체 재생성은 "
+                         "원본 docx가 모두 있어야 하므로 나머지를 지워버린다.")
+    ns = ap.parse_args()
+    DL = Path(ns.src)
+    only = ns.only
 
-    if OUT.exists():
-        shutil.rmtree(OUT)
+    if only:
+        if not SUB.exists():
+            sys.exit(f"--only 는 기존 소스 트리가 있어야 한다: {SUB}")
+    else:
+        if OUT.exists():
+            shutil.rmtree(OUT)
     SUB.mkdir(parents=True, exist_ok=True)
+
+    def skip(slug):
+        return bool(only) and slug != only
 
     rows = []
     ref_notes = []
 
     # ---- docx 원고 ----
     for spec in DOCX:
+        if skip(spec["slug"]):
+            continue
         src = DL / spec["file"]
         if not src.exists():
             rows.append((spec["slug"], "없음", 0, 0, ""))
@@ -504,6 +653,8 @@ def main():
 
     # ---- hwpx 원고 ----
     for spec in HWPX:
+        if skip(spec["slug"]):
+            continue
         src = DL / spec["file"]
         if not src.exists():
             rows.append((spec["slug"], "없음", 0, 0, ""))
@@ -517,7 +668,13 @@ def main():
                 dropped += 1
                 continue
             kept.append(l)
-        body = promote_numbered_headings("\n".join(kept).strip())
+        body = apply_fixes("\n".join(kept).strip(), TYPO_FIX.get(spec["slug"]))
+        body = apply_fixes(body, spec.get("heading_fix"))
+        body = replace_table(body, spec.get("table_replace"))
+        body = promote_numbered_headings(body)
+        if spec.get("sub_headings"):
+            body = promote_sub_headings(body)
+        body = join_reference_lines(body)
         if spec["slug"] in REF_OVERRIDE:
             body = refstyle.replace_section(body, REF_OVERRIDE[spec["slug"]])
             ref = {"count": 0, "dropped": [], "dupes": [], "removed": [],
@@ -536,65 +693,73 @@ def main():
 
     # ---- 회원 소식 인물 사진 ----
     for slug, fname, box in NEWS_PHOTOS:
+        if skip(slug):
+            continue
         if not add_photo(fname, slug, box):
             print(f"  ! 사진 없음: {fname}")
 
     # ---- 고정 지면 (구성원 소개·회비 납부자 명단) ----
     for spec in STATIC:
+        if skip(spec["slug"]):
+            continue
         write_md(spec["slug"], spec["title"], "", spec["body"].strip())
         rows.append((spec["slug"], "고정지면", len(spec["body"]), 0,
                      spec["title"]))
 
     # ---- 미제출 자리 ----
     for spec in PENDING:
+        if skip(spec["slug"]):
+            continue
         author = author_block(spec["name"], spec["affil"], spec["role"])
         body = (f"<aside>\n원고 준비 중입니다. ({spec['note']})\n</aside>\n")
         write_md(spec["slug"], spec["title"], author, body)
         rows.append((spec["slug"], "준비중", 0, 0, spec["title"]))
 
-    # ---- 발간사 (루트 MD) ----
-    # 회장 명의 초안. 작년 재창간호의 어투를 따랐다. 최종 문안은 회장 확인 필요.
-    (OUT / "발간사.md").write_text("""# 발간의 글
+    if not only:
+        # ---- 발간사 (루트 MD) ----
+        # (--only 로 한 편만 고칠 때는 아래 고정 산출물을 다시 쓰지 않는다)
+        # 회장 명의 초안. 작년 재창간호의 어투를 따랐다. 최종 문안은 회장 확인 필요.
+        (OUT / "발간사.md").write_text("""# 발간의 글
 
-존경하는 회원 여러분,
+    존경하는 회원 여러분,
 
-한국교육학회 제주지회 회장 이인회입니다.
+    한국교육학회 제주지회 회장 이인회입니다.
 
-지난해 재창간호를 내놓은 데 이어 『제주교육마루』 제2호를 펴냅니다. 한 해에 한 번 나오는 지면이지만, 그 사이에 제주 교육에는 적지 않은 변화가 있었습니다. 새 교육감이 취임하였고, 우리 지회는 창립 60주년을 눈앞에 두고 있습니다.
+    지난해 재창간호를 내놓은 데 이어 『제주교육마루』 제2호를 펴냅니다. 한 해에 한 번 나오는 지면이지만, 그 사이에 제주 교육에는 적지 않은 변화가 있었습니다. 새 교육감이 취임하였고, 우리 지회는 창립 60주년을 눈앞에 두고 있습니다.
 
-이번 호에서는 지난 60년을 함께 돌아보았습니다. 1967년 창립 이래 제주지회가 지나온 세 번의 전환점을 짚고, 앞으로 우리가 어디로 가야 할지를 주론에 담았습니다. 회원 여러분께서 보내주신 글에는 연구실과 교실, 마을과 학교 현장에서 교육을 고민해 온 시간이 고스란히 담겨 있습니다. 저마다 자리는 다르지만 같은 물음을 품고 있다는 것을 이 지면에서 확인하게 됩니다.
+    이번 호에서는 지난 60년을 함께 돌아보았습니다. 1967년 창립 이래 제주지회가 지나온 세 번의 전환점을 짚고, 앞으로 우리가 어디로 가야 할지를 주론에 담았습니다. 회원 여러분께서 보내주신 글에는 연구실과 교실, 마을과 학교 현장에서 교육을 고민해 온 시간이 고스란히 담겨 있습니다. 저마다 자리는 다르지만 같은 물음을 품고 있다는 것을 이 지면에서 확인하게 됩니다.
 
-발간 형태도 한 걸음 나아갔습니다. 지난해 노션(Notion)으로 옮겨왔던 뉴스레터를 올해는 독립된 웹페이지로 다시 지었습니다. 주소 하나로 언제든 찾아볼 수 있고, 해마다 쌓인 기록이 그대로 남습니다. 작은 변화지만 지회의 이야기를 오래 간직하려는 뜻입니다.
+    발간 형태도 한 걸음 나아갔습니다. 지난해 노션(Notion)으로 옮겨왔던 뉴스레터를 올해는 독립된 웹페이지로 다시 지었습니다. 주소 하나로 언제든 찾아볼 수 있고, 해마다 쌓인 기록이 그대로 남습니다. 작은 변화지만 지회의 이야기를 오래 간직하려는 뜻입니다.
 
-바쁘신 가운데 원고를 보내주신 필자 여러분, 축하의 말씀을 보내주신 고의숙 교육감님, 그리고 한 호를 엮어내기까지 애써주신 뉴스레터위원회에 깊이 감사드립니다.
+    바쁘신 가운데 원고를 보내주신 필자 여러분, 축하의 말씀을 보내주신 고의숙 교육감님, 그리고 한 호를 엮어내기까지 애써주신 뉴스레터위원회에 깊이 감사드립니다.
 
-이 지면이 소식을 전하는 데 그치지 않고 제주 교육의 내일을 함께 궁리하는 자리가 되기를 바랍니다. 회원 여러분의 많은 관심과 참여를 부탁드립니다.
+    이 지면이 소식을 전하는 데 그치지 않고 제주 교육의 내일을 함께 궁리하는 자리가 되기를 바랍니다. 회원 여러분의 많은 관심과 참여를 부탁드립니다.
 
-감사합니다.
+    감사합니다.
 
-한국교육학회 제주지회 회장  이인회
-""", encoding="utf-8")
+    한국교육학회 제주지회 회장  이인회
+    """, encoding="utf-8")
 
-    # ---- 공통 이미지 ----
-    out_img = REPO / "2026" / "images"
-    out_img.mkdir(parents=True, exist_ok=True)
-    for src_name, dst_name in [("배너.jpg", "banner.jpg"),
-                               ("로고.png", "logo.png")]:
-        s = DL / src_name
+        # ---- 공통 이미지 ----
+        out_img = REPO / "2026" / "images"
+        out_img.mkdir(parents=True, exist_ok=True)
+        for src_name, dst_name in [("배너.jpg", "banner.jpg"),
+                                   ("로고.png", "logo.png")]:
+            s = DL / src_name
+            if s.exists():
+                shutil.copy2(s, out_img / dst_name)
+        # 캘리그래피는 드라이브 원본에 투명 격자가 박혀 있어 2025년 확정본을 쓴다
+        for name in ["calligraphy-white.png", "calligraphy-white-v2.png"]:
+            s = REPO / "2025" / "images" / name
+            if s.exists():
+                shutil.copy2(s, out_img / name)
+        for name in ["favicon.ico"]:
+            s = REPO / name
+            if s.exists():
+                shutil.copy2(s, REPO / "2026" / name)
+        s = REPO / "2025" / "images" / "apple-touch-icon.png"
         if s.exists():
-            shutil.copy2(s, out_img / dst_name)
-    # 캘리그래피는 드라이브 원본에 투명 격자가 박혀 있어 2025년 확정본을 쓴다
-    for name in ["calligraphy-white.png", "calligraphy-white-v2.png"]:
-        s = REPO / "2025" / "images" / name
-        if s.exists():
-            shutil.copy2(s, out_img / name)
-    for name in ["favicon.ico"]:
-        s = REPO / name
-        if s.exists():
-            shutil.copy2(s, REPO / "2026" / name)
-    s = REPO / "2025" / "images" / "apple-touch-icon.png"
-    if s.exists():
-        shutil.copy2(s, out_img / "apple-touch-icon.png")
+            shutil.copy2(s, out_img / "apple-touch-icon.png")
 
     print(f"{'파일':<24}{'상태':<8}{'본문자수':>8}{'이미지':>6}  제목")
     print("-" * 96)

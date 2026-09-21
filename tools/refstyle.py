@@ -70,6 +70,11 @@ def normalize_entry(text):
         head = m.group("a").rstrip(" .")
         s = f"{head}({m.group('y')})" + s[m.end():]
 
+    # 'https://....../gp에서 2026.9.14. 인출' — 주소 뒤에 조사가 바로 붙으면
+    # 주소가 어디서 끝나는지 보이지 않고, 독자가 주소만 떼어 쓸 수도 없다.
+    # 한 칸 띄운다. (이미 띄어져 있으면 걸리지 않는다)
+    s = re.sub(r"(https?://\S+?)에서", r"\1 에서", s)
+
     # 빈 URL/출처 자리 정리:  '성료. .' → '성료.'
     s = re.sub(r"\.\s+\.(\s|$)", r".\1", s)
     s = re.sub(r"\s{2,}", " ", s).strip()

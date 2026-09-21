@@ -42,7 +42,8 @@ SECTIONS = [
         'color': '#1a5c35',
         'file_key': '',
         'subsections': [
-            {'title': '제주지회 60주년 소회와 전망', 'file_key': '시론_김민호'},
+            {'title': '하와이 몰로카이 주민의 선택과 ‘지속가능한 생활양식’ 교육',
+             'file_key': '시론_김민호'},
             {'title': '시론 (제목 미정)', 'file_key': '시론_연준모'},
         ]
     },

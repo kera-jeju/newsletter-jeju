@@ -1382,13 +1382,18 @@ p.table-caption,
 p.table-caption + .table-wrap { margin-top: 0; }
 
 /* -- FIGURE CAPTIONS -- */
-.figure-caption {
-    font-size: 0.85rem;
-    color: #666;
+/* `.article-body p` 가 더 구체적이라 여태 캡션 규칙이 밀리고 있었다 —
+   캡션이 본문과 같은 크기·색으로 나온 진짜 이유다. 선택자를 같은 층으로 올린다. */
+.figure-caption,
+.article-body .figure-caption,
+.section-content .figure-caption {
+    font-size: 0.82rem;
+    color: #6b6b6b;
     text-align: center;
     font-family: var(--font-ui);
-    margin: 0.5rem 0 1.5rem;
-    line-height: 1.5;
+    margin: -0.6rem 0 1.6rem;   /* 사진 문단의 아래 여백을 물고 바짝 붙인다 */
+    line-height: 1.55;
+    word-break: keep-all;
 }
 
 /* -- FOOTNOTES -- */
@@ -2390,6 +2395,20 @@ def build(src_root, out_dir):
     html = re.sub(
         r'<p><code>(&lt;표\s*\d+&gt;[^<]*|<표[^<]*|\[그림\s*\d+\][^<]*)</code></p>',
         r'<p class="figure-caption">\1</p>', html)
+
+    # 사진 캡션 — 원고에 [사진설명= …] 으로 적힌 한 줄을 캡션 꼴로 만든다.
+    # 그 전에는 괄호만 붙은 채 본문 문단과 똑같은 크기·색으로 나와 캡션인지
+    # 구분되지 않았다. 바깥 괄호와 '사진설명=' 표시는 걷고, 출처 표기는
+    # 한 꼴로 맞춘다. (PI 2026-09-22)
+    def photo_caption(m):
+        text = m.group(1).strip()
+        for a, b in (("사진 출처=", "출처: "), ("사진출처=", "출처: "),
+                     ("사진 제공=", "사진 제공: "), ("사진제공=", "사진 제공: ")):
+            text = text.replace(a, b)
+        text = re.sub(r"\s*,\s*(출처:|사진 제공:)", r" · \g<1>", text)
+        return f'<p class="figure-caption">{text.strip()}</p>'
+
+    html = re.sub(r'<p>\s*\[사진설명=\s*([^\]]*?)\s*\]\s*</p>', photo_caption, html)
 
     # 표 바로 앞에 놓인 <…> 꼴의 한 줄은 표 제목이다.
     # 꺾쇠를 이스케이프하고, 표에 바짝 붙는 캡션으로 만든다.

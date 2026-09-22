@@ -72,8 +72,15 @@ DOCX = [
     dict(file="석진아_뉴스레터 원고_템플릿.docx", slug="제주교육소식_석진아",
          affil_override="제주대학교 대학원 교육학과",
          role_override="박사과정 · 1급 언어재활사"),
+    # 사진 아래 캡션이 맨 문장으로만 적혀 있어 본문과 구분되지 않았다(PI 2026-09-22).
+    # [사진설명= …] 꼴로 맞추면 다른 원고와 같은 캡션 꼴로 그려진다.
     dict(file="조천_마을탐방_뉴스레터_원고_양유정 (4).docx", slug="활동소개_양유정",
-         title_from_body=True),
+         title_from_body=True,
+         captions=[
+             "너븐숭이에서 고영철 선생님의 설명을 듣는 탐방 참가자들",
+             "조천만세운동 기념탑 앞에서 항일운동의 역사를 되새기는 탐방 참가자들",
+             "조천의 역사 현장에서 함께한 한국교육학회 제주지회 회원들",
+         ]),
     # 이 글은 사무국장으로서 쓴 행사 기록이다. 같은 절의 양유정(제주지회 총무)과
     # 같은 꼴로 맞춘다 — 원고의 '제주영송학교 / 교사'는 싣지 않는다.
     # (PI 2026-09-21, 병기했다가 되돌림)
@@ -791,6 +798,20 @@ def promote_sub_headings(body):
     return PAREN_HEADING.sub(repl("####"), body)
 
 
+def wrap_captions(body, captions):
+    """사진 아래에 맨 문장으로만 적힌 캡션을 [사진설명= …] 꼴로 감싼다.
+
+    원고마다 캡션 표기가 제각각이라 지면에서 캡션인지 본문인지 구분되지 않았다.
+    표기를 하나로 맞추면 build.py가 캡션 꼴(작은 회색 가운데 글씨)로 그린다.
+    (PI 2026-09-22)
+    """
+    for line in captions or []:
+        old_line = line.strip()
+        assert body.count(old_line) == 1, f"캡션 줄을 찾지 못했거나 여럿이다: {old_line[:30]}"
+        body = body.replace(old_line, f"[사진설명= {old_line}]")
+    return body
+
+
 def apply_fixes(body, pairs):
     """오탈자·절 번호 교정. (틀린 것, 바른 것) 순서대로 적용한다."""
     for wrong, right in pairs or []:
@@ -966,6 +987,7 @@ def main():
             title = spec.get("title_override") or "(제목 미정)"
 
         body = drop_template_residue(body)
+        body = wrap_captions(body, spec.get("captions"))
         body = promote_bullet_headings(body)
         if spec.get("bold_headings"):
             body = promote_bold_headings(body)

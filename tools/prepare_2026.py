@@ -51,14 +51,25 @@ SUB = OUT / "한국교육학회 제주지회 뉴스레터"
 #                   ★ 표시는 PI 확인 필요.
 # --------------------------------------------------------------------------
 DOCX = [
+    # 2026-09-22 PI: 대학원생 필자 넷의 소속 표기를 하나로 맞춘다 —
+    #   「제주대학교 대학원 교육학과 박사과정」. 원고에는 '제주대학교 / 교육학과',
+    #   '제주대학교 대학원 교육학과', '제주대학교 교육학과', '제주대학교'로 네 가지가
+    #   섞여 있었다. 카드 목록(config_2026.py의 card_author)도 같이 맞췄다.
     dict(file="뉴스레터 원고_아라캠퍼스_홍지환.docx", slug="제주교육소식_홍지환",
          title_override="성읍마을에서 만난 작은 주인공들",   # ★ 임시 제목
-         needs_title=True),
-    dict(file="뉴스레터 원고_김지원.docx", slug="제주교육소식_김지원"),
+         needs_title=True,
+         affil_override="제주대학교 대학원 교육학과", role_override="박사과정"),
+    dict(file="뉴스레터 원고_김지원.docx", slug="제주교육소식_김지원",
+         affil_override="제주대학교 대학원 교육학과", role_override="박사과정"),
     dict(file="뉴스레터 원고 (전새미).docx", slug="제주교육소식_전새미",
-         title_from_body=True),
+         title_from_body=True,
+         affil_override="제주대학교 대학원 교육학과", role_override="박사과정"),
     dict(file="뉴스레터 원고_홍지오.docx", slug="제주교육소식_홍지오"),
-    dict(file="석진아_뉴스레터 원고_템플릿.docx", slug="제주교육소식_석진아"),
+    # ★ 원고의 직함은 '박사과정 · 1급 언어재활사'였다. 넷을 같은 꼴로 맞추라는
+    #   PI 지시(2026-09-22)에 따라 '박사과정'으로만 적는다. 자격을 다시 살리려면
+    #   role_override 를 "박사과정 · 1급 언어재활사" 로 되돌린다.
+    dict(file="석진아_뉴스레터 원고_템플릿.docx", slug="제주교육소식_석진아",
+         affil_override="제주대학교 대학원 교육학과", role_override="박사과정"),
     dict(file="조천_마을탐방_뉴스레터_원고_양유정 (4).docx", slug="활동소개_양유정",
          title_from_body=True),
     # 이 글은 사무국장으로서 쓴 행사 기록이다. 같은 절의 양유정(제주지회 총무)과

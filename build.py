@@ -1002,7 +1002,19 @@ nav.site-nav {
     gap: 0.85rem;
 }
 /* 호수는 지면에서 가장 먼저 눈에 들어와야 한다 — 호끼리 헷갈리지 않게 */
-.masthead-eyebrow .mh-since { color: rgba(255,255,255,0.55); }
+/* 2026-09-22 PI: 배너 위에는 '이번 호가 무엇인가'(호수 · 발간일)를, 배너 아래에는
+   '누가 내는가'(발행처 · 창간연도)를 둔다. 전에는 SINCE 1993이 호수 옆에,
+   발간일이 발행처 옆에 있어 짝이 엇갈려 있었다. */
+.masthead-eyebrow .mh-date {
+    color: rgba(255,255,255,0.72);
+    letter-spacing: 0.02em;
+    font-weight: 500;
+}
+.masthead-meta .mh-since {
+    letter-spacing: 0.12em;
+    font-weight: 600;
+    color: rgba(255,255,255,0.6);
+}
 .masthead-eyebrow .mh-issue {
     color: var(--white);
     font-size: 1.02rem;
@@ -1028,21 +1040,23 @@ nav.site-nav {
     width: 100%;
     line-height: 0;
 }
-/* 넓은 모니터에서 배너가 화면을 다 덮어 아래 발간사가 보이지 않았다.
-   캘리그래피가 사진 안에 박혀 있어 세로로 자르면 글씨가 잘리므로,
-   자르지 않고 본문 폭까지만 키운다. 모바일은 그대로 꽉 채운다.
-   (PI 2026-09-21) */
+/* 첫 화면 배너.
+   2026-09-21에는 넓은 모니터에서 배너가 화면을 다 덮어 아래 발간사가 보이지
+   않는 문제를 '사진을 본문 폭까지만 줄여서' 풀었다. 그러자 1366px 노트북에서
+   사진이 화면의 절반도 안 되는 섬처럼 놓여 표지 구실을 못 했다.
+   2026-09-22 PI 결정: **가로는 화면 끝까지 쓰고 세로만 잘라낸다.**
+   원본은 2.22:1이고 먹글씨 '제주교육마루'는 사진 높이의 10.4%~31.8% 자리에
+   있다(측정값). 아래 값은 그 띠가 어떤 화면에서도 여유를 두고 들어오도록
+   잡은 것이다 — 보이는 창이 위에서 약 5%부터 시작한다.
+   모바일(640px 이하)은 세로가 넉넉해 자를 이유가 없으므로 그대로 둔다. */
 @media (min-width: 641px) {
-    /* 배너 자체는 화면 끝까지 두어 좌우 여백이 위아래 초록 띠와 이어지게 하고,
-       사진만 줄인다. 배너는 2.22:1이라 폭을 89vh로 묶으면 높이가 화면의 40%를
-       넘지 않아, 세로가 짧은 노트북에서도 아래 발간사가 첫 화면에 걸린다. */
-    .masthead-hero-img {
-        background: var(--green-dark);
-        text-align: center;
-    }
+    .masthead-hero-img { background: var(--green-dark); }
     .masthead-hero-img img {
-        max-width: min(var(--max-width), 89vh);
-        margin: 0 auto;
+        max-width: none;
+        aspect-ratio: 3.2 / 1;   /* 원본 2.22:1 → 세로의 약 69%만 보인다 */
+        max-height: 52vh;        /* 세로가 짧은 노트북에서 발간사가 첫 화면에 걸리게 */
+        object-fit: cover;
+        object-position: center 14%;   /* 글씨 윗머리 위로 여백을 남기는 자리 */
     }
 }
 .masthead-hero-img img {
@@ -2048,13 +2062,13 @@ def build_html(toc_html, intro_html, sections_html, article_views_html, hero_img
 <!-- MASTHEAD -->
 <header class="masthead" role="banner">
   <div class="masthead-inner">
-    <div class="masthead-eyebrow"><span class="mh-since">{SINCE}</span><span class="mh-issue">{COPYRIGHT_YEAR} &#183; {NEWSLETTER_SUBTITLE}</span></div>
+    <div class="masthead-eyebrow"><span class="mh-issue">{COPYRIGHT_YEAR} &#183; {NEWSLETTER_SUBTITLE}</span><span class="mh-date">{PUBLICATION_DATE}</span></div>
     {hero}
     <div class="masthead-calligraphy" style="display:none;"><img src="images/calligraphy-white.png" alt="제주교육마루"></div>
     <div class="masthead-meta">
       <span>{NEWSLETTER_TITLE}</span>
       <span class="dot">&#183;</span>
-      <span>{PUBLICATION_DATE}</span>
+      <span class="mh-since">{SINCE}</span>
     </div>
   </div>
 </header>

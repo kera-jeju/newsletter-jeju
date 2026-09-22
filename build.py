@@ -1183,15 +1183,21 @@ main {
     border-top: 1px solid var(--gray-mid);
     margin: 2rem 0;
 }
+/* 직접인용 — 필자가 원고에서 양쪽 들여쓰기 + 이탤릭으로 표시한 블록.
+   그 서식을 그대로 옮긴다(띠·배경 없이 양쪽을 좁히고 기울인다).
+   좁은 화면에서는 양쪽을 좁히면 읽을 폭이 남지 않아 들여쓰기를 줄인다. */
 .article-body blockquote,
 .section-content blockquote {
-    border-left: 3px solid var(--green-light);
-    padding: 0.85rem 1.25rem;
-    margin: 1.25rem 0;
-    background: var(--green-faint);
-    border-radius: 0 var(--radius) var(--radius) 0;
+    margin: 1.5rem 2.25rem;
+    padding: 0;
+    border: none;
+    background: none;
     font-style: italic;
     color: var(--gray-text);
+}
+@media (max-width: 600px) {
+    .article-body blockquote,
+    .section-content blockquote { margin: 1.25rem 1rem; }
 }
 .article-body ul, .article-body ol,
 .section-content ul, .section-content ol {

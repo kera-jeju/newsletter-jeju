@@ -39,6 +39,37 @@ def _is_inside_table(p_el, table_paras):
     return id(p_el) in table_paras
 
 
+def _quote_para_ids(header_xml):
+    """양쪽(왼쪽·오른쪽)을 모두 들여쓴 문단모양 id 집합.
+
+    한글에서 직접인용을 표시하는 관행적인 서식이다 — 본문보다 양쪽을 좁혀
+    블록으로 앉힌다. 한쪽만 들여쓴 것(참고문헌의 내어쓰기 등)은 인용이 아니므로
+    양쪽이 모두 0보다 클 때만 센다. 단위는 HWPUNIT(1/7200인치).
+    """
+    ids = set()
+    root = ET.fromstring(header_xml)
+    for el in root.iter():
+        if _local(el.tag) != 'paraPr':
+            continue
+        left = right = 0
+        for m in el.iter():
+            if _local(m.tag) != 'margin':
+                continue
+            for mm in m:
+                name = _local(mm.tag)
+                try:
+                    v = int(mm.get('value', '0'))
+                except ValueError:
+                    continue
+                if name == 'left':
+                    left = max(left, v)
+                elif name == 'right':
+                    right = max(right, v)
+        if left > 0 and right > 0:
+            ids.add(el.get('id'))
+    return ids
+
+
 def _collect_table_paras(root):
     """표 안에 들어 있는 문단 id 집합 (본문 순회 시 중복 방지)."""
     inside = set()
@@ -99,6 +130,12 @@ def convert(hwpx_path, out_dir, slug):
             (img_dir / fname).write_bytes(z.read(n))
             images.append(f"images/{fname}")
 
+    # 필자가 양쪽 들여쓰기로 표시한 직접인용을 찾아 둔다 (아래에서 > 로 옮긴다)
+    try:
+        quote_ids = _quote_para_ids(z.read("Contents/header.xml").decode("utf-8"))
+    except KeyError:
+        quote_ids = set()
+
     sections = sorted(n for n in z.namelist()
                       if re.match(r"Contents/section\d+\.xml$", n))
     lines = []
@@ -116,7 +153,13 @@ def convert(hwpx_path, out_dir, slug):
                     lines.append("")
             elif tag == 'p' and not _is_inside_table(el, in_table):
                 t = _para_text(el)
-                lines.append(t if t else "")
+                if t and el.get('paraPrIDRef') in quote_ids:
+                    # 앞뒤에 빈 줄을 두어야 본문 문단에 붙지 않는다
+                    lines.append("")
+                    lines.append("> " + t)
+                    lines.append("")
+                else:
+                    lines.append(t if t else "")
 
     md = "\n".join(lines)
     md = re.sub(r"\n{3,}", "\n\n", md).strip() + "\n"

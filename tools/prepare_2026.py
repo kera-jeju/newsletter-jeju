@@ -455,17 +455,17 @@ STATIC = [
     # 연구비 수주 — 과제명·기간·금액·발주기관은 공개 검색으로 확인되지 않는다.
     # 해당 교수님들께 직접 받아 아래 표의 빈칸을 채운다.
     # 2026-09-22 PI가 연준모 교수분을 전달: 과제명·연구기간·발주기관.
-    #   ★ 총 연구비는 받지 못해 비워 두었다. ★ '연구책임자' 칸에 넣었으나
-    #   책임자인지 공동연구원인지는 확인되지 않았다.
+    # 2026-09-22 PI 결정: **총 연구비 열을 뺀다.** 본인이 금액 공개를 부담스러워
+    #   하셨다. 빈칸으로 남겨두면 나머지 두 분께도 요구처럼 보인다.
     dict(slug="회원동정_연구비수주", title="연구비 수주", body="""
-| 연구과제명 | 연구책임자 | 연구기간 | 총 연구비 | 발주기관 |
-|---|---|---|---|---|
-|  | 고 전 교수 |  |  |  |
-| 제주 발달장애인 가족의 돌봄 현황 및 지원 방안 탐색 | 연준모 교수 | 2026년 3월 ~ 10월 |  | 제주여성가족연구원 |
-|  | 박정환 교수 |  |  |  |
+| 연구과제명 | 연구책임자 | 연구기간 | 발주기관 |
+|---|---|---|---|
+|  | 고 전 교수 |  |  |
+| 제주 발달장애인 가족의 돌봄 현황 및 지원 방안 탐색 | 연준모 교수 | 2026년 3월 ~ 10월 | 제주여성가족연구원 |
+|  | 박정환 교수 |  |  |
 
 <aside>
-과제명·연구기간·연구비·발주기관은 확인되는 대로 채웁니다.
+과제명·연구기간·발주기관은 확인되는 대로 채웁니다.
 </aside>
 """),
 
@@ -587,6 +587,44 @@ def split_body(md):
     body = re.sub(r"^[─—-]{5,}\s*$", "", body, flags=re.M)
     body = re.sub(r"^##\s*본문\s*$", "", body, flags=re.M)
     return body.strip(), profile_img
+
+
+# 원고 템플릿(`뉴스레터 원고_템플릿.docx`)의 안내 문구. 지우지 않고 그 위에 덧써
+# 보내신 원고가 있어 본문에 그대로 딸려 온다 — 전새미 원고의 사진 아래에
+# 「여기에 본문을 자유롭게 작성해주세요」가 남아 있었다(PI 지적 2026-09-22).
+# 줄이 붙어 있든 나뉘어 있든 잡히도록 공백을 지우고 견준다.
+TEMPLATE_RESIDUE = [
+    "여기에 본문을 자유롭게 작성해주세요.",
+    "이미지를 넣고 싶은 위치에 직접 삽입하시면 됩니다.(삽입 → 그림 → 이 디바이스에서)",
+    "본문에 이미지를 넣고 싶은 위치에 직접 삽입해주세요.",
+    "참고문헌이 있는 경우 아래에 APA 형식으로 작성해주세요.",
+    "예) 홍길동(2024). 논문제목. 학술지명, 1(2), 1-10.",
+    "아래에 프로필 사진을 삽입해주세요. (정면 얼굴, 가로세로 비율 1:1 권장)(삽입 → 그림 → 이 디바이스에서)",
+    "[여기에 프로필 사진 삽입]",
+    "아래 양식에 맞춰 내용을 작성해주세요.",
+    "프로필 사진은 문서 맨 아래 지정된 위치에 삽입해주세요.",
+    "작성 완료 후 .docx 파일 그대로 메일로 회신해주세요.",
+    "분량: 1,000자(A4 1장) 이상",
+    "참고문헌은 APA 형식을 권장합니다.",
+    "※ 아래 점선 이후부터 작성해주세요. 이 안내문은 삭제하셔도 됩니다.",
+    "작성 안내",
+]
+_RESIDUE_KEYS = {re.sub(r"\s+", "", t) for t in TEMPLATE_RESIDUE}
+
+
+def drop_template_residue(body):
+    """필자가 지우지 않고 보낸 템플릿 안내 문구를 걷어낸다.
+
+    한 줄이 통째로 안내 문구일 때만 지운다 — 본문 안에 같은 말이 섞여 있는
+    경우까지 건드리면 필자의 글을 깎는다.
+    """
+    kept = []
+    for line in body.split("\n"):
+        key = re.sub(r"\s+", "", line.strip().strip("*").strip())
+        if key and key in _RESIDUE_KEYS:
+            continue
+        kept.append(line)
+    return re.sub(r"\n{3,}", "\n\n", "\n".join(kept))
 
 
 def lift_title_from_body(body):
@@ -844,6 +882,7 @@ def main():
         if not title or "제목을 적어" in title:
             title = spec.get("title_override") or "(제목 미정)"
 
+        body = drop_template_residue(body)
         body = promote_bullet_headings(body)
         if spec.get("bold_headings"):
             body = promote_bold_headings(body)
@@ -888,7 +927,8 @@ def main():
                 dropped += 1
                 continue
             kept.append(l)
-        body = apply_fixes("\n".join(kept).strip(), TYPO_FIX.get(spec["slug"]))
+        body = drop_template_residue("\n".join(kept).strip())
+        body = apply_fixes(body, TYPO_FIX.get(spec["slug"]))
         body = apply_fixes(body, spec.get("heading_fix"))
         body = replace_table(body, spec.get("table_replace"))
         body = promote_numbered_headings(body)

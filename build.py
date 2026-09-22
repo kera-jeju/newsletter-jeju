@@ -1004,17 +1004,16 @@ nav.site-nav {
 /* 호수는 지면에서 가장 먼저 눈에 들어와야 한다 — 호끼리 헷갈리지 않게 */
 /* 2026-09-22 PI: 배너 위에는 '이번 호가 무엇인가'(호수 · 발간일)를, 배너 아래에는
    '누가 내는가'(발행처 · 창간연도)를 둔다. 전에는 SINCE 1993이 호수 옆에,
-   발간일이 발행처 옆에 있어 짝이 엇갈려 있었다. */
+   발간일이 발행처 옆에 있어 짝이 엇갈려 있었다.
+   배지에는 호수만 적는다 — 「2026 · 제2호」는 '2026년의 두 번째 호'로 읽힌다.
+   연도는 바로 옆 발간일이 말해 준다. (2025년 호의 「2025 · 재창간호」는
+   숫자가 아니라 그 오해가 없었다.) */
 .masthead-eyebrow .mh-date {
     color: rgba(255,255,255,0.72);
     letter-spacing: 0.02em;
     font-weight: 500;
 }
-.masthead-meta .mh-since {
-    letter-spacing: 0.12em;
-    font-weight: 600;
-    color: rgba(255,255,255,0.6);
-}
+.masthead-meta .mh-since { color: rgba(255,255,255,0.6); }
 .masthead-eyebrow .mh-issue {
     color: var(--white);
     font-size: 1.02rem;
@@ -1022,7 +1021,8 @@ nav.site-nav {
     letter-spacing: 0.06em;
     border: 1px solid rgba(255,255,255,0.45);
     border-radius: 999px;
-    padding: 0.22rem 0.85rem;
+    /* 글자가 '제2호' 석 자뿐이라 좌우 여백을 넉넉히 줘야 배지 꼴이 산다 */
+    padding: 0.24rem 1.2rem;
     line-height: 1.3;
 }
 .masthead-calligraphy {
@@ -1075,6 +1075,10 @@ nav.site-nav {
     justify-content: center;
     gap: 0.5rem;
     flex-wrap: wrap;
+    /* 발행처와 창간연도를 한 꼴로 — 글씨체가 갈리면 두 조각처럼 보인다
+       (PI 2026-09-22) */
+    letter-spacing: 0.12em;
+    font-weight: 600;
 }
 .masthead-meta .dot { opacity: 0.4; }
 
@@ -2062,7 +2066,7 @@ def build_html(toc_html, intro_html, sections_html, article_views_html, hero_img
 <!-- MASTHEAD -->
 <header class="masthead" role="banner">
   <div class="masthead-inner">
-    <div class="masthead-eyebrow"><span class="mh-issue">{COPYRIGHT_YEAR} &#183; {NEWSLETTER_SUBTITLE}</span><span class="mh-date">{PUBLICATION_DATE}</span></div>
+    <div class="masthead-eyebrow"><span class="mh-issue">{NEWSLETTER_SUBTITLE}</span><span class="mh-date">{PUBLICATION_DATE}</span></div>
     {hero}
     <div class="masthead-calligraphy" style="display:none;"><img src="images/calligraphy-white.png" alt="제주교육마루"></div>
     <div class="masthead-meta">

@@ -7,7 +7,10 @@ build.py --config config_2026.py 로 불러 쓴다.
 ※ 원고가 바뀌면 이 파일의 title/subsections만 고치면 된다.
 """
 
-NEWSLETTER_SUBTITLE = "제2호"
+# 2026-09-22 PI: 호수를 매기지 않는다 — 회장이 바뀌면 이어지지 않을 수도 있어
+# 호를 붙이는 것이 무의미할 수 있다는 판단. 머리글도 「2026 한국교육학회 제주지회
+# 뉴스레터」로 바꿨다. 이 값은 브라우저 제목과 meta description에 쓰인다.
+NEWSLETTER_SUBTITLE = "2026"
 PUBLICATION_DATE = "2026년 10월 1일"
 COPYRIGHT_YEAR = "2026"
 EDITORS = "양은별, 황현철"

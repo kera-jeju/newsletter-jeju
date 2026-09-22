@@ -1006,25 +1006,21 @@ nav.site-nav {
 /* 2026-09-22 PI: 배너 위에는 '이번 호가 무엇인가'(호수 · 발간일)를, 배너 아래에는
    '누가 내는가'(발행처 · 창간연도)를 둔다. 전에는 SINCE 1993이 호수 옆에,
    발간일이 발행처 옆에 있어 짝이 엇갈려 있었다.
-   배지에는 호수만 적는다 — 「2026 · 제2호」는 '2026년의 두 번째 호'로 읽힌다.
-   연도는 바로 옆 발간일이 말해 준다. (2025년 호의 「2025 · 재창간호」는
-   숫자가 아니라 그 오해가 없었다.)
-   **날짜는 여기 두지 않는다.** 바닥글 판권란에 발행처·발행인·편집위원·주소가
-   있는데 발행일만 빠져 있었다 — 날짜가 제자리를 못 찾아 머리글에 혼자 붙어
-   있었던 것이다. 판권으로 내리고 여기는 '몇 호인가'만 말한다.
-   용어도 '발간'이 아니라 **발행일**이다: 발행처·발행인과 한 세트인 서지 표기이고,
-   다른 뉴스레터들도 그렇게 쓴다. (PI 2026-09-22) */
+   **호수를 쓰지 않는다 (PI 2026-09-22).** 회장이 바뀌면 이어지지 않을 수도 있어
+   호수를 매기는 것이 무의미할 수 있다는 판단이다. 대신 배너 위에 연도와 발행
+   주체를 적어 '언제, 누가 낸 무엇인가'를 한 줄로 말한다.
+   배너 위 = 「2026 한국교육학회 제주지회 뉴스레터」 / 배너 아래 = 「Since 1993」.
+   캘리그래피(제호 '제주교육마루')가 그 사이에 놓여 세 층이 된다.
+   발행일은 바닥글 판권란에 있다 — 발행처·발행인과 한 세트인 서지 표기이고,
+   다른 뉴스레터들도 그렇게 쓴다. */
 
-.masthead-eyebrow .mh-issue {
-    color: var(--white);
-    font-size: 1.02rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    border: 1px solid rgba(255,255,255,0.45);
-    border-radius: 999px;
-    /* 글자가 '제2호' 석 자뿐이라 좌우 여백을 넉넉히 줘야 배지 꼴이 산다 */
-    padding: 0.24rem 1.2rem;
-    line-height: 1.3;
+.masthead-eyebrow .mh-title {
+    color: rgba(255,255,255,0.92);
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    line-height: 1.4;
+    word-break: keep-all;
 }
 .masthead-calligraphy {
     background: var(--green-dark);
@@ -2044,7 +2040,7 @@ def build_html(toc_html, intro_html, sections_html, article_views_html, hero_img
   <meta name="format-detection" content="telephone=no, email=no, address=no">
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-  <meta name="description" content="{NEWSLETTER_TITLE} {NEWSLETTER_SUBTITLE} {PUBLICATION_DATE}">
+  <meta name="description" content="{NEWSLETTER_TITLE} {PUBLICATION_DATE}">
   {PREVIEW_META}<title>{NEWSLETTER_TITLE} | {NEWSLETTER_SUBTITLE}</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -2072,12 +2068,10 @@ def build_html(toc_html, intro_html, sections_html, article_views_html, hero_img
 <!-- MASTHEAD -->
 <header class="masthead" role="banner">
   <div class="masthead-inner">
-    <div class="masthead-eyebrow"><span class="mh-issue">{NEWSLETTER_SUBTITLE}</span></div>
+    <div class="masthead-eyebrow"><span class="mh-title">{COPYRIGHT_YEAR} {NEWSLETTER_TITLE}</span></div>
     {hero}
     <div class="masthead-calligraphy" style="display:none;"><img src="images/calligraphy-white.png" alt="제주교육마루"></div>
     <div class="masthead-meta">
-      <span>{NEWSLETTER_TITLE}</span>
-      <span class="dot">&#183;</span>
       <span class="mh-since">{SINCE}</span>
     </div>
   </div>

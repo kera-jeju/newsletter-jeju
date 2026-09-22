@@ -33,6 +33,7 @@ PREVIEW = False
 SINCE = "Since 1993"
 PUBLISHER = "한국교육학회 제주지회"
 PUBLISHER_NAME = "이인회"
+PUBLISHER_PHONE = "064-754-2163"   # 지회장 연구실 (PI 2026-09-22)
 EDITORS = "양은별, 황현철"
 ADDRESS = "제주대학교 아라캠퍼스 사범대학 2호관 1312호"
 CAFE_URL = "https://cafe.naver.com/kerajeju"
@@ -1818,6 +1819,10 @@ footer {
     letter-spacing: 0.07em;
 }
 .footer-item span, .footer-item a {
+    /* 한 항목에 값이 둘 이상이면(발행인 이름 + 전화번호) 줄을 나눠 쌓는다 */
+    display: block;
+    /* 칸이 좁아 '카페'가 '카 / 페'로 갈라졌다 — 낱말 단위로만 끊는다 */
+    word-break: keep-all;
     color: rgba(255,255,255,0.8);
     text-decoration: none;
     line-height: 1.6;
@@ -2103,6 +2108,7 @@ def build_html(toc_html, intro_html, sections_html, article_views_html, hero_img
       <div class="footer-item">
         <label>발행인</label>
         <span>{PUBLISHER_NAME}</span>
+        <span>{PUBLISHER_PHONE}</span>
       </div>
       <div class="footer-item">
         <label>발행일</label>
@@ -2118,7 +2124,7 @@ def build_html(toc_html, intro_html, sections_html, article_views_html, hero_img
       </div>
       <div class="footer-item">
         <label>카페</label>
-        <a href="{CAFE_URL}" target="_blank" rel="noopener">한국교육학회 제주지회 카페 &rarr;</a>
+        <a href="{CAFE_URL}" target="_blank" rel="noopener">한국교육학회 제주지회 카페 (바로가기)</a>
       </div>
     </div>
     <hr class="footer-divider">

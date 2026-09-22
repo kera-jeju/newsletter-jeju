@@ -72,6 +72,21 @@ DOCX = [
          # 원고에는 '교사'로만 적혀 있으나 이번 호 회원 동정에 박사학위 취득이
          # 함께 실리므로 직함에 박사를 덧붙였다. (PI 확인 2026-09-11)
          role_override="교사 · 교육학박사"),
+    # 2026-09-22 수합. 필자가 html-to-docx 로 만들어 보내 제목·소제목이 모두
+    # 굵은 글씨 한 줄로만 왔다 — 제목은 본문 첫 줄에서 올리고(title_from_body),
+    # 소제목 다섯은 bold_headings 로 다른 원고와 같은 소제목이 되게 한다.
+    # 이 서식에는 필자 표(필자/소속/직함)가 없어 이름·소속·직함을 지정한다.
+    # 직함은 이번 호 회원 소식과 맞춰 '부교수'로 적는다(2026.3.1. 승진).
+    # ★ 사진은 이번 호 회원 소식에 쓴 제주대신문 기사 사진을 같이 쓴다 —
+    #   한 호에 같은 사진이 두 번 나온다. 본인 사진을 받으면 교체.
+    dict(file="칼럼_통합교육과_신경다양성_시론_연준모(260922).docx",
+         slug="시론_연준모",
+         title_from_body=True,
+         bold_headings=True,
+         name_override="연준모",
+         affil_override="제주대학교",
+         role_override="부교수",
+         photo="연준모 교수.jpg", photo_crop=(0, 0, 150, 150)),
 ]
 
 HWPX = [
@@ -125,6 +140,9 @@ BOOK_COVERS = [
     "책표지_태극도와서명도.jpg",
     "책표지_놀이와유아교육.jpg",
     "책표지_오늘의교육내일의교육정책.jpg",
+    # 2026-09-22 PI 전달. 학지사 신간 안내 리플릿(2026-09-16) 표지면을 잘라 썼다.
+    # 앞의 세 권과 달리 판매처 상품 이미지가 아니라 출판사 인쇄용 원본이다.
+    "책표지_학습장애및학습지원대상학생교육.jpg",
 ]
 
 # 회원 소식에 넣을 인물 사진 — 얼굴이 원 중앙에 오도록 자른다.
@@ -385,7 +403,11 @@ STATIC = [
     #     전자책은 2025-04-30이다. PI가 "올해 개정판이 나오는 것 같다"고 하여
     #     김은정 저서와 같은 형식으로 '2026년 개정판 출간 예정'을 덧붙였다.
     #     ★ PI도 확실하지 않다고 했다. 이인회 회장이 회람 대상이니 직접 확인받을 것.
-    #   · 연준모 교수 저서는 여전히 서점에서 최근 발간본이 확인되지 않는다.
+    # 2026-09-22 PI가 학지사 신간 안내 리플릿(2026-09-16)을 전달. 연준모 교수가
+    #   공저자로 참여한 한국학습장애학회 편 신간이다. 출간일은 리플릿에도 적혀
+    #   있지 않아 PI 전언대로 '출간 예정'으로 적는다. ★ 출간일을 받으면 채운다.
+    #   정가(27,000원)는 리플릿에 있으나 서명석 저서와 같이 싣지 않는다
+    #   (PI 2026-09-21 정가 표기 삭제 방침).
     dict(slug="회원동정_신간안내", title="회원 신간 안내", body="""
 회원들의 새 저서를 소개합니다.
 
@@ -416,17 +438,30 @@ STATIC = [
 </aside>
 
 <aside>
+![학습장애 및 학습지원 대상 학생 교육 표지](images/책표지_학습장애및학습지원대상학생교육.jpg)
+**학습장애 및 학습지원 대상 학생 교육**
+한국학습장애학회 편 / 학지사
+강은영 · 김동일 · 김소희 · 김우리 · 김제린 · 김희은 · 서선진 · 손승현 · 신미경 · 신재현 · **연준모** · 옥민욱 · 유은미 · 이대식 · 이예다나 · 정평강 · 지은 · 최승숙 공저
+**2026년 출간 예정**
+---
+학습의 어려움을 가진 학생을 어떻게 이해하고 교실 안에서 어떻게 지원할 것인지를 다룬다. 읽기와 쓰기, 수학, 사회, 과학에서 사회성 및 행동 지원까지 학습장애와 학습지원 대상 학생을 위한 교육적 지원 방안을 영역별로 짚는다.
+</aside>
+
+<aside>
 서지사항을 알려주시면 이 자리에 함께 싣습니다.
 </aside>
 """),
 
     # 연구비 수주 — 과제명·기간·금액·발주기관은 공개 검색으로 확인되지 않는다.
     # 해당 교수님들께 직접 받아 아래 표의 빈칸을 채운다.
+    # 2026-09-22 PI가 연준모 교수분을 전달: 과제명·연구기간·발주기관.
+    #   ★ 총 연구비는 받지 못해 비워 두었다. ★ '연구책임자' 칸에 넣었으나
+    #   책임자인지 공동연구원인지는 확인되지 않았다.
     dict(slug="회원동정_연구비수주", title="연구비 수주", body="""
 | 연구과제명 | 연구책임자 | 연구기간 | 총 연구비 | 발주기관 |
 |---|---|---|---|---|
 |  | 고 전 교수 |  |  |  |
-|  | 연준모 교수 |  |  |  |
+| 제주 발달장애인 가족의 돌봄 현황 및 지원 방안 탐색 | 연준모 교수 | 2026년 3월 ~ 10월 |  | 제주여성가족연구원 |
 |  | 박정환 교수 |  |  |  |
 
 <aside>
@@ -459,9 +494,6 @@ STATIC = [
 
 # 미제출 원고 — 자리(placeholder)만 만들어 레이아웃에서 보이게 한다
 PENDING = [
-    dict(slug="시론_연준모", title="시론",
-         name="연준모", affil="제주대학교", role="교수",
-         note="제출 기한 확인 중"),
     dict(slug="제주교육소식_김경주", title="지역사회 교육활동의 성과와 제언",
          name="김경주", affil="", role="박사",
          note="추석 전 제출 예정"),
@@ -496,6 +528,13 @@ def find_src(filename):
         hits = sorted(DL.rglob(bare + dot + ext))
         if hits:
             return hits[0]
+    # 꼬리표가 사양이 아니라 '파일 쪽'에 붙어 있는 경우 — 같은 파일을 두 번
+    # 내려받으면 드라이브에 '…(260922) (1).docx' 로 남는다. 사양에 그 꼬리표를
+    # 적어두면 다음에 깨끗한 이름으로 받았을 때 못 찾으므로, 여기서 떼고 견준다.
+    hits = [q for q in sorted(DL.rglob("*" + dot + ext))
+            if re.sub(r"(\s*\(\d+\))+$", "", q.stem).strip() == bare]
+    if hits:
+        return hits[0]
     return None
 
 
@@ -594,6 +633,22 @@ BULLET_HEADING = re.compile(r"^[\u25a0\u25aa\u25c6\u25cf]\s*(\S.{0,60})$", re.M)
 
 def promote_bullet_headings(body):
     return BULLET_HEADING.sub(lambda m: "## " + m.group(1).strip(), body)
+
+
+# 소제목을 굵은 글씨 한 줄로만 표시한 원고가 있다 (연준모 시론 — 필자가
+# html-to-docx 로 만들어 보내 제목·소제목이 모두 **굵게** 로만 왔다).
+# 그대로 두면 본문 문단으로 흘러 절의 층이 보이지 않는다. 문장이 아닌 짧은
+# 줄만 소제목으로 올려 다른 원고와 같은 초록 굵은 글씨가 되게 한다.
+BOLD_HEADING = re.compile(r"^\*\*(\S.{0,40})\*\*$", re.M)
+
+
+def promote_bold_headings(body):
+    def repl(m):
+        line = m.group(1).strip()
+        if line.endswith(("다.", "요.", "까?", "음.", ".")):
+            return m.group(0)
+        return f"## {line}"
+    return BOLD_HEADING.sub(repl, body)
 
 
 # '가. 초기 저항과 토지 접근권 투쟁' / '1) 미 연방정부로부터의 자율성' 처럼
@@ -790,6 +845,8 @@ def main():
             title = spec.get("title_override") or "(제목 미정)"
 
         body = promote_bullet_headings(body)
+        if spec.get("bold_headings"):
+            body = promote_bold_headings(body)
 
         if spec["slug"] in REF_OVERRIDE:
             body = refstyle.replace_section(body, REF_OVERRIDE[spec["slug"]])
@@ -803,8 +860,11 @@ def main():
 
         if prof and spec.get("photo_crop"):
             crop_square(SUB / prof, spec["photo_crop"])
+        elif spec.get("photo"):
+            # 원고에 프로필 사진이 딸려 오지 않은 경우 드라이브의 사진을 쓴다.
+            prof = add_photo(spec["photo"], spec["slug"], spec.get("photo_crop"))
 
-        author = author_block(meta.get("필자", ""),
+        author = author_block(spec.get("name_override") or meta.get("필자", ""),
                               spec.get("affil_override") or meta.get("소속", ""),
                               spec.get("role_override") or meta.get("직함", ""),
                               prof)

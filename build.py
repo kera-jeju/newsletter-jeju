@@ -1008,15 +1008,11 @@ nav.site-nav {
    배지에는 호수만 적는다 — 「2026 · 제2호」는 '2026년의 두 번째 호'로 읽힌다.
    연도는 바로 옆 발간일이 말해 준다. (2025년 호의 「2025 · 재창간호」는
    숫자가 아니라 그 오해가 없었다.)
-   날짜에는 '발간'을 붙인다 — 날짜만 있으면 마감일인지 회람일인지 모호하다.
-   '발행'이 아니라 '발간'인 것은 이 지면이 두 말을 역할로 나눠 쓰기 때문이다:
-   발행 = 누가 내는가(바닥글의 발행처·발행인), 발간 = 언제/무엇을 내는가
-   (발간사·발간일·발간 목록). */
-.masthead-eyebrow .mh-date {
-    color: rgba(255,255,255,0.72);
-    letter-spacing: 0.02em;
-    font-weight: 500;
-}
+   **날짜는 여기 두지 않는다.** 바닥글 판권란에 발행처·발행인·편집위원·주소가
+   있는데 발행일만 빠져 있었다 — 날짜가 제자리를 못 찾아 머리글에 혼자 붙어
+   있었던 것이다. 판권으로 내리고 여기는 '몇 호인가'만 말한다.
+   용어도 '발간'이 아니라 **발행일**이다: 발행처·발행인과 한 세트인 서지 표기이고,
+   다른 뉴스레터들도 그렇게 쓴다. (PI 2026-09-22) */
 
 .masthead-eyebrow .mh-issue {
     color: var(--white);
@@ -2071,7 +2067,7 @@ def build_html(toc_html, intro_html, sections_html, article_views_html, hero_img
 <!-- MASTHEAD -->
 <header class="masthead" role="banner">
   <div class="masthead-inner">
-    <div class="masthead-eyebrow"><span class="mh-issue">{NEWSLETTER_SUBTITLE}</span><span class="mh-date">{PUBLICATION_DATE} 발간</span></div>
+    <div class="masthead-eyebrow"><span class="mh-issue">{NEWSLETTER_SUBTITLE}</span></div>
     {hero}
     <div class="masthead-calligraphy" style="display:none;"><img src="images/calligraphy-white.png" alt="제주교육마루"></div>
     <div class="masthead-meta">
@@ -2107,6 +2103,10 @@ def build_html(toc_html, intro_html, sections_html, article_views_html, hero_img
       <div class="footer-item">
         <label>발행인</label>
         <span>{PUBLISHER_NAME}</span>
+      </div>
+      <div class="footer-item">
+        <label>발행일</label>
+        <span>{PUBLICATION_DATE}</span>
       </div>
       <div class="footer-item">
         <label>편집위원</label>

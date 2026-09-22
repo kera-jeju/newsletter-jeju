@@ -37,6 +37,7 @@ PUBLISHER_PHONE = "064-754-2163"   # 지회장 연구실 (PI 2026-09-22)
 EDITORS = "양은별, 황현철"
 ADDRESS = "제주대학교 아라캠퍼스 사범대학 2호관 1312호"
 CAFE_URL = "https://cafe.naver.com/kerajeju"
+CAFE_LABEL = "cafe.naver.com/kerajeju"   # 판권에 보일 주소
 FEEDBACK_EMAIL = "e.yang@jejunu.ac.kr"
 FEEDBACK_NAME = "제주대학교 양은별"
 DONATION_ACCOUNT = "(농협) 302-2028-2520-51  이인회(제주지회)"
@@ -1803,9 +1804,11 @@ footer {
     margin-top: 3rem;
 }
 .footer-inner { max-width: var(--max-width); margin: 0 auto; }
+/* 발행처 … 주소 다섯 칸을 한 줄에 둔다. 카페는 아래 문의·후원 상자로 옮겼다.
+   (PI 2026-09-22 — 카페만 둘째 줄에 혼자 남아 있었다) */
 .footer-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 1rem 1.5rem;
     text-align: left;
     margin-bottom: 1.5rem;
@@ -1830,10 +1833,11 @@ footer {
     font-size: 0.85rem;
 }
 .footer-item a:hover { color: var(--green-pale); }
+/* 뉴스레터 문의 · 후원 · 제주지회 카페 세 칸 (PI 2026-09-22) */
 .footer-contact-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem 1.5rem;
 }
 .footer-contact-item label {
     display: block;
@@ -2121,10 +2125,6 @@ def build_html(toc_html, intro_html, sections_html, article_views_html, hero_img
         <label>주소</label>
         <span>{ADDRESS}</span>
       </div>
-      <div class="footer-item">
-        <label>카페</label>
-        <a href="{CAFE_URL}" target="_blank" rel="noopener">한국교육학회 제주지회 카페 (바로가기)</a>
-      </div>
     </div>
     <hr class="footer-divider">
     <div class="feedback-box">
@@ -2137,6 +2137,10 @@ def build_html(toc_html, intro_html, sections_html, article_views_html, hero_img
         <div class="footer-contact-item">
           <label>뉴스레터 후원</label>
           <span>{DONATION_ACCOUNT}</span>
+        </div>
+        <div class="footer-contact-item">
+          <label>제주지회 카페</label>
+          <span><a href="{CAFE_URL}" target="_blank" rel="noopener">{CAFE_LABEL} (바로가기)</a></span>
         </div>
       </div>
     </div>

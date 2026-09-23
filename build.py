@@ -1264,6 +1264,20 @@ main {
     max-height: 560px;
     width: auto;
 }
+/* 포스터는 위 규칙에서 뺀다 (2026-09-23, 제5차 공동학술대회 원고).
+   위 560px 규칙은 '사진'을 위한 것이다. 포스터는 사진이 아니라 읽는 지면이다 —
+   2,673×3,780(A판 비율)을 560px로 묶으면 396px 폭이 되어 발표 제목·발표자 이름과
+   QR 두 개가 뭉갠 자국으로만 남는다. 1,000px이면 707×1,000이라 본문 폭(896px)
+   안에 들어오면서 프로그램을 읽을 수 있다. 모바일은 max-width:100%가 먼저 걸린다. */
+.article-body img[alt*="포스터"],
+.section-content img[alt*="포스터"] {
+    max-height: 1000px;
+}
+/* 링크로 감싼 뒤에도 사진처럼 가운데에 놓이게 한다. */
+.article-body a.poster-link,
+.section-content a.poster-link { display: block; }
+.article-body a.poster-link img,
+.section-content a.poster-link img { cursor: zoom-in; }
 .article-body img[alt*="교수"],
 .article-body img[alt*="선생님"],
 .article-body img[alt*="사진"],
@@ -2436,6 +2450,16 @@ def build(src_root, out_dir):
         return f'<p class="figure-caption">{text.strip()}</p>'
 
     html = re.sub(r'<p>\s*\[사진설명=\s*([^\]]*?)\s*\]\s*</p>', photo_caption, html)
+
+    # 포스터는 눌러서 원본 크기로 볼 수 있게 한다 (2026-09-23).
+    # 지면에서는 707×1,000으로 읽히지만 휴대전화(폭 345px)에서는 262×371이라
+    # 발표 제목도 QR도 읽히지 않는다. 사진은 작아도 무엇인지 알아보지만
+    # 포스터는 읽지 못하면 실린 뜻이 없다. 새 탭에서 원본(1,400×1,980)을 연다.
+    html = re.sub(
+        r'(<img src="([^"]+)" alt="[^"]*포스터[^"]*"[^>]*>)',
+        r'<a href="\2" target="_blank" rel="noopener" class="poster-link" '
+        r'title="포스터를 원본 크기로 봅니다">\1</a>',
+        html)
 
     # 표 바로 앞에 놓인 <…> 꼴의 한 줄은 표 제목이다.
     # 꺾쇠를 이스케이프하고, 표에 바짝 붙는 캡션으로 만든다.

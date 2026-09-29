@@ -454,6 +454,7 @@ STATIC = [
 2026. 8.
 ---
 대학상담센터 상담자의 심리적 소진과 회복 경험에 관한 근거이론적 접근
+(A Grounded Theory Approach to Counselors’ Burnout and Recovery Experiences at University Counseling Centers)
 </aside>
 
 <aside>

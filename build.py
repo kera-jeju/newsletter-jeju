@@ -2303,6 +2303,15 @@ def build(src_root, out_dir):
     # improve formatting. Grouped by concern area.
     # -----------------------------------------------------------------------
 
+    # 한글로 시작하는 꺾쇠 표기를 글자로 살린다 (2026-09-29).
+    #   회장은 문서·책 이름을 <제주교육론>, <제주지회 활성화를 위한 제안서> 처럼
+    #   꺾쇠로 적고, 교육감 축사에도 <한국교육학회 제주지회>가 나온다. 그대로
+    #   내보내면 HTML 안에 정체불명의 여는 태그가 섞인다. 브라우저가 한글로
+    #   시작하는 것은 태그로 보지 않아 지금은 글자로 보이지만, 표준으로는 파스
+    #   오류이고 검색·요약·번역 도구를 거치면 통째로 사라질 수 있다.
+    #   한글은 HTML 태그 이름이 될 수 없으므로 이 치환에 거짓 양성이 없다.
+    html = re.sub(r'<([\uac00-\ud7a3][^<>]{0,60})>', r'&lt;\1&gt;', html)
+
     # --- 1. General cleanup (markdown artifacts, empty elements) -----------
     # Remove any remaining ** markdown bold markers
     html = html.replace('**', '')

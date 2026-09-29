@@ -113,8 +113,17 @@ DOCX = [
     # 2026-09-29 전체 교정: 소제목 셋(마을이 함께 세운 학교… / 배움이 항일의
     #   실천으로… / 지역을 걷는 일이…)이 굵은 글씨 한 줄로만 와서 본문 문단으로
     #   흘렀다. bold_headings 로 올려 다른 원고와 같은 소제목이 되게 한다.
+    # 2026-09-29 PI: 제목과 부제가 어긋나 있었다. 지면 제목은 행사 이름
+    #   「조천 마을탐방: …」(config_2026.py)인데 부제에도 같은 행사 이름이
+    #   다시 나와 한 화면에 같은 문구가 두 번 보였고, 정작 **필자가 붙인 제목**
+    #   「배움의 길에서 만난 기억과 실천」은 지면 어디에도 없었다.
+    #   PI 판단: 활동 소개 절이므로 **제목은 행사 이름이 맞다.** 대신 부제를
+    #   필자가 쓴 제목으로 바꾼다. (제목은 config 가 정하므로 여기 title_override
+    #   는 소스 파일을 지면과 같게 보이게 하는 용도다.)
     dict(file="조천_마을탐방_뉴스레터_원고_양유정 (4).docx", slug="활동소개_양유정",
          title_from_body=True,
+         title_override="조천 마을탐방: 항일 정신과 근대교육의 요람을 찾아서",
+         subtitle_override="― 배움의 길에서 만난 기억과 실천",
          bold_headings=True,
          captions=[
              "너븐숭이에서 고영철 선생님의 설명을 듣는 탐방 참가자들",
@@ -1221,6 +1230,8 @@ def main():
                 title = t
         if spec.get("title_override"):
             title = spec["title_override"]
+        if spec.get("subtitle_override") is not None:
+            subtitle = spec["subtitle_override"]
         if not title or "제목을 적어" in title:
             title = spec.get("title_override") or "(제목 미정)"
 

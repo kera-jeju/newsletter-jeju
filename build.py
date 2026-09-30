@@ -2135,6 +2135,8 @@ def build_html(toc_html, intro_html, sections_html, article_views_html, hero_img
       <span class="mh-since">{SINCE}</span>
       <span class="dot">&#183;</span>
       <span class="mh-issue">{NEWSLETTER_SUBTITLE}</span>
+      <span class="dot">&#183;</span>
+      <span class="mh-date">{PUBLICATION_DATE} 발행</span>
     </div>
   </div>
 </header>
@@ -2310,7 +2312,16 @@ def build(src_root, out_dir):
     #   시작하는 것은 태그로 보지 않아 지금은 글자로 보이지만, 표준으로는 파스
     #   오류이고 검색·요약·번역 도구를 거치면 통째로 사라질 수 있다.
     #   한글은 HTML 태그 이름이 될 수 없으므로 이 치환에 거짓 양성이 없다.
-    html = re.sub(r'<([\uac00-\ud7a3][^<>]{0,60})>', r'&lt;\1&gt;', html)
+    #
+    #   꺾쇠와 이름 사이에 word joiner(U+2060)를 넣는다 (PI 2026-09-30).
+    #   한국어는 글자 사이 어디서나 줄이 바뀌므로 「2023년 6월 <」까지만 한 줄에
+    #   남고 여는 꺾쇠가 앞줄 끝에 홀로 떨어지는 일이 생긴다. word joiner는 폭도
+    #   글자도 없이 그 자리의 줄바꿈만 막아, 꺾쇠가 이름과 함께 다음 줄로 넘어
+    #   가게 한다. 이름 안쪽(낱말 사이)은 그대로 끊기게 둔다 — 통째로 묶으면
+    #   폭 345px 휴대전화에서 「제주지회 활성화를 위한 제안서」가 화면을 넘는다.
+    #   검색어는 꺾쇠가 아니라 이름부터 시작하므로 본문 검색에는 영향이 없다.
+    html = re.sub(r'<([\uac00-\ud7a3][^<>]{0,60})>',
+                  '&lt;\u2060\\1\u2060&gt;', html)
 
     # --- 1. General cleanup (markdown artifacts, empty elements) -----------
     # Remove any remaining ** markdown bold markers

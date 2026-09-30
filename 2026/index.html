@@ -1127,7 +1127,18 @@ footer {
     }
     main { padding: 1rem 0.875rem 2rem; }
     .masthead-eyebrow { font-size: 0.68rem; padding: 0.6rem 1rem 0.3rem; }
-    .masthead-meta { font-size: 0.78rem; padding: 0.4rem 1rem; }
+    /* 발간일이 더해져 세 조각이 되자 폰에서 두 줄로 접혔다 → 한 줄로 되돌린다
+       (PI 2026-09-30). 이 지면의 규칙대로 줄이는 것은 글자보다 여백이 먼저다 —
+       좌우 여백(1rem→0.6rem)·조각 사이 간격(0.5→0.3rem)·자간(0.12→0.04em)만
+       좁히고 글자 크기는 0.78rem 그대로 뒀다. 「발행」도 뺄 필요가 없다.
+       한 줄이 되는 최소 폭 375px → 315px(측정) — 320px 이상 전 기종이 한 줄이다.
+       자간은 세 조각이 함께 받으므로 '한 꼴로 보이게' 한 2026-09-22 규칙은 유지된다. */
+    .masthead-meta {
+        font-size: 0.78rem;
+        padding: 0.4rem 0.6rem;
+        gap: 0.3rem;
+        letter-spacing: 0.04em;
+    }
     .masthead-calligraphy { padding: 0.5rem 1rem; }
     .masthead-calligraphy img { max-width: 280px; }
     .section-header,
